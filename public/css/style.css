@@ -5,6 +5,252 @@
 }
 
 
+
 body{
-    background-color: aquamarine;
+    background-color: #141627;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    
+}
+
+.main-div{
+    width: 100%;
+    display: grid;
+    grid-template-areas: 'sidebar  navbar navbar navbar navbar  '
+                        'sidebar  chat chat chat chat ';
+                       
+    grid-template-rows: 115px 1fr 30px;
+    grid-template-columns: 170px 1fr; 
+  
+}
+/* side bar style */
+
+.side-bar{
+    border-right: 1px solid #343752 ;   
+    min-height: 100vh; 
+    grid-area: sidebar;
+   
+    
+ 
+}
+
+.logo{
+    padding: 2rem;
+    text-align: center;
+}
+
+.logo img{
+    width: 100px;
+}
+
+.chat-option img , .image-gpt img {
+    width: 100%;
+    height: 150px;
+
+}
+
+
+/* navbar style */
+
+.nav-bar{
+    grid-area: navbar;  
+   
+    border-bottom: 2px solid #343752;
+    
+   
+    
+}
+
+.profile{
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    
+}
+
+
+
+.profile img{
+    border-radius: 50%;
+    width: 70px;
+}
+
+.logo-nav , .chat-gpt-nav, .image-gpt-nav {
+    display: none;
+}
+
+
+
+
+
+
+/* chat div */
+
+.chat-div{
+    grid-area: chat;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: 75vh;
+    overflow: scroll;
+    padding-bottom: 4rem;
+   
+}
+
+.chat-div::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chat-div {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.chat-section{
+    width: 95%;
+   
+    margin:  0px auto 2rem;
+    padding-top: 1rem;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    
+   
+   
+}
+
+
+.chat{
+    width: 60%;
+    color: white;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem;
+    display: block;
+   
+}
+
+
+.chat-by-public{
+
+    background-color: #343752;
+    align-self: flex-end;
+
+   
+
+}
+
+
+.chat-bt-gpt {
+    background-color: #282849;
+    
+  
+    
+}
+
+.input{
+    position: fixed;
+    bottom: 20px;
+    left: 31%;
+    width: 50%;
+    margin: auto;
+    height: 60px;
+    text-align: center;
+   
+}
+
+.input input{
+
+    width: 90%;
+    margin: auto;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #282849;
+    border: none;
+    color: white;
+    font-size: 1rem;
+     padding-left: 1rem;
+     border: 1px solid #0b0c18;
+    
+}
+
+.input button{
+    position: absolute;
+    top: 3px;
+    height: 40px;
+    right: 48px;
+    border: none;
+    cursor: pointer;
+    background-color: #282849;
+    padding: 0 48px 0 44px;
+    border-top-right-radius: 8px;
+     border-bottom-right-radius: 8px;
+     text-align: center;
+}
+
+.input input:focus{
+    outline: none;
+   
+}
+
+@media (max-width : 800px ){
+
+    .side-bar{
+        display: none;
+    }
+    .main-div{
+    width: 100%;
+    display: grid;
+    grid-template-areas: 'navbar  navbar navbar navbar navbar  '
+                        'chat  chat chat chat chat ';
+                       
+    grid-template-rows: 115px 1fr 30px;
+    grid-template-columns: 170px 1fr; 
+  
+}
+
+.input{
+    left: 0;
+    width: 100%;
+}
+.chat{
+    width: 95%;
+}
+
+.nav-bar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    padding:  0 0 0 2rem;
+}
+
+.logo-nav , .chat-gpt-nav, .image-gpt-nav {
+    display: inline;
+}
+
+
+.profile {
+   flex-basis: 50%;
+}
+
+.logo-nav img{
+    width: 50px;
+    height: 50px;
+
+}
+
+.chat-gpt-nav img , .image-gpt-nav img{
+    width: 50px;
+    height: 50px;
+}
+
+
+
+
 }
