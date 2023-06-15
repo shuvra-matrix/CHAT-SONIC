@@ -4,15 +4,20 @@
     <% answer.forEach(e => { %>
 
     <div class="chat-by-public chat">
-      <p class="question "><%= e.question %></p>
+      <p class="question"><%= e.question %></p>
     </div>
     <div class="chat-bt-gpt chat">
       <p class="answer loading"><%= e.answer %></p>
+      <img
+        class="copy"
+        width="48"
+        height="48"
+        src="https://img.icons8.com/fluency/48/copy.png"
+        alt="copy"
+      />
     </div>
     <% }); %>
   </div>
   <% } %>
-  <form action="/" method="post">
-  <%- include("./input.ejs") %>
-    </form>
+  <form action="/" method="post"><%- include("./input.ejs") %></form>
 </div>

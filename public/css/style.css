@@ -154,7 +154,7 @@ body{
     width: 60%;
     color: rgb(212, 212, 212);
     font-size: 1.2rem;
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 4rem 1.5rem;
     border-radius: 8px;
     margin: 1rem;
     display: block;
@@ -176,10 +176,21 @@ body{
 
 .chat-bt-gpt {
     background-color: var(--gpt-background-color);
-    
-  
-    
+    position: relative;
+
 }
+
+.copy{
+    position: absolute;
+    cursor: pointer;
+    right: 20px;
+    bottom: 10px;
+    width: 40px;
+    height: 40px;
+    margin-top: 1rem ;
+    opacity: 0.8;
+}
+
 
 .input{
     position: fixed;
@@ -552,6 +563,13 @@ span[class^="dot-"]{
 
 }
 
+
+@media (max-width: 711px){
+    .chat-div{
+        height: 73vh;
+    }
+}
+
 @media (max-width : 568px ){
 
 .main-div {
@@ -599,7 +617,7 @@ span[class^="dot-"]{
     line-height: 1.6;
     text-align: left;
     width: 95%;
-    padding: 1rem;
+    padding: 1rem 1rem 3rem 1rem;
    
 }
 
@@ -643,6 +661,16 @@ span[class^="dot-"]{
     right: 44px;
 }
 
+.copy{
+ 
+    right: 20px;
+    bottom: 10px;
+    width: 30px;
+    height: 30px;
+    opacity: 0.8;
+}
+
+
 }
 
 
@@ -677,5 +705,7 @@ span[class^="dot-"]{
     width: 94%;
     height: 200px;
 }
-
+.chat-div {
+    height: 75vh;
+}
 }
