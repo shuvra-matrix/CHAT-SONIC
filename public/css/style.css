@@ -118,6 +118,7 @@ body{
     height: 75vh;
     overflow: scroll;
     padding-bottom: 4rem;
+    overflow-wrap: break-word;
     
 }
 

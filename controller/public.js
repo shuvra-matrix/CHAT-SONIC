@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const { validationResult } = require("express-validator");
 const axios = require("axios");
 
 exports.getIndex = (req, res, next) => {
@@ -16,6 +16,18 @@ exports.getIndex = (req, res, next) => {
 
 exports.postChat = (req, res, next) => {
   const que = req.body.value;
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(422).render("public/index", {
+      answer: [
+        {
+          question: que,
+          answer: "Please enter a valid input",
+        },
+      ],
+    });
+  }
+
   async function apiCall() {
     const options = {
       method: "POST",
@@ -50,6 +62,14 @@ exports.postChat = (req, res, next) => {
         ],
       });
     } catch (error) {
+      res.render("public/index", {
+        answer: [
+          {
+            question: que,
+            answer: "Something went wrong. Please try again later.",
+          },
+        ],
+      });
       console.error(error);
     }
   }
