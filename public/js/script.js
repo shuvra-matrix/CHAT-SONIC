@@ -49,6 +49,13 @@ function loders() {
   }
 }
 
+input.addEventListener("keypress", () => {
+  if (button.classList.contains("hidden")) {
+    button.classList.remove("hidden");
+    loder.classList.add("hidden");
+  }
+});
+
 if (answer) {
   answer.forEach((a) => {
     const value = a.textContent.replaceAll("\n", "<br>");
