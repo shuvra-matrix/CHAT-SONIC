@@ -152,7 +152,7 @@ body{
 
 
 .chat{
-    width: 60%;
+    width: 70%;
     color: rgb(212, 212, 212);
     font-size: 1.2rem;
     padding: 1.5rem 1.5rem 4rem 1.5rem;
@@ -238,8 +238,31 @@ body{
    
 }
 
-.input::placeholder{
-   
+.chat-by-public{
+  position: relative;
+  padding-right: 5.5rem;
+}
+
+.logo-avator , .logo-gpt{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+
+.logo-avator {
+  top: 10px;
+ right: 10px;
+}
+
+.logo-gpt{
+  top: 10px;
+  left: 10px;
+}
+
+.chat-bt-gpt{
+  padding-left: 5.5rem;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
@@ -506,7 +529,7 @@ span[class^="dot-"]{
     grid-template-areas: 'navbar  navbar navbar navbar navbar  '
                         'chat  chat chat chat chat ';
                        
-    grid-template-rows: 115px 1fr 30px;
+    grid-template-rows: 100px 1fr 30px;
     grid-template-columns: 170px 1fr; 
   
 }
@@ -521,7 +544,7 @@ span[class^="dot-"]{
     justify-content: space-around;
     align-items: center;
     gap: 10px;
-    padding:  0 0 0 2rem;
+    padding:  0 0 0 1rem;
 }
 
 .logo-nav , .chat-gpt-nav, .image-gpt-nav {
@@ -534,24 +557,26 @@ span[class^="dot-"]{
 }
 
 .logo-nav img{
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 8px;
 
 }
 
 .chat-gpt-nav img , .image-gpt-nav img{
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height:45px;
     border-radius: 8px;
 }
 
 .chat{
     margin : 0 auto 1rem ;
-    width: 90%;
+    width: 94%;
+    font-size: 1rem;
+     padding-top: 16px;
 }
 .profile{
-    padding-right: 2rem;
+    padding-right: 1rem;
 }
 
 .regenerate {
@@ -559,7 +584,30 @@ span[class^="dot-"]{
     margin-top: 0px;
 }
 
+.chat-by-public{
+  padding-right: 4rem;
+}
 
+.logo-avator , .logo-gpt{
+  width: 40px;
+  height: 40px;
+}
+
+
+.logo-avator {
+  top: 10px;
+ right: 10px;
+ opacity: 0.7;
+}
+
+.logo-gpt{
+  top: 10px;
+  left: 10px;
+}
+
+.chat-bt-gpt{
+  padding-left: 4rem;
+}
 
 
 }
@@ -579,8 +627,8 @@ span[class^="dot-"]{
    
 }
 .logo-nav img{
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     border-radius: 8px;
 
 }
@@ -589,12 +637,12 @@ span[class^="dot-"]{
 
 .profile img{
     border-radius: 50%;
-    width: 50px;
+    width: 40px;
     
 }
 .chat-gpt-nav img , .image-gpt-nav img{
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     opacity: 0.8;
 }
 
@@ -618,7 +666,8 @@ span[class^="dot-"]{
     line-height: 1.6;
     text-align: left;
     width: 95%;
-    padding: 1rem 1rem 3rem 1rem;
+    padding-bottom: 3rem;
+    padding-top: 11px;
    
 }
 
@@ -664,13 +713,37 @@ span[class^="dot-"]{
 
 .copy{
  
-    right: 20px;
+    right: 10px;
     bottom: 10px;
     width: 30px;
     height: 30px;
     opacity: 0.8;
 }
 
+.chat-by-public{
+  padding-right: 3rem;
+}
+
+.logo-avator , .logo-gpt{
+  width: 30px;
+  height: 30px;
+}
+
+
+.logo-avator {
+  top: 10px;
+ right: 10px;
+ opacity: 0.7;
+}
+
+.logo-gpt{
+  top: 10px;
+  left: 10px;
+}
+
+.chat-bt-gpt{
+  padding-left: 3rem;
+}
 
 }
 
