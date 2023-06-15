@@ -489,13 +489,37 @@ span[class^="dot-"]{
 
 .hljs{
 
-      background: #1d224773;
-    color: #b7b7b7;
-    border-radius: 8px;
+    background: #00000073 !important;
+    color: #c4c4c4 !important;
+    border-radius: 8px !important;
+}
+
+.code_one{
+  padding-bottom: 1rem;
+}
+
+.code_two{
+  padding-top: 1.5rem;
 }
 
 
+.hljs-deletion, .hljs-number, .hljs-quote, .hljs-selector-class, .hljs-selector-id, .hljs-string, .hljs-template-tag, .hljs-type {
+    color: #179ebe !important;
+}
 
+.hljs-section, .hljs-title {
+    color: #29b05f !important;
+    font-weight: 700 !important;
+}
+
+.hljs-addition, .hljs-built_in, .hljs-bullet, .hljs-code {
+    color: #aa53e9 !important;
+}
+
+.hljs-attribute, .hljs-doctag, .hljs-keyword, .hljs-meta .hljs-keyword, .hljs-name, .hljs-selector-tag {
+    font-weight: 700 !important;
+    color: #b48608 !important;
+}
 
 @media (max-width : 1329px) {
 

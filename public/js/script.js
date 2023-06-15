@@ -85,8 +85,8 @@ code.forEach((c) => {
   console.log(list);
   c.nextElementSibling.innerHTML += `
   
-  <p>${list[0]}</p>
+  <p class="code_one">${list[0]}</p>
   <pre><code class=""> ${list[1].replaceAll("python", "")}  </code></pre>
-  <p>${list[2]}</p>
+  <p class="code_two">${list[2]}</p>
   `;
 });
