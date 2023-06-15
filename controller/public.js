@@ -99,8 +99,8 @@ exports.postImage = (req, res, next) => {
         "X-RapidAPI-Host": "openai80.p.rapidapi.com",
       },
       data: {
-        prompt: "A cute baby sea otter",
-        n: 2,
+        prompt: value,
+        n: 1,
         size: "1024x1024",
       },
     };
