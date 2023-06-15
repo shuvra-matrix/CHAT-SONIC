@@ -1,20 +1,28 @@
 <div class="chat-div">
-  <div class="chat-section">
-    <div
-      class="chat-bt-gpt chat"
-      style="
-        width: 100%;
-        color: rgba(224, 53, 53, 0.726);
-        font-size: 2rem;
-        text-align: center;
-      "
-    >
-      <p><%= status %></p>
+  <div class="image-section">
+    <div class="image">
+      <img class="main-image" src="/images/dalhe.jpg" alt="" />
+      <a href=""
+        ><img
+          class="download"
+          src="https://img.icons8.com/color-glass/48/downloading-updates.png"
+          alt="downloading-updates"
+        />
+      </a>
     </div>
+
+    <form action="/dalle" method="post">
+      <div class="regenerate">
+        <input type="hidden" name="preInput" value="" />
+        <button class="btn">
+          Regenerate
+          <img width="64" height="64" src="/images/relode.png" alt="reboot" />
+        </button>
+      </div>
+    </form>
   </div>
 
-  <% if(modeon) {%>
-  <form action="/" method="post">
+  <form action="/dalle" method="post">
     <div class="input">
       <input type="text" name="value" placeholder="Search" />
       <button type="submit">
@@ -27,5 +35,4 @@
       </button>
     </div>
   </form>
-  <% } %>
 </div>

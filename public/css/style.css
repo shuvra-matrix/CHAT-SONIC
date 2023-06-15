@@ -230,6 +230,85 @@ body{
    
 }
 
+
+/* image section */
+
+.image-section{
+    margin: 1rem auto 1rem auto;
+    width: 90%;
+    text-align: center;
+}
+.image{
+    background-color: #1e1940;
+    padding: 2rem;
+    width: 500px;
+    height: 400px;
+    margin: 2rem auto;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+}
+
+.download{
+    width: 30px;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    background-color: #181141bb;
+}
+
+.image .main-image{
+    width: 400px;
+    height: 300px;
+}
+
+
+
+
+.regenerate{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.btn {
+  align-items: center;
+  background-image: linear-gradient(144deg,#5f2886, #3e2f9e 50%,#2a9097);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  padding: 10px 24px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+
+}
+
+.btn img{
+    width: 30px;
+    height: 30px;
+    padding-left: .5rem;
+}
+
+.btn:hover{
+     background-image: linear-gradient(144deg,#72359e, #4a38bb 50%,#38aab3);
+}
+
+
 @media (max-width : 800px ){
 
     .side-bar{
