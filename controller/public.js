@@ -49,7 +49,7 @@ exports.postChat = (req, res, next) => {
         model: "gpt-3.5-turbo",
         messages: [
           {
-            role: "user",
+            role: "assistant",
             content: que,
           },
         ],
@@ -59,7 +59,6 @@ exports.postChat = (req, res, next) => {
     try {
       const response = await axios.request(options);
       const reply = response.data.choices[0].message.content;
-
       res.render("public/chat", {
         answer: [
           {

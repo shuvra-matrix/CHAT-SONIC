@@ -4,10 +4,10 @@
     <% answer.forEach(e => { %>
 
     <div class="chat-by-public chat">
-      <p><%= e.question %></p>
+      <p class="question "><%= e.question %></p>
     </div>
     <div class="chat-bt-gpt chat">
-      <p><%= e.answer %></p>
+      <p class="answer loading"><%= e.answer %></p>
     </div>
     <% }); %>
   </div>
