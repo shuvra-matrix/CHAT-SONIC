@@ -485,6 +485,18 @@ span[class^="dot-"]{
   
 
 
+/* highlight js */
+
+.hljs{
+
+      background: #1d224773;
+    color: #b7b7b7;
+    border-radius: 8px;
+}
+
+
+
+
 @media (max-width : 1329px) {
 
     .input {

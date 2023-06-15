@@ -8,7 +8,14 @@
       <img class="logo-avator" src="/images/3.png" alt="" />
     </div>
     <div class="chat-bt-gpt chat">
+      <% if(!e.isCode) {%>
+
       <p class="answer loading"><%= e.answer %></p>
+      <% } else { %>
+      <input type="hidden" class="code" value="<%= e.answer %>" />
+      <div class="code-run"></div>
+
+      <% } %>
       <img class="logo-gpt" src="/images/chat.jpg" alt="" />
       <img
         class="copy"

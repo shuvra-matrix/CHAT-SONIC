@@ -1,7 +1,7 @@
 const button = document.querySelector(".btns");
 const loder = document.querySelector(".loder");
 const reButton = document.querySelector(".btn");
-const input = document.querySelector("input");
+const input = document.querySelector(".value-input");
 const question = document.querySelectorAll(".question");
 const answer = document.querySelectorAll(".answer");
 const copy = document.querySelectorAll(".copy");
@@ -76,4 +76,17 @@ copy.forEach((e) => {
     };
     copyContent();
   });
+});
+
+const code = document.querySelectorAll(".code");
+
+code.forEach((c) => {
+  const list = c.value.split("```");
+  console.log(list);
+  c.nextElementSibling.innerHTML += `
+  
+  <p>${list[0]}</p>
+  <pre><code class=""> ${list[1].replaceAll("python", "")}  </code></pre>
+  <p>${list[2]}</p>
+  `;
 });
