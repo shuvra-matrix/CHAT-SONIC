@@ -15,7 +15,6 @@ exports.getChatIndex = (req, res, next) => {
 
 exports.getImageIndex = (req, res, next) => {
   res.render("public/image", {
-    status: "Comming Soon",
     modeon: false,
     preInput: "",
     imgaeLink: "/images/dalhe.jpg",
@@ -87,6 +86,14 @@ exports.postChat = (req, res, next) => {
 
 exports.postImage = (req, res, next) => {
   const value = req.body.value;
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(422).render("public/image", {
+      modeon: false,
+      preInput: value,
+      imgaeLink: "/images/invalid.jpg",
+    });
+  }
 
   async function apiCall() {
     const options = {
@@ -104,18 +111,21 @@ exports.postImage = (req, res, next) => {
         size: "1024x1024",
       },
     };
-
     try {
       const response = await axios.request(options);
       const imageLink = response.data.data[0].url;
 
       res.render("public/image", {
-        status: "Comming Soon",
         modeon: true,
         preInput: value,
         imgaeLink: imageLink,
       });
     } catch (error) {
+      res.render("public/image", {
+        modeon: false,
+        preInput: value,
+        imgaeLink: "/images/invalid2.jpg",
+      });
       console.error(error);
     }
   }
