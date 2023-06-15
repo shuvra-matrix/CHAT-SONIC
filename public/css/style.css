@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 * , ::after , ::before {
     padding: 0;
     margin: 0;
@@ -12,7 +13,7 @@
     --public-background-color: #1e1940;
     --gpt-background-color: #1f1c32;
     --navbar-color : #09061a;
-    
+    --font-family: 'Open Sans', sans-serif;
 }
 
 
@@ -21,6 +22,7 @@ body{
     padding: 0;
     margin: 0;
     overflow: hidden;
+    font-family: var(--font-family);
     
 }
 
@@ -145,12 +147,13 @@ body{
 
 .chat{
     width: 60%;
-    color: white;
+    color: rgb(212, 212, 212);
     font-size: 1.2rem;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 8px;
     margin: 1rem;
     display: block;
+    line-height: 1.6;
    
 }
 
@@ -309,6 +312,10 @@ body{
 
     padding: 0 20px 0 23px;
     
+}
+
+.chat-div{
+    height: 77vh;
 }
 
 }
