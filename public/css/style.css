@@ -14,6 +14,7 @@
     --gpt-background-color: #1f1c32;
     --navbar-color : #09061a;
     --font-family: 'Open Sans', sans-serif;
+    --text-shadow : 4px 4px 7px black;
 }
 
 
@@ -23,6 +24,7 @@ body{
     margin: 0;
     overflow: hidden;
     font-family: var(--font-family);
+    text-shadow: var(--text-shadow);
     
 }
 
@@ -119,6 +121,7 @@ body{
     overflow: scroll;
     padding-bottom: 4rem;
     overflow-wrap: break-word;
+    text-align: justify;
     
 }
 
