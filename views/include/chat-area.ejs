@@ -1,24 +1,28 @@
 <div class="chat-div">
-        <div class="chat-section">
-          <div class="chat-by-public chat">
-            <p></p>
-          </div>
-          <div class="chat-bt-gpt chat">
-            <p></p>
-          </div>
-        </div>
+  <% if(answer.length > 0 ) { %>
+  <div class="chat-section">
+    <% answer.forEach(e => { %>
 
-        <form action="">
-          <div class="input">
-            <input type="text" name="value" placeholder="Search" />
-            <button type="submit">
-              <img
-                width="40"
-                height="40"
-                src="https://img.icons8.com/fluency/96/000000/sent.png"
-                alt="sent"
-              />
-            </button>
-          </div>
-        </form>
-      </div>
+    <div class="chat-by-public chat">
+      <p><%= e.question %></p>
+    </div>
+    <div class="chat-bt-gpt chat">
+      <p><%= e.answer %></p>
+    </div>
+    <% }); %>
+  </div>
+  <% } %>
+  <form action="/" method="post">
+    <div class="input">
+      <input type="text" name="value" placeholder="Search" />
+      <button type="submit">
+        <img
+          width="40"
+          height="40"
+          src="https://img.icons8.com/fluency/96/000000/sent.png"
+          alt="sent"
+        />
+      </button>
+    </div>
+  </form>
+</div>

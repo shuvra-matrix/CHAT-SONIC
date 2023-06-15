@@ -13,6 +13,7 @@
     "nodemon": "^2.0.22"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "csurf": "^1.11.0",
@@ -23,6 +24,7 @@
     "express-validator": "^7.0.1",
     "mongodb": "^5.6.0",
     "mongoose": "^7.3.0",
+    "node-fetch": "^3.3.1",
     "nodemailer": "^6.9.3"
   }
 }
