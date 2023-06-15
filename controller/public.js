@@ -34,6 +34,11 @@ exports.postChat = (req, res, next) => {
       ],
     });
   }
+  if (!req.session.answer) {
+    req.session.message = [];
+    req.session.answer = [];
+  }
+  req.session.message.push({ role: "user", content: que });
 
   async function apiCall() {
     const options = {
@@ -47,25 +52,21 @@ exports.postChat = (req, res, next) => {
       },
       data: {
         model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "assistant",
-            content: que,
-          },
-        ],
+        messages: req.session.message,
       },
     };
 
     try {
       const response = await axios.request(options);
       const reply = response.data.choices[0].message.content;
+      console.log(req.session.message);
+      req.session.answer.push({
+        question: que,
+        answer: reply,
+      });
+      console.log(req.session.answer);
       res.render("public/chat", {
-        answer: [
-          {
-            question: que,
-            answer: reply,
-          },
-        ],
+        answer: req.session.answer,
       });
     } catch (error) {
       res.render("public/chat", {

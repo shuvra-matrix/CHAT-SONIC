@@ -2,10 +2,15 @@ const button = document.querySelector(".btns");
 const loder = document.querySelector(".loder");
 const reButton = document.querySelector(".btn");
 const input = document.querySelector("input");
-const question = document.querySelector(".question");
-const answer = document.querySelector(".answer");
+const question = document.querySelectorAll(".question");
+const answer = document.querySelectorAll(".answer");
 const copy = document.querySelectorAll(".copy");
 
+const public = document.querySelector(".chat-section");
+
+if (public) {
+  window.location.hash = public.lastChild;
+}
 if (reButton !== null) {
   reButton.addEventListener("click", loders);
 }
@@ -16,8 +21,11 @@ function loders() {
   loder.classList.toggle("hidden");
 
   if (question) {
-    question.textContent = input.value;
-    answer.innerHTML = `<div class="wrapper">
+    public.innerHTML += ` <div class="chat-by-public chat">
+      <p class="question">${input.value}</p>
+    </div>`;
+    public.innerHTML += `<div class="chat-bt-gpt chat">
+      <p class="answer loading"><div class="wrapper">
   <div class="loading-text"> <!--Loading-text-->
     <h1>Loading
       <span class="dot-one"> .</span>
@@ -28,13 +36,19 @@ function loders() {
          <span class="dot-six"> .</span>
     </h1>
   </div> <!--/Loading-text-->
-</div> `;
+</div> </p>
+    
+    </div>`;
+
+    public.lastChild.scrollIntoView();
   }
 }
 
 if (answer) {
-  const value = answer.textContent.replaceAll("\n", "<br>");
-  answer.innerHTML = value;
+  answer.forEach((a) => {
+    const value = a.textContent.replaceAll("\n", "<br>");
+    a.innerHTML = value;
+  });
 }
 
 copy.forEach((e) => {
