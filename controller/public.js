@@ -17,6 +17,8 @@ exports.getImageIndex = (req, res, next) => {
   res.render("public/image", {
     status: "Comming Soon",
     modeon: false,
+    preInput: "",
+    imgaeLink: "/images/dalhe.jpg",
   });
 };
 
@@ -76,6 +78,44 @@ exports.postChat = (req, res, next) => {
           },
         ],
       });
+      console.error(error);
+    }
+  }
+
+  apiCall();
+};
+
+exports.postImage = (req, res, next) => {
+  const value = req.body.value;
+
+  async function apiCall() {
+    const options = {
+      method: "POST",
+      url: "https://openai80.p.rapidapi.com/images/generations",
+      headers: {
+        "Accept-Encoding": "gzip,deflate,compress",
+        "content-type": "application/json",
+        "X-RapidAPI-Key": process.env.API_KEY,
+        "X-RapidAPI-Host": "openai80.p.rapidapi.com",
+      },
+      data: {
+        prompt: "A cute baby sea otter",
+        n: 2,
+        size: "1024x1024",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      const imageLink = response.data.data[0].url;
+
+      res.render("public/image", {
+        status: "Comming Soon",
+        modeon: true,
+        preInput: value,
+        imgaeLink: imageLink,
+      });
+    } catch (error) {
       console.error(error);
     }
   }

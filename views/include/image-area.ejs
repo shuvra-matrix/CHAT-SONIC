@@ -1,8 +1,8 @@
 <div class="chat-div">
   <div class="image-section">
     <div class="image">
-      <img class="main-image" src="/images/dalhe.jpg" alt="" />
-      <a href=""
+      <img class="main-image" src="<%= imgaeLink  %>" alt="" />
+      <a href="<%= imgaeLink %>" target="_blank" download
         ><img
           class="download"
           width="48"
@@ -12,10 +12,10 @@
         />
       </a>
     </div>
-
+    <% if(modeon) { %>
     <form action="/dalle" method="post">
       <div class="regenerate">
-        <input type="hidden" name="preInput" value="" />
+        <input type="hidden" name="value" value="<%= preInput  %>" />
         <button class="btn">
           Regenerate
           <img width="64" height="64" src="/images/relode.png" alt="reboot" />
@@ -23,6 +23,7 @@
       </div>
     </form>
   </div>
+  <% } %>
 
   <form action="/dalle" method="post">
     <div class="input">

@@ -8,5 +8,6 @@ routes.get("/", publicController.getChatIndex);
 routes.post("/", body("value").trim().isString(), publicController.postChat);
 
 routes.get("/dalle", publicController.getImageIndex);
+routes.post("/dalle", publicController.postImage);
 
 module.exports = routes;
