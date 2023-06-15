@@ -254,10 +254,11 @@ body{
 
 .download{
     width: 30px;
+    height: 30px;
     position: absolute;
     bottom: 10px;
     right: 15px;
-    background-color: #181141bb;
+    
 }
 
 .image .main-image{
@@ -308,6 +309,39 @@ body{
      background-image: linear-gradient(144deg,#72359e, #4a38bb 50%,#38aab3);
 }
 
+
+@media (max-width : 1329px) {
+
+    .input {
+    left: 15%;
+    width: 85%;
+   
+}
+
+
+}
+
+
+@media (max-width : 1090px) {
+
+    .input {
+    left: 16%;
+   
+   
+}
+
+
+}
+
+
+@media (max-width : 997px) {
+
+    .input {
+    left: 17%;
+   
+}
+
+}
 
 @media (max-width : 800px ){
 
@@ -368,12 +402,19 @@ body{
     padding-right: 2rem;
 }
 
+.regenerate {
+    
+    margin-top: 0px;
+}
+
+
+
 
 }
 
 @media (max-width : 568px ){
 
-    .main-div {
+.main-div {
    
     grid-template-rows: 80px 1fr 30px;
    
@@ -420,6 +461,71 @@ body{
     width: 95%;
     padding: 1rem;
    
+}
+
+
+.image-section{
+    margin-top: 2rem;
+    width: 90%;
+  
+}
+.image{
+    padding: 1rem 1rem 2rem 1rem;
+    width: 95%;
+    height: 400px;
+    margin: 1rem auto;
+
+}
+
+.download{
+    width: 30px;
+    height: 30px;
+
+    bottom: 10px;
+    right: 15px;
+    
+}
+
+.image .main-image{
+    width: 94%;
+    height: 300px;
+}
+
+
+.regenerate{
+    width: 100%;
+    
+  
+    margin-top: 4rem;
+}
+
+}
+
+
+@media (max-width: 380px){
+
+    .image-section{
+    margin-top: 1rem;
+    width: 95%;
+  
+}
+.image{
+    padding: 1rem 1rem 2rem 1rem;
+    width: 95%;
+    height: 300px;
+    margin: 0 auto 1rem;
+
+}
+
+.download{
+    width: 25px;
+    height: 25px;
+    
+}
+
+.image .main-image{
+    width: 94%;
+    height: 200px;
 }
 
 }
