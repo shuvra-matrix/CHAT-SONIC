@@ -7,7 +7,11 @@ const routes = express.Router();
 routes.get("/", publicController.getChatIndex);
 routes.post("/", body("value").trim().isString(), publicController.postChat);
 
-routes.get("/dalle", publicController.getImageIndex);
+routes.get(
+  "/dalle",
+
+  publicController.getImageIndex
+);
 routes.post(
   "/dalle",
   body("value").trim().isString(),
