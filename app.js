@@ -1,6 +1,8 @@
 const bodyParser = require("body-parser");
 const express = require("express");
+const port = "3000";
 const path = require("path");
+require("dotenv").config();
 
 const app = express();
 app.set("view engine", "ejs");
@@ -13,4 +15,6 @@ const publicRoutes = require("./routes/public");
 
 app.use(publicRoutes);
 
-app.listen("3000");
+app.listen(process.env.POST || port, () => {
+  console.log(`listning to the port ${port}`);
+});
