@@ -5,7 +5,7 @@ const input = document.querySelector(".value-input");
 const question = document.querySelectorAll(".question");
 const answer = document.querySelectorAll(".answer");
 const copy = document.querySelectorAll(".copy");
-
+const code = document.querySelectorAll(".code");
 const public = document.querySelector(".chat-section");
 
 if (public.childElementCount > 2) {
@@ -65,7 +65,13 @@ if (answer) {
 
 copy.forEach((e) => {
   e.addEventListener("click", (f) => {
-    const text = e.parentElement.childNodes[1].textContent;
+    let text = "";
+    if (e.parentElement.childNodes[3].childNodes[7]) {
+      text = e.parentElement.childNodes[3].childNodes[7].textContent;
+    } else {
+      text = e.parentElement.childNodes[1].textContent;
+    }
+
     const copyContent = async () => {
       try {
         await navigator.clipboard.writeText(text);
@@ -78,15 +84,13 @@ copy.forEach((e) => {
   });
 });
 
-const code = document.querySelectorAll(".code");
-
 code.forEach((c) => {
   const list = c.value.split("```");
-  console.log(list);
   c.nextElementSibling.innerHTML += `
   
   <p class="code_one">${list[0]}</p>
   <pre><code class=""> ${list[1].replaceAll("python", "")}  </code></pre>
   <p class="code_two">${list[2]}</p>
+ <p style="display: none"> "${list[1].replaceAll("python", "")}"</p>
   `;
 });
