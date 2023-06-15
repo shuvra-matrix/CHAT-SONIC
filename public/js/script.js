@@ -8,8 +8,13 @@ const copy = document.querySelectorAll(".copy");
 
 const public = document.querySelector(".chat-section");
 
-if (public) {
-  window.location.hash = public.lastChild;
+if (public.childElementCount > 2) {
+  window.addEventListener("load", () => {
+    public.scrollIntoView({
+      block: "end",
+      inline: "nearest",
+    });
+  });
 }
 if (reButton !== null) {
   reButton.addEventListener("click", loders);

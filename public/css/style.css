@@ -25,6 +25,7 @@ body{
     overflow: hidden;
     font-family: var(--font-family);
     text-shadow: var(--text-shadow);
+    scroll-behavior: smooth;
     
 }
 
