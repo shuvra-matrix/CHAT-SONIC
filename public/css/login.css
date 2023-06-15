@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+* , ::after,::after{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    font-family: 'DM Sans', sans-serif;
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient( 360deg, hsl(220, 17%, 7%) 40%, hsla(220, 17%, 7%, 0.8) 100%);
+    transition: 200ms ease-in;
+    color: white;
+   
+}
+
+.main{
+    width: 100%;
+    background: linear-gradient(144deg,#35084e, #1c0646 50%,#19033d);;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: .8;
+}
+
+.login-main{
+    --border-size: 3px;
+    --border-angle: 0turn;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.527);
+    width: 25%;
+    margin: auto;
+   
+    background-image: conic-gradient(
+      from var(--border-angle),
+      #213,
+      #112 50%,
+      #213
+    ),
+    conic-gradient(from var(--border-angle), transparent 20%, #08f, #f03 , rgb(255, 187, 0) , rgb(80, 238, 7), rgb(207, 1, 104));
+    background-size: calc(100% - (var(--border-size) * 2))
+      calc(100% - (var(--border-size) * 2)),
+    cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    animation: bg-spin 4s linear infinite;
+    
+}
+
+@keyframes bg-spin {
+    to {
+      --border-angle: 1turn;
+    }
+  }
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+
+.login-text{
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-block-start: 2.5rem;
+    margin-block-end: 2.5rem;
+}
+
+
+.login-input{
+    position: relative;
+}
+
+.input-sub{
+    display: flex;
+    flex-flow: column nowrap;
+    
+}
+
+.input-sub:first-child{
+    margin-block-end: 1rem;
+}
+
+.input{
+    padding: .6rem 2.5rem .6rem .1rem;
+    background: none;
+    border-style: none none solid none;
+    border-color: white;
+    margin-bottom: 1.5rem;
+    transition: 250ms ease;
+    overflow: hidden;
+    
+}
+
+input{
+    color: white;
+    font-size: 16px;
+}
+
+.input:focus{
+    outline: none;
+}
+
+.input-sub{
+    position: relative;
+}
+
+.input-email::before{
+    position: absolute;
+   
+    content: "dasdasdasd";
+    background: url("./images/icons8-email-96.png") no-repeat;
+    background-position:center;
+    background-size: 35px;
+    width: 40px;
+    height: 40px;
+    top: -5px;
+    right: 1px;
+    color: transparent;
+}
+
+.input-password::before{
+    position: absolute;
+   
+    content: "dasdasdasd";
+    background: url("./images/icons8-password-100.png") no-repeat;
+    background-position:center;
+    background-size: 35px;
+    width: 40px;
+    height: 40px;
+    top: -5px;
+    right: 1px;
+    color: transparent;
+}
+
+
+
+.input-sub label{
+    
+    left: 1px;
+    font-size: 18px;
+    font-weight: 500;
+    
+}
+
+.lable,
+.labletwo{
+  position: absolute;
+
+}
+
+.input-email:focus ~ label {
+    top: -20px;
+}
+
+.input:focus ~ label {
+    top: -20px;
+}
+
+.confirmpass{
+    margin-top: 1rem;
+}
+
+.input:valid{
+    background-color: transparent;
+}
+
+input[type="checkbox"]{
+    accent-color: rgb(255, 0, 98);
+    
+}
+.remember{
+    display: inline;
+}
+
+.forgot{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    
+   
+}
+
+.forgot a{
+    text-decoration: none;
+    color: white;
+}
+
+.forgot a:hover{
+    color: rgb(255, 0, 98);
+}
+
+.button{
+    margin-block: 3rem;
+    display: block;
+    width: 100%;
+    padding: .6rem;
+    border-radius: 160px;
+    background-color: white;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: scale(105%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: aliceblue;
+}
+
+.sign-up{
+    text-align: center;
+    margin-block-end: 2rem;
+}
+
+.sign-up a{
+    color: white;
+}
+
+
+@media(max-width: 1494px){
+    .login-main{
+    padding: 3rem;
+    width: 35%;
+ 
+}
+
+}
+
+
+@media(max-width: 1330px){
+    .login-main{
+    padding: 3rem;
+    width: 40%;
+ 
+}
+
+}
+
+
+@media(max-width: 943px){
+    .login-main{
+    padding: 3rem;
+    width: 60%;
+ 
+}
+
+}
+
+@media(max-width: 651px){
+    .login-main{
+    padding: 3rem;
+    width: 70%;
+ 
+}
+
+}
+
+
+
+@media(max-width: 480px){
+    .login-main{
+    padding: 3rem;
+    width: 85%;
+ 
+}
+
+}
+
+
+@media(max-width: 413px){
+    .login-main{
+    padding: 2rem;
+    width: 90%;
+ 
+}
+
+}

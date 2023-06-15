@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <title>Login Page V1</title>
+  </head>
+  <body>
+    <div class="main">
+      <div class="login-main">
+        <h3 class="login-text">Sign up</h3>
+
+        <form action="/signup" method="">
+          <div class="login-input">
+            <div class="input-email input-sub">
+              <input
+                class="input input-email"
+                type="text"
+                id="email"
+                name="email"
+                required
+              />
+              <label for="email" class="lable">Email</label>
+            </div>
+            <div class="input-password input-sub">
+              <input
+                class="input input-pass"
+                type="password"
+                id="pass"
+                name="password"
+                required
+              />
+              <label for="pass" class="labletwo">Password</label>
+            </div>
+             <div class="input-password input-sub confirmpass" >
+              <input
+                class="input input-pass"
+                type="password"
+                id="pass"
+                name="confirmpassword"
+                required
+              />
+              <label for="pass" class="labletwo">Confirm Password</label>
+            </div>
+          </div>
+          <button type="button" class="button">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
