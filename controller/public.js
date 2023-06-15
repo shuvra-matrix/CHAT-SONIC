@@ -3,6 +3,11 @@ const { validationResult } = require("express-validator");
 const axios = require("axios");
 
 exports.getChatIndex = (req, res, next) => {
+  if (req.session.answer) {
+    return res.render("public/chat", {
+      answer: req.session.answer,
+    });
+  }
   res.render("public/chat", {
     answer: [
       {
