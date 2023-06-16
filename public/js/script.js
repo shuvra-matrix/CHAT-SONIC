@@ -111,7 +111,7 @@ if (public) {
           list.slice(-1)[0].innerHTML =
             text.slice(0, index) + '<span class="blinking-cursor">|</span>';
           index++;
-          setTimeout(type, Math.random() * 50 + 10);
+          setTimeout(type, Math.random() * 40 + 10);
         } else {
           list.slice(-1)[0].innerHTML =
             text.slice(0, index) + '<span class="blinking-cursor">|</span>';
