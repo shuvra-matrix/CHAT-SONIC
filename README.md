@@ -12,7 +12,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!-- Badges -->
 
 <h4>
-    <a href="https://github.com/shuvra-matrix/CHAT-GURU">View Demo</a>
+    <a href="https://dull-pink-prawn-sari.cyclic.app/">View Demo</a>
   <span> · </span>
     <a href="https://github.com/shuvra-matrix/CHAT-GURU">Report Bug</a>
   <span> · </span>
