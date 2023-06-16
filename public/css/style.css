@@ -371,6 +371,7 @@ span[class^="dot-"]{
 .image .main-image{
     width: 400px;
     height: 300px;
+    border-radius: 8px;
 }
 
 
@@ -812,8 +813,8 @@ span[class^="dot-"]{
 }
 
 .image .main-image{
-    width: 94%;
-    height: 200px;
+    width: 95%;
+    height: 220px;
 }
 .chat-div {
     height: 75vh;

@@ -5,7 +5,7 @@ const { body } = require("express-validator");
 const routes = express.Router();
 
 routes.get("/", publicController.getChatIndex);
-routes.post("/", body("value").trim().isString(), publicController.postChat);
+routes.post("/", body("value").trim(), publicController.postChat);
 
 routes.get(
   "/dalle",

@@ -8,7 +8,7 @@ const copy = document.querySelectorAll(".copy");
 const code = document.querySelectorAll(".code");
 const public = document.querySelector(".chat-section");
 
-if (public.childElementCount > 2) {
+if (public) {
   window.addEventListener("load", () => {
     public.scrollIntoView({
       block: "end",
@@ -16,20 +16,22 @@ if (public.childElementCount > 2) {
     });
   });
 }
+
 if (reButton !== null) {
   reButton.addEventListener("click", loders);
 }
 button.addEventListener("click", loders);
 
 function loders() {
-  button.classList.toggle("hidden");
-  loder.classList.toggle("hidden");
-
-  if (question) {
-    public.innerHTML += ` <div class="chat-by-public chat">
+  if (input.value.length > 0) {
+    button.classList.toggle("hidden");
+    loder.classList.toggle("hidden");
+    if (public) {
+      public.innerHTML += ` <div class="chat-by-public chat">
       <p class="question">${input.value}</p>
+      <img class="logo-avator" src="/images/3.png" alt="" />
     </div>`;
-    public.innerHTML += `<div class="chat-bt-gpt chat">
+      public.innerHTML += `<div class="chat-bt-gpt chat">
       <p class="answer loading"><div class="wrapper">
   <div class="loading-text"> <!--Loading-text-->
     <h1>Loading
@@ -42,10 +44,11 @@ function loders() {
     </h1>
   </div> <!--/Loading-text-->
 </div> </p>
-    
+     <img class="logo-gpt" src="/images/chat.jpg" alt="" />
     </div>`;
 
-    public.lastChild.scrollIntoView();
+      public.lastChild.scrollIntoView();
+    }
   }
 }
 
