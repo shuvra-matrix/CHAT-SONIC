@@ -81,7 +81,7 @@ function loders() {
 
 // when input key preess loder go hide and button come on
 
-input.addEventListener("keypress", () => {
+input.addEventListener("keydown", () => {
   if (button.classList.contains("hidden")) {
     button.classList.remove("hidden");
     loder.classList.add("hidden");
