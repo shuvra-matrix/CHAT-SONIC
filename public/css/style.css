@@ -201,6 +201,10 @@ body{
     opacity: 0.8;
 }
 
+.copy:hover{
+  transform: scale(110%);
+}
+
 
 .input{
     position: fixed;
