@@ -147,7 +147,7 @@ body{
 .chat-section{
     width: 95%;
    
-    margin:  0px auto 2rem;
+    margin:  20px auto 2rem;
     padding-top: 1rem;
     display: flex;
     flex-flow: column wrap;

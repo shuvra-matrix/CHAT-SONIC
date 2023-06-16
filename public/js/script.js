@@ -27,7 +27,7 @@ function loders() {
     button.classList.toggle("hidden");
     loder.classList.toggle("hidden");
     if (public) {
-      public.innerHTML += ` <div class="chat-by-public chat">
+      public.innerHTML += `<div class="chat-by-public chat">
       <p class="question">${input.value}</p>
       <img class="logo-avator" src="/images/3.png" alt="" />
     </div>`;
@@ -46,8 +46,10 @@ function loders() {
 </div> </p>
      <img class="logo-gpt" src="/images/chat.jpg" alt="" />
     </div>`;
-
-      public.lastChild.scrollIntoView();
+      public.scrollIntoView({
+        block: "end",
+        inline: "nearest",
+      });
     }
   }
 }
