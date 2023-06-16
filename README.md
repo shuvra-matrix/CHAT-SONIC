@@ -14,9 +14,9 @@ Maybe you can mention me or this repo in the acknowledgements too
 <h4>
     <a href="https://dull-pink-prawn-sari.cyclic.app/">View Demo</a>
   <span> · </span>
-    <a href="https://github.com/shuvra-matrix/CHAT-GURU">Report Bug</a>
+    <a href="https://github.com/shuvra-matrix/CHAT-GURU/issues/">Report Bug</a>
   <span> · </span>
-    <a href="https://github.com/shuvra-matrix/CHAT-GURU">Request Feature</a>
+    <a href="https://github.com/shuvra-matrix/CHAT-GURU/issues/">Request Feature</a>
   </h4>
 </div>
 
