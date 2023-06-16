@@ -1,6 +1,6 @@
 const button = document.querySelector(".btns");
 const loder = document.querySelector(".loder");
-const reButton = document.querySelector(".btn");
+const reButton = document.querySelector(".rebtn");
 const input = document.querySelector(".value-input");
 const question = document.querySelectorAll(".question");
 const answer = document.querySelectorAll(".answer");
@@ -29,9 +29,11 @@ if (public) {
   });
 }
 // regenerate button loder on
-
-if (reButton !== null) {
-  reButton.addEventListener("click", loders);
+if (reButton) {
+  reButton.addEventListener("click", () => {
+    button.classList.toggle("hidden");
+    loder.classList.toggle("hidden");
+  });
 }
 
 // submit buton loder on

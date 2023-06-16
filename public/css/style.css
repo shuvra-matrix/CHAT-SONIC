@@ -416,7 +416,7 @@ span[class^="dot-"]{
     margin-top: 4rem;
 }
 
-.btn {
+.rebtn {
     align-items: center;
     background: #1b163b;
     border: 0;
@@ -438,14 +438,15 @@ span[class^="dot-"]{
 
 }
 
-.btn img{
+.rebtn img{
     width: 20px;
     height: 20px;
     padding-left: .5rem;
 }
 
-.btn:hover{
+.rebtn:hover{
      background: #120e2b;
+     transform: scale(110%);
 }
 
 .lod{
