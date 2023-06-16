@@ -41,7 +41,7 @@ button.addEventListener("click", loders);
 // also set cookies for farther use
 // add question and loging dynamic when sumit button click
 function loders() {
-  if (input.value.length > 2) {
+  if (input.value.length > 0) {
     button.classList.toggle("hidden");
     loder.classList.toggle("hidden");
 
