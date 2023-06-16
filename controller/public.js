@@ -29,8 +29,8 @@ exports.getImageIndex = (req, res, next) => {
 exports.postChat = (req, res, next) => {
   const que = req.body.value;
   const error = validationResult(req);
-  if (!error.isEmpty()) {
-    return res.status(422).render("public/index", {
+  if (!error.isEmpty() || que.length < 2) {
+    return res.status(422).render("public/chat", {
       answer: [
         {
           question: que,
