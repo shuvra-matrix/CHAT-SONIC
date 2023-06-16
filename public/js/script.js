@@ -7,7 +7,8 @@ const answer = document.querySelectorAll(".answer");
 const copy = document.querySelectorAll(".copy");
 const code = document.querySelectorAll(".code");
 const public = document.querySelector(".chat-section");
-
+const codeDiv = document.querySelector(".code-run");
+const gptDiv = document.querySelector(".chat-bt-gpt");
 // cookie function
 
 function set_cookie(name, value) {
@@ -42,12 +43,12 @@ button.addEventListener("click", loders);
 // add question and loging dynamic when sumit button click
 function loders() {
   if (input.value.length > 0) {
-    set_cookie("newOutput", "true");
     button.classList.toggle("hidden");
     loder.classList.toggle("hidden");
 
     // add question and loging dynamic when sumit button click
     if (public) {
+      set_cookie("newOutput", "true");
       public.innerHTML += `<div class="chat-by-public chat">
       <p class="question">${input.value}</p>
       <img class="logo-avator" src="/images/3.png" alt="" />
@@ -89,44 +90,51 @@ input.addEventListener("keypress", () => {
 // when windows loading done it check my decided cooke is present or not if present then grab latest
 // elemnt text content and show it slowly word by word (like some one typing)
 // then delete the cooker because when page relode any no input paresent i dont want show smae typing animation evertime
-window.addEventListener("load", () => {
-  let cookie = document.cookie.split(" ")[0].split("=");
-  let name = cookie[0];
-  let value = cookie[1];
-  let list = [];
-  answer.forEach((a) => {
-    list.push(a);
-  });
-  let text = list.slice(-1)[0].textContent.replaceAll("\n", "<br>");
-  let index = 10;
-
-  // then function print text one by one
-  function type() {
-    if (index < text.length) {
-      list.slice(-1)[0].innerHTML =
-        text.slice(0, index) + '<span class="blinking-cursor">|</span>';
-      index++;
-      setTimeout(type, Math.random() * 50 + 10);
-    } else {
-      list.slice(-1)[0].innerHTML =
-        text.slice(0, index) + '<span class="blinking-cursor">|</span>';
-    }
-    delete_cookie(name);
-  }
-
-  // check if cooke is corrent
-  if (name == "newOutput") {
-    type();
-  }
-
-  // replce all elemnt textcontain(\n) with <br> to show it next line in html
-  if (answer) {
+if (public) {
+  window.addEventListener("load", () => {
+    let cookie = document.cookie.split(" ")[0].split("=");
+    let name = cookie[0];
+    let value = cookie[1];
+    let list = [];
     answer.forEach((a) => {
-      const value = a.textContent.replaceAll("\n", "<br>");
-      a.innerHTML = value;
+      list.push(a);
     });
-  }
-});
+    let index = 10;
+
+    if (
+      public.lastChild.previousSibling.childNodes[1].classList.contains("code")
+    ) {
+      console.log("yo");
+    } else {
+      let text = list.slice(-1)[0].textContent.replaceAll("\n", "<br>");
+      function type() {
+        if (index < text.length) {
+          list.slice(-1)[0].innerHTML =
+            text.slice(0, index) + '<span class="blinking-cursor">|</span>';
+          index++;
+          setTimeout(type, Math.random() * 50 + 10);
+        } else {
+          list.slice(-1)[0].innerHTML =
+            text.slice(0, index) + '<span class="blinking-cursor">|</span>';
+        }
+        delete_cookie(name);
+      }
+
+      if (name == "newOutput") {
+        type();
+      }
+    }
+    // check if cooke is corrent
+
+    // replce all elemnt textcontain(\n) with <br> to show it next line in html
+    if (answer) {
+      answer.forEach((a) => {
+        const value = a.textContent.replaceAll("\n", "<br>");
+        a.innerHTML = value;
+      });
+    }
+  });
+}
 
 // copy content from element
 copy.forEach((e) => {
@@ -154,11 +162,18 @@ copy.forEach((e) => {
 
 code.forEach((c) => {
   const list = c.value.split("```");
+  console.log(c);
   c.nextElementSibling.innerHTML += `
   
   <p class="code_one">${list[0]}</p>
   <pre><code class=""> ${list[1].replaceAll("python", "")}  </code></pre>
-  <p class="code_two">${list[2]}</p>
- <p style="display: none"> "${list[1].replaceAll("python", "")}"</p>
   `;
+
+  for (let i = 2; i < list.length; i++) {
+    c.nextElementSibling.innerHTML += `<p class="code_two">${list[i]}</p>`;
+  }
+  c.nextElementSibling.innerHTML += `<p style="display: none"> "${list[1].replaceAll(
+    "python",
+    ""
+  )}"</p>`;
 });
