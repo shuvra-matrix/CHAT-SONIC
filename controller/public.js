@@ -95,7 +95,7 @@ exports.postChat = (req, res, next) => {
     }
   }
 
-  // apiCall();
+  apiCall();
 };
 
 exports.postImage = (req, res, next) => {
