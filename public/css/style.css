@@ -14,8 +14,10 @@
     --gpt-background-color: #1f1c32;
     --navbar-color : #09061a;
     --font-family: 'Open Sans', sans-serif;
-    --text-shadow : 4px 4px 7px black;
+    --text-shadow : 3px 3px 10px black;
     --side-bar-color : #000000d9;
+    --logo-box-shadow :  1px 1px 10px #000000;
+    --chat-section-color : linear-gradient(45deg, #00000082, #060123);
 }
 
 
@@ -103,20 +105,20 @@ body{
     display: flex;
     align-items: center;
     justify-content: flex-end;
-   
-    
 }
-
-
 
 .profile img{
     border-radius: 50%;
     width: 70px;
+    box-shadow: var(--logo-box-shadow);
+    
 }
 
 .logo-nav , .chat-gpt-nav, .image-gpt-nav {
     display: none;
 }
+
+
 
 
 /* chat div */
@@ -130,6 +132,7 @@ body{
     overflow: scroll;
     padding-bottom: 4rem;
     overflow-wrap: break-word;
+    background: var(--chat-section-color);
     
     
 }
@@ -151,20 +154,15 @@ body{
     padding-top: 1rem;
     display: flex;
     flex-flow: column wrap;
-    align-items: flex-start;
-
-    
-   
-   
+    align-items: flex-start;  
 }
 
 
 .chat{
     width: 70%;
-    color: rgb(212, 212, 212);
-    font-size: 1.2rem;
+    color: rgb(179 179 179);
+    font-size: 1rem;
     padding: 1.5rem 1.5rem 4rem 1.5rem;
-    border-radius: 8px;
     margin: 1rem;
     display: block;
     line-height: 1.6;
@@ -177,16 +175,18 @@ body{
 
     background-color: var(--public-background-color);
     align-self: flex-end;
-
-   
-
+    border-top-left-radius: 24px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 24px
 }
 
 
 .chat-bt-gpt {
     background-color: var(--gpt-background-color);
     position: relative;
-
+    border-top-right-radius: 24px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 24px
 }
 
 .copy{
@@ -194,8 +194,8 @@ body{
     cursor: pointer;
     right: 20px;
     bottom: 10px;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     margin-top: 1rem ;
     opacity: 0.8;
 }
@@ -220,11 +220,12 @@ body{
     border-radius: 8px;
     background-color: var(--input-background);
     border: none;
-    color: white;
+    color: rgb(194, 194, 194);
     font-size: 1rem;
     padding-left: 1rem;
     border: 1px solid var(--input-border-color);
     padding-right: 5.5rem;
+    box-shadow: 1px 1px 19px #0000008c;
     
 }
 
@@ -249,6 +250,7 @@ body{
 .chat-by-public{
   position: relative;
   padding-right: 5.5rem;
+  
 }
 
 .logo-avator , .logo-gpt{
@@ -354,7 +356,7 @@ span[class^="dot-"]{
     text-align: center;
 }
 .image{
-    background-color: #1e1940;
+    background-color: #1e1940d9;
     padding: 2rem;
     width: 500px;
     height: 400px;
@@ -380,6 +382,7 @@ span[class^="dot-"]{
     width: 400px;
     height: 300px;
     border-radius: 8px;
+    box-shadow: var(--logo-box-shadow);
 }
 
 
@@ -394,35 +397,35 @@ span[class^="dot-"]{
 }
 
 .btn {
-  align-items: center;
-  background-image: linear-gradient(144deg,#5f2886, #3e2f9e 50%,#2a9097);
-  border: 0;
-  border-radius: 8px;
-  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  display: flex;
-  font-family: Phantomsans, sans-serif;
-  font-size: 20px;
-  justify-content: center;
-  padding: 10px 24px;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  cursor: pointer;
+    align-items: center;
+    background: #1b163b;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: rgb(0 0 0 / 32%) 3px 3px 30px -3px;
+    box-sizing: border-box;
+    color: #b3b3b3;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    padding: 7px 12px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 2px solid #41414199;
 
 }
 
 .btn img{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     padding-left: .5rem;
 }
 
 .btn:hover{
-     background-image: linear-gradient(144deg,#72359e, #4a38bb 50%,#38aab3);
+     background: #120e2b;
 }
 
 
@@ -612,6 +615,9 @@ span[class^="dot-"]{
     width: 45px;
     height:45px;
     border-radius: 8px;
+    box-shadow: var(--logo-box-shadow);
+        border: 2px solid;
+    border-color: #2b2b2b80;
 }
 
 .chat{
@@ -654,7 +660,9 @@ span[class^="dot-"]{
   padding-left: 4rem;
 }
 
-
+.logo-nav img {
+    box-shadow: var(--logo-box-shadow);
+}
 }
 
 
@@ -688,7 +696,7 @@ span[class^="dot-"]{
 .chat-gpt-nav img , .image-gpt-nav img{
     width: 35px;
     height: 35px;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .input input{
@@ -706,8 +714,8 @@ span[class^="dot-"]{
 }
 
 .chat{
-    color: rgb(204, 198, 198);
-    font-size: 1rem;
+       color: rgb(179 179 179);
+    font-size: 0.9rem;
     line-height: 1.6;
     text-align: left;
     width: 95%;
@@ -760,8 +768,8 @@ span[class^="dot-"]{
  
     right: 10px;
     bottom: 10px;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     opacity: 0.8;
 }
 
