@@ -19,7 +19,6 @@ function delete_cookie(name) {
 }
 
 // when page relode it always go to last div
-
 if (public) {
   window.addEventListener("load", () => {
     public.scrollIntoView({
@@ -28,7 +27,6 @@ if (public) {
     });
   });
 }
-
 // regenerate button loder on
 
 if (reButton !== null) {
@@ -105,6 +103,7 @@ if (public) {
       public.lastChild.previousSibling.childNodes[1].classList.contains("code")
     ) {
       console.log("yo");
+      // remove code section text animation
     } else {
       let text = list.slice(-1)[0].textContent.replaceAll("\n", "<br>");
       function type() {
@@ -162,7 +161,7 @@ copy.forEach((e) => {
 
 code.forEach((c) => {
   const list = c.value.split("```");
-  console.log(c);
+
   c.nextElementSibling.innerHTML += `
   
   <p class="code_one">${list[0]}</p>
