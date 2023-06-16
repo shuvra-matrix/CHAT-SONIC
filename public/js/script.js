@@ -140,12 +140,14 @@ if (public) {
 copy.forEach((e) => {
   e.addEventListener("click", (f) => {
     let text = "";
-    if (e.parentElement.childNodes[3].childNodes[7]) {
-      text = e.parentElement.childNodes[3].childNodes[7].textContent;
-    } else {
-      text = e.parentElement.childNodes[1].textContent;
-    }
 
+    const contTypee = e.parentElement.childNodes;
+
+    if (contTypee.length === 9) {
+      text = contTypee[3].lastChild.textContent;
+    } else {
+      text = contTypee[1].textContent;
+    }
     const copyContent = async () => {
       try {
         await navigator.clipboard.writeText(text);
