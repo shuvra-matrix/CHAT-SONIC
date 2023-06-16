@@ -68,6 +68,53 @@ if (answer) {
   });
 }
 
+window.addEventListener("load", () => {
+  let list = [];
+  answer.forEach((a) => {
+    const text = a;
+    list.push(a);
+  });
+  let text = list.slice(-1)[0].textContent;
+  let index = 0;
+  function type() {
+    if (index < text.length) {
+      list.slice(-1)[0].innerHTML =
+        text.slice(0, index) + '<span class="blinking-cursor">|</span>';
+      index++;
+      setTimeout(type, Math.random() * 150 + 50);
+    } else {
+      list.slice(-1)[0].innerHTML =
+        text.slice(0, index) + '<span class="blinking-cursor">|</span>';
+    }
+  }
+  type();
+});
+
+async function btn() {
+  button.addEventListener("click", () => {
+    let index = 0;
+    window.addEventListener("load", () => {
+      answer.forEach((a) => {
+        const text = a;
+        console.log(a);
+        // if (index < text.length) {
+        //   console.log(a[-1]);
+
+        //   a[-1].innerHTML =
+        //     text.slice(0, index) + '<span class="blinking-cursor">|</span>';
+        //   index++;
+        //   setTimeout(type, Math.random() * 150 + 50);
+        // } else {
+        //   a[-1].innerHTML =
+        //     text.slice(0, index) + '<span class="blinking-cursor">|</span>';
+        // }
+      });
+    });
+  });
+}
+
+btn();
+
 copy.forEach((e) => {
   e.addEventListener("click", (f) => {
     let text = "";

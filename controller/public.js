@@ -144,5 +144,5 @@ exports.postImage = (req, res, next) => {
     }
   }
 
-  apiCall();
+  // apiCall();
 };
