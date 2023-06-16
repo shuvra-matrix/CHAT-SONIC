@@ -26,6 +26,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
+    -[Live Demo](#house-livedemo)
   - [Tech Stack](#space_invader-tech-stack)
   - [Features](#dart-features)
   - [Environment Variables](#key-environment-variables)
@@ -65,6 +66,10 @@ Maybe you can mention me or this repo in the acknowledgements too
     Overall, this web application represents a novel and exciting way to leverage AI technologies, providing users with an immersive and dynamic experience through conversational interactions and visually stunning image generation.
   </p>
 
+<!--  live demo -->
+
+### :house: LiveDemo
+[Live Demo](https://dull-pink-prawn-sari.cyclic.app/)
 <!-- TechStack -->
 ### :space_invader: Tech Stack
 
@@ -94,6 +99,8 @@ Maybe you can mention me or this repo in the acknowledgements too
     <li><a href="https://www.mongodb.com/">MongoDB</a></li>
   </ul>
 </details>
+
+
 
 <!-- Features -->
 ### :dart: Features
