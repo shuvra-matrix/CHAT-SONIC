@@ -36,7 +36,7 @@
    
   ],
   "start_url": "/",
-  "display_override": ["window-control-overlay", "minimal-ui"],
+  "display_override": ["window-control-overlay", "standalone"],
   "display": "fullscreen",
   "theme_color": "#020105",
   "background_color": "#020105"
