@@ -4,10 +4,8 @@ const toCache = [
   "/css/style.css",
   "/images/avatar.jpg",
   "/images/d4.jpg",
-  "/images/logo.png",
   "/images/dalhe.jpg",
   "/images/chat.jpg",
-  "/js/script.js",
   "/js/status.js",
 ];
 

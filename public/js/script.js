@@ -9,7 +9,6 @@ const code = document.querySelectorAll(".code");
 const public = document.querySelector(".chat-section");
 const codeDiv = document.querySelector(".code-run");
 const gptDiv = document.querySelector(".chat-bt-gpt");
-const subImage = document.querySelector(".btns-image");
 
 // cookie function
 
@@ -37,7 +36,6 @@ if (reButton !== null) {
 
 // submit buton loder on
 button.addEventListener("click", loders);
-subImage.addEventListener("click", loders);
 
 // function to load loder on click submit button and regenerate button
 // also set cookies for farther use
