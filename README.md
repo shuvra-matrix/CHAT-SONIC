@@ -26,7 +26,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
-  -[Live Demo](#house-livedemo)
+  - [Live Demo](#house-livedemo)
   - [Tech Stack](#space_invader-tech-stack)
   - [Features](#dart-features)
   - [Environment Variables](#key-environment-variables)
