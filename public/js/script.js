@@ -146,12 +146,14 @@ copy.forEach((e) => {
     let text = "";
 
     const contTypee = e.parentElement.childNodes;
-
     if (contTypee.length === 9) {
-      text = contTypee[3].lastChild.textContent;
+      text = contTypee[3].childNodes[1].textContent;
     } else {
       text = contTypee[1].textContent;
     }
+
+    console.log(contTypee);
+
     const copyContent = async () => {
       try {
         await navigator.clipboard.writeText(text);
@@ -168,15 +170,17 @@ copy.forEach((e) => {
 
 code.forEach((c) => {
   const list = c.value.split("```");
-
+  console.log(list);
   const listLength = list.length;
   for (let i = 0; i < listLength - 1; i++) {
     if (i % 2 == 0) {
       c.nextElementSibling.innerHTML += `
   
-  <p class="code_one" >${list[0 + i]}</p>
+  <p class="code_one" >${list[0 + i]}
+    </p>
 
   <pre><code style="margin-bottom : 1rem "> ${list[i + 1]}  </code></pre>`;
+
       c.nextElementSibling.childNodes[1].innerHTML += list[i + 1];
     }
   }
