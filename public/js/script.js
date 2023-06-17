@@ -107,7 +107,6 @@ if (publics) {
     if (
       publics.lastChild.previousSibling.childNodes[1].classList.contains("code")
     ) {
-      console.log("yo");
       // remove code section text animation
     } else {
       let text = list.slice(-1)[0].textContent.replaceAll("\n", "<br>");
@@ -170,16 +169,17 @@ copy.forEach((e) => {
 
 code.forEach((c) => {
   const list = c.value.split("```");
-  console.log(list);
   const listLength = list.length;
   for (let i = 0; i < listLength - 1; i++) {
     if (i % 2 == 0) {
+      let a = list[i + 1];
+      a = a.substring(a.indexOf("\n") + 1).replace(/^/, "\n");
       c.nextElementSibling.innerHTML += `
   
   <p class="code_one" >${list[0 + i]}
     </p>
 
-  <pre><code style="margin-bottom : 1rem "> ${list[i + 1]}  </code></pre>`;
+  <pre><code style="margin-bottom : 1rem "> ${a}  </code></pre>`;
 
       c.nextElementSibling.childNodes[1].innerHTML += list[i + 1];
     }
