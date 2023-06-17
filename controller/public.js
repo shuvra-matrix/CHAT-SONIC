@@ -1,6 +1,37 @@
 require("dotenv").config();
 const { validationResult } = require("express-validator");
 const axios = require("axios");
+let total = 23324;
+async function api() {
+  const options = {
+    method: "POST",
+    url: "https://openai80.p.rapidapi.com/chat/completions",
+    headers: {
+      "Accept-Encoding": "gzip,deflate,compress",
+      "content-type": "application/json",
+      "X-RapidAPI-Key": "91e8d91d42msh9648b3d92531ed3p110591jsn998769c81a46",
+      "X-RapidAPI-Host": "openai80.p.rapidapi.com",
+    },
+    data: {
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content: "make python code to print addition of two digit",
+        },
+      ],
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// api();
 
 exports.getChatIndex = (req, res, next) => {
   if (req.session.answer) {
@@ -45,6 +76,7 @@ exports.postChat = (req, res, next) => {
   }
   req.session.message.push({ role: "user", content: que });
 
+  const questionList = req.session.message.slice(-4);
   async function apiCall() {
     const options = {
       method: "POST",
@@ -57,13 +89,16 @@ exports.postChat = (req, res, next) => {
       },
       data: {
         model: "gpt-3.5-turbo",
-        messages: req.session.message,
+        messages: questionList,
       },
     };
 
     try {
       const response = await axios.request(options);
       const reply = response.data.choices[0].message.content;
+      console.log(reply);
+      total += Number(response.data.usage.total_tokens);
+      console.log(total);
 
       if (reply.includes("```")) {
         req.session.answer.push({
@@ -128,6 +163,7 @@ exports.postImage = (req, res, next) => {
     try {
       const response = await axios.request(options);
       const imageLink = response.data.data[0].url;
+      console.log(response.data.data);
 
       res.render("public/image", {
         modeon: true,

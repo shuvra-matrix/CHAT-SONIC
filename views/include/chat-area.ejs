@@ -13,7 +13,10 @@
       <p class="answer loading"><%= e.answer %></p>
       <% } else { %>
       <input type="hidden" class="code" value="<%= e.answer %>" />
-      <div class="code-run"></div>
+      <div class="code-run">
+
+        <p style="display: none"></p>
+      </div>
 
       <% } %>
       <img class="logo-gpt" src="/images/chat.jpg" alt="" />

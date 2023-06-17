@@ -1,3 +1,5 @@
+"use strict";
+
 const button = document.querySelector(".btns");
 const loder = document.querySelector(".loder");
 const reButton = document.querySelector(".rebtn");
@@ -6,7 +8,7 @@ const question = document.querySelectorAll(".question");
 const answer = document.querySelectorAll(".answer");
 const copy = document.querySelectorAll(".copy");
 const code = document.querySelectorAll(".code");
-const public = document.querySelector(".chat-section");
+const publics = document.querySelector(".chat-section");
 const codeDiv = document.querySelector(".code-run");
 const gptDiv = document.querySelector(".chat-bt-gpt");
 
@@ -20,9 +22,9 @@ function delete_cookie(name) {
 }
 
 // when page relode it always go to last div
-if (public) {
+if (publics) {
   window.addEventListener("load", () => {
-    public.scrollIntoView({
+    publics.scrollIntoView({
       block: "end",
       inline: "nearest",
     });
@@ -48,13 +50,13 @@ function loders() {
     loder.classList.toggle("hidden");
 
     // add question and loging dynamic when sumit button click
-    if (public) {
+    if (publics) {
       set_cookie("newOutput", "true");
-      public.innerHTML += `<div class="chat-by-public chat">
+      publics.innerHTML += `<div class="chat-by-public chat">
       <p class="question">${input.value}</p>
       <img class="logo-avator" src="/images/3.png" alt="" />
     </div>`;
-      public.innerHTML += `<div class="chat-bt-gpt chat">
+      publics.innerHTML += `<div class="chat-bt-gpt chat">
       <p class="answer loading"><div class="wrapper">
   <div class="loading-text"> <!--Loading-text-->
     <h1>Loading
@@ -71,7 +73,7 @@ function loders() {
     </div>`;
 
       //after sumit button page view go to last div
-      public.scrollIntoView({
+      publics.scrollIntoView({
         block: "end",
         inline: "nearest",
       });
@@ -91,7 +93,7 @@ input.addEventListener("keydown", () => {
 // when windows loading done it check my decided cooke is present or not if present then grab latest
 // elemnt text content and show it slowly word by word (like some one typing)
 // then delete the cooker because when page relode any no input paresent i dont want show smae typing animation evertime
-if (public) {
+if (publics) {
   window.addEventListener("load", () => {
     let cookie = document.cookie.split(" ")[0].split("=");
     let name = cookie[0];
@@ -103,7 +105,7 @@ if (public) {
     let index = 10;
 
     if (
-      public.lastChild.previousSibling.childNodes[1].classList.contains("code")
+      publics.lastChild.previousSibling.childNodes[1].classList.contains("code")
     ) {
       console.log("yo");
       // remove code section text animation
@@ -167,17 +169,22 @@ copy.forEach((e) => {
 code.forEach((c) => {
   const list = c.value.split("```");
 
-  c.nextElementSibling.innerHTML += `
+  const listLength = list.length;
+  for (let i = 0; i < listLength - 1; i++) {
+    if (i % 2 == 0) {
+      c.nextElementSibling.innerHTML += `
   
-  <p class="code_one">${list[0]}</p>
-  <pre><code class=""> ${list[1].replaceAll("python", "")}  </code></pre>
-  `;
+  <p class="code_one" >${list[0 + i]}</p>
 
-  for (let i = 2; i < list.length; i++) {
-    c.nextElementSibling.innerHTML += `<p class="code_two">${list[i]}</p>`;
+  <pre><code style="margin-bottom : 1rem "> ${list[i + 1]}  </code></pre>`;
+      c.nextElementSibling.childNodes[1].innerHTML += list[i + 1];
+    }
   }
-  c.nextElementSibling.innerHTML += `<p style="display: none"> "${list[1].replaceAll(
-    "python",
-    ""
-  )}"</p>`;
+  c.nextElementSibling.innerHTML += `<p class="code_two"> ${
+    list[listLength - 1]
+  }
+  </p>`;
+
+  // c.nextElementSibling.innerHTML += `<p style="display: none"> ${list}
+  // </p>`;
 });
