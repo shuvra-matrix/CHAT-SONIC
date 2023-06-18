@@ -56,6 +56,8 @@ async function api() {
 // api();
 
 exports.getChatIndex = (req, res, next) => {
+  console.log(req.user);
+  console.log(req.user.apikeyindex, req.user.maxApiKey);
   if (req.session.answer) {
     return res.render("public/chat", {
       answer: req.session.answer,
@@ -92,6 +94,18 @@ exports.postChat = (req, res, next) => {
       ],
     });
   }
+  if (req.user.apikeyindex.toString() == req.user.maxApiKey.toString()) {
+    return res.render("public/chat", {
+      answer: [
+        {
+          question: "What's wrong Chat Sonic?",
+          answer:
+            "We faced some major issues. We try to fixed it as soon as possible. Please try again later",
+        },
+      ],
+    });
+  }
+
   if (!req.session.answer) {
     req.session.message = [];
     req.session.answer = [];
@@ -163,17 +177,17 @@ exports.postChat = (req, res, next) => {
             "You have exceeded the MONTHLY quota for Tokens on your current plan"
           )
         ) {
-          User.findById("648edc6b1f324c954afc65d7").then((user) => {
-            let userApiIndex = user.apikeyindex + 1;
-            user.apikeyindex = userApiIndex;
-            user
-              .save()
-              .then((result) => {
-                const mailOption = {
-                  from: process.env.USER_ID,
-                  to: process.env.TO_USER_ID,
-                  subject: "Welcome To Shop",
-                  html: `<html><body style="width : 90%; margin : auto ; background-color :#000000d9,padding : 15px ;">
+          let userApiIndex = req.user.apikeyindex + 1;
+          console.log(userApiIndex);
+          req.user.apikeyindex = userApiIndex;
+          req.user
+            .save()
+            .then((result) => {
+              const mailOption = {
+                from: process.env.USER_ID,
+                to: process.env.TO_USER_ID,
+                subject: "Welcome To Shop",
+                html: `<html><body style="width : 90%; margin : auto ; background-color :#000000d9,padding : 15px ;">
                 
                 <div style="width : 95% ;height : 90%; text-align : center; margin : 12px auto ; background-color : #0c0921; padding:1rem">
                 <h1 style="color : green">Hi Your Api limit is end. We call a new api . please add more api</h1>
@@ -181,22 +195,21 @@ exports.postChat = (req, res, next) => {
                 </div>
                 
                 </body></html>`,
-                };
-                return transporter.sendMail(mailOption);
-              })
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          });
+              };
+              return transporter.sendMail(mailOption);
+            })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         } else {
           console.log("error");
           res.render("public/chat", {
             answer: [
               {
-                question: "what's wrong Chat Sonic?",
+                question: "What's wrong Chat Sonic?",
                 answer: "Something went wrong. Please try again later",
               },
             ],
@@ -204,14 +217,8 @@ exports.postChat = (req, res, next) => {
         }
       });
   }
-  user
-    .findById("648edc6b1f324c954afc65d7")
-    .then((user) => {
-      apiCall(user.apikeyindex);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
+  apiCall(req.user.apikeyindex);
 };
 
 exports.postImage = (req, res, next) => {
@@ -224,7 +231,17 @@ exports.postImage = (req, res, next) => {
       imgaeLink: "/images/invalid.jpg",
     });
   }
-
+  if (req.user.apikeyindex.toString() == req.user.maxApiKey.toString()) {
+    return res.render("public/chat", {
+      answer: [
+        {
+          question: "What's wrong Chat Sonic?",
+          answer:
+            "We faced some major issues. We try to fixed it as soon as possible. Please try again later",
+        },
+      ],
+    });
+  }
   async function apiCall(indexApi) {
     let api;
     if (indexApi >= 0) {
@@ -277,17 +294,27 @@ exports.postImage = (req, res, next) => {
             "You have exceeded the MONTHLY quota for Tokens on your current plan"
           )
         ) {
-          User.findById("648edc6b1f324c954afc65d7").then((user) => {
-            let userApiIndex = user.apikeyindex + 1;
-            user.apikeyindex = userApiIndex;
-            user
-              .save()
-              .then((result) => {
-                const mailOption = {
-                  from: process.env.USER_ID,
-                  to: process.env.TO_USER_ID,
-                  subject: "Welcome To Shop",
-                  html: `<html><body style="width : 90%; margin : auto ; background-color :#000000d9,padding : 15px ;">
+          let userApiIndex = req.user.apikeyindex + 1;
+          req.user.apikeyindex = userApiIndex;
+          if (userApiIndex == user.maxApiKey) {
+            return res.render("public/chat", {
+              answer: [
+                {
+                  question: "What's wrong Chat Sonic?",
+                  answer:
+                    "Sorry we faced some major issue. We try to solve it as soon as possible. Please try again later",
+                },
+              ],
+            });
+          }
+          req.user
+            .save()
+            .then((result) => {
+              const mailOption = {
+                from: process.env.USER_ID,
+                to: process.env.TO_USER_ID,
+                subject: "Welcome To Shop",
+                html: `<html><body style="width : 90%; margin : auto ; background-color :#000000d9,padding : 15px ;">
                 
                 <div style="width : 95% ;height : 90%; text-align : center; margin : 12px auto ; background-color : #0c0921; padding:1rem">
                 <h1 style="color : green">Hi Your Api limit is end. We call a new api . please add more api</h1>
@@ -295,16 +322,15 @@ exports.postImage = (req, res, next) => {
                 </div>
                 
                 </body></html>`,
-                };
-                return transporter.sendMail(mailOption);
-              })
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          });
+              };
+              return transporter.sendMail(mailOption);
+            })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         } else {
           console.log("error");
           res.render("public/image", {
@@ -315,12 +341,6 @@ exports.postImage = (req, res, next) => {
         }
       });
   }
-  user
-    .findById("648edc6b1f324c954afc65d7")
-    .then((user) => {
-      apiCall(user.apikeyindex);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
+  apiCall(req.user.apikeyindex);
 };

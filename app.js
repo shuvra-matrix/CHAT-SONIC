@@ -3,6 +3,7 @@ const express = require("express");
 const mongoos = require("mongoose");
 const session = require("express-session");
 const SessionStore = require("connect-mongodb-session")(session);
+const User = require("./model/user");
 const port = "3000";
 const path = require("path");
 require("dotenv").config();
@@ -31,6 +32,20 @@ app.use(
     },
   })
 );
+
+app.use((req, res, next) => {
+  if (req.user) {
+    next();
+  }
+  User.findById("648edc6b1f324c954afc65d7")
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 const publicRoutes = require("./routes/public");
 const authRoutes = require("./routes/auth");

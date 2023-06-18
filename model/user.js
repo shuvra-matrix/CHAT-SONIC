@@ -6,6 +6,9 @@ const userSchema = new Schema({
   apikeyindex: {
     type: Number,
   },
+  maxApiKey: {
+    type: Number,
+  },
 });
 
 module.exports = mongoos.model("User", userSchema);
