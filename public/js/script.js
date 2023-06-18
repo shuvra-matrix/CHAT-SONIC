@@ -1,5 +1,3 @@
-"use strict";
-
 const button = document.querySelector(".btns");
 const loder = document.querySelector(".loder");
 const reButton = document.querySelector(".rebtn");
@@ -11,7 +9,7 @@ const code = document.querySelectorAll(".code");
 const publics = document.querySelector(".chat-section");
 const codeDiv = document.querySelector(".code-run");
 const gptDiv = document.querySelector(".chat-bt-gpt");
-
+const undefineCode = document.querySelector(".language-css");
 // cookie function
 
 function set_cookie(name, value) {
@@ -20,6 +18,26 @@ function set_cookie(name, value) {
 function delete_cookie(name) {
   document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 }
+
+// add auestion dynamic when typing
+// publics.innerHTML += `<div class="chat-by-public chat hidden ">
+//       <p class="question"></p>
+//       <img class="logo-avator" src="/images/3.png" alt="" />
+//     </div>`;
+
+// input.addEventListener("keydown", (e) => {
+//   publics.lastChild.classList.remove("hidden");
+//   let text = publics.lastChild.childNodes[1].innerHTML;
+//   if (e.key == "Backspace") {
+//     text = text.slice(0, -1);
+//     publics.lastChild.childNodes[1].innerHTML = text;
+//   } else {
+//     publics.lastChild.childNodes[1].innerHTML += e.key;
+//   }
+//   if (publics.lastChild.childNodes[1].textContent.length < 1) {
+//     publics.lastChild.classList.add("hidden");
+//   }
+// });
 
 // when page relode it always go to last div
 if (publics) {
@@ -50,6 +68,7 @@ function loders() {
     loder.classList.toggle("hidden");
 
     // add question and loging dynamic when sumit button click
+    // hide last chile because it's created for show your question letter by letter
     if (publics) {
       set_cookie("newOutput", "true");
       publics.innerHTML += `<div class="chat-by-public chat">
@@ -97,7 +116,6 @@ if (publics) {
   window.addEventListener("load", () => {
     let cookie = document.cookie.split(" ")[0].split("=");
     let name = cookie[0];
-    let value = cookie[1];
     let list = [];
     answer.forEach((a) => {
       list.push(a);
@@ -130,9 +148,9 @@ if (publics) {
     // check if cooke is corrent
 
     // replce all elemnt textcontain(\n) with <br> to show it next line in html
-    if (answer) {
+    if (question) {
       answer.forEach((a) => {
-        const value = a.textContent.replaceAll("\n", "<br>");
+        let value = a.textContent.replaceAll("\n", "<br>");
         a.innerHTML = value;
       });
     }
@@ -169,17 +187,32 @@ copy.forEach((e) => {
 
 code.forEach((c) => {
   const list = c.value.split("```");
+  console.log(list);
+
   const listLength = list.length;
   for (let i = 0; i < listLength - 1; i++) {
     if (i % 2 == 0) {
       let a = list[i + 1];
       a = a.substring(a.indexOf("\n") + 1).replace(/^/, "\n");
-      c.nextElementSibling.innerHTML += `
-  
-  <p class="code_one" >${list[0 + i]}
-    </p>
 
-  <pre><code style="margin-bottom : 1rem "> ${a}  </code></pre>`;
+      console.log(list[0 + i]);
+      console.log(list[i + 1]);
+      const textList = list[0 + i].split("\n");
+      const lengthOfText = textList.length;
+      for (let i = 0; i < lengthOfText; i++) {
+        c.nextElementSibling.innerHTML += `
+        
+  <p class="code_one" >${textList[i]
+    .replaceAll("\n", "<br>")
+    .replaceAll("<", "&#60;")
+    .replaceAll(">", "&#62;")
+    .replaceAll("`", "'")}<br>
+    </p>`;
+      }
+      c.nextElementSibling.innerHTML += `
+  <pre><code style="margin-bottom : 1rem "> ${a
+    .replaceAll("<", "&#60;")
+    .replaceAll(">", "&#62;")}  </code></pre>`;
 
       c.nextElementSibling.childNodes[1].innerHTML += list[i + 1];
     }
@@ -188,7 +221,6 @@ code.forEach((c) => {
     list[listLength - 1]
   }
   </p>`;
-
-  // c.nextElementSibling.innerHTML += `<p style="display: none"> ${list}
-  // </p>`;
 });
+
+//language-bash

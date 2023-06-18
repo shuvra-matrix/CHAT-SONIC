@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { validationResult } = require("express-validator");
 const axios = require("axios");
-let total = 23324;
+let total = 28896;
 async function api() {
   const options = {
     method: "POST",
@@ -76,7 +76,6 @@ exports.postChat = (req, res, next) => {
   }
   req.session.message.push({ role: "user", content: que });
 
-  const questionList = req.session.message.slice(-4);
   async function apiCall() {
     const options = {
       method: "POST",
@@ -89,7 +88,7 @@ exports.postChat = (req, res, next) => {
       },
       data: {
         model: "gpt-3.5-turbo",
-        messages: questionList,
+        messages: req.session.message,
       },
     };
 
@@ -126,7 +125,8 @@ exports.postChat = (req, res, next) => {
           },
         ],
       });
-      console.error(error);
+      let errorData = error.response.data.message;
+      console.log(errorData);
     }
   }
 
