@@ -518,19 +518,28 @@ span[class^="dot-"]{
 
 /* highlight js */
 
-.hljs{
+pre {
 
     background: #00000073 !important;
     color: #c4c4c4 !important;
     border-radius: 8px !important;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.hljs{
+  background-color: transparent !important;
+  color: #dbd6e0 !important;
+}
+
+h1, h2 {
+  font-size: 1rem !important;
 }
 
 .code_one{
-  padding-bottom: 1rem;
-}
-
-.code_two{
-  padding-top: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 
@@ -552,6 +561,24 @@ span[class^="dot-"]{
     color: #b48608 !important;
 }
 
+
+.hljs-punctuation, .hljs-tag {
+    color: #ffffffaa !important;
+}
+
+
+.hljs-name{
+    font-weight: 700 !important;
+    color: #cb63b7 !important ;
+}
+
+
+.hljs-attr {
+    color: #cd4545 !important;
+}
+
+
+
 @media (max-width : 1329px) {
 
     .input {
@@ -559,6 +586,10 @@ span[class^="dot-"]{
     width: 85%;
    
 }
+
+.chat {
+    width: 74%;}
+
 
 
 }
@@ -571,6 +602,8 @@ span[class^="dot-"]{
    
    
 }
+.chat {
+    width: 80%;}
 
 
 }

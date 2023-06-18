@@ -10,6 +10,7 @@ const publics = document.querySelector(".chat-section");
 const codeDiv = document.querySelector(".code-run");
 const gptDiv = document.querySelector(".chat-bt-gpt");
 const undefineCode = document.querySelector(".language-css");
+
 // cookie function
 
 function set_cookie(name, value) {
@@ -143,8 +144,11 @@ copy.forEach((e) => {
     let text = "";
 
     const contTypee = e.parentElement.childNodes;
+    console.log(contTypee);
     if (contTypee.length === 9) {
       text = contTypee[3].childNodes[1].textContent;
+      console.log(text);
+      console.log(contTypee[3].childNodes);
     } else {
       text = contTypee[1].textContent;
     }
@@ -174,28 +178,35 @@ code.forEach((c) => {
 
       const textList = list[0 + i].split("\n");
       const lengthOfText = textList.length;
+
       for (let i = 0; i < lengthOfText; i++) {
         c.nextElementSibling.innerHTML += `
-        
+      
   <p class="code_one" >${textList[i]
     .replaceAll("\n", "<br>")
     .replaceAll("<", "&#60;")
     .replaceAll(">", "&#62;")
-    .replaceAll("`", "'")}<br>
+    .replaceAll("`", "'")}
     </p>`;
       }
       c.nextElementSibling.innerHTML += `
   <pre><code style="margin-bottom : 1rem "> ${a
     .replaceAll("<", "&#60;")
-    .replaceAll(">", "&#62;")}  </code></pre>`;
+    .replaceAll(">", "&#62;")
+    .replaceAll(".", "&#46;")}  </code></pre>`;
 
-      c.nextElementSibling.childNodes[1].innerHTML += list[i + 1];
+      c.nextElementSibling.childNodes[1].innerHTML += list[i + 1]
+        .replaceAll("<", "&#60;")
+        .replaceAll(">", "&#62;")
+        .replaceAll(".", "&#46;");
     }
   }
-  c.nextElementSibling.innerHTML += `<p class="code_two"> ${list[
-    listLength - 1
-  ].replaceAll("\n", "<br>")}
+  c.nextElementSibling.innerHTML += `<p class="code_two"> ${list[listLength - 1]
+    .replaceAll("\n", "<br>")
+    .replace("<br>", "")}
   </p>`;
 });
 
 //language-bash
+
+console.log(undefineCode);
