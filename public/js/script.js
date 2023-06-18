@@ -19,26 +19,6 @@ function delete_cookie(name) {
   document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 }
 
-// add auestion dynamic when typing
-// publics.innerHTML += `<div class="chat-by-public chat hidden ">
-//       <p class="question"></p>
-//       <img class="logo-avator" src="/images/3.png" alt="" />
-//     </div>`;
-
-// input.addEventListener("keydown", (e) => {
-//   publics.lastChild.classList.remove("hidden");
-//   let text = publics.lastChild.childNodes[1].innerHTML;
-//   if (e.key == "Backspace") {
-//     text = text.slice(0, -1);
-//     publics.lastChild.childNodes[1].innerHTML = text;
-//   } else {
-//     publics.lastChild.childNodes[1].innerHTML += e.key;
-//   }
-//   if (publics.lastChild.childNodes[1].textContent.length < 1) {
-//     publics.lastChild.classList.add("hidden");
-//   }
-// });
-
 // when page relode it always go to last div
 if (publics) {
   window.addEventListener("load", () => {
@@ -169,8 +149,6 @@ copy.forEach((e) => {
       text = contTypee[1].textContent;
     }
 
-    console.log(contTypee);
-
     const copyContent = async () => {
       try {
         await navigator.clipboard.writeText(text);
@@ -187,7 +165,6 @@ copy.forEach((e) => {
 
 code.forEach((c) => {
   const list = c.value.split("```");
-  console.log(list);
 
   const listLength = list.length;
   for (let i = 0; i < listLength - 1; i++) {
@@ -195,8 +172,6 @@ code.forEach((c) => {
       let a = list[i + 1];
       a = a.substring(a.indexOf("\n") + 1).replace(/^/, "\n");
 
-      console.log(list[0 + i]);
-      console.log(list[i + 1]);
       const textList = list[0 + i].split("\n");
       const lengthOfText = textList.length;
       for (let i = 0; i < lengthOfText; i++) {
@@ -217,9 +192,9 @@ code.forEach((c) => {
       c.nextElementSibling.childNodes[1].innerHTML += list[i + 1];
     }
   }
-  c.nextElementSibling.innerHTML += `<p class="code_two"> ${
-    list[listLength - 1]
-  }
+  c.nextElementSibling.innerHTML += `<p class="code_two"> ${list[
+    listLength - 1
+  ].replaceAll("\n", "<br>")}
   </p>`;
 });
 
