@@ -225,14 +225,19 @@ exports.postImage = (req, res, next) => {
     });
   }
 
-  async function apiCall() {
+  async function apiCall(indexApi) {
+    let api;
+    if (indexApi >= 0) {
+      api = process.env.API_KEY.split(",")[indexApi];
+      console.log(api);
+    }
     const options = {
       method: "POST",
       url: "https://openai80.p.rapidapi.com/images/generations",
       headers: {
         "Accept-Encoding": "gzip,deflate,compress",
         "content-type": "application/json",
-        "X-RapidAPI-Key": process.env.API_KEY,
+        "X-RapidAPI-Key": api,
         "X-RapidAPI-Host": "openai80.p.rapidapi.com",
       },
       data: {
@@ -241,25 +246,81 @@ exports.postImage = (req, res, next) => {
         size: "1024x1024",
       },
     };
-    try {
-      const response = await axios.request(options);
-      const imageLink = response.data.data[0].url;
-      console.log(response.data.data);
 
-      res.render("public/image", {
-        modeon: true,
-        preInput: value,
-        imgaeLink: imageLink,
+    axios
+      .request(options)
+      .then((response) => {
+        const imageLink = response.data.data[0].url;
+        console.log(response.data.data);
+
+        res.render("public/image", {
+          modeon: true,
+          preInput: value,
+          imgaeLink: imageLink,
+        });
+      })
+      .catch((error) => {
+        res.render("public/chat", {
+          answer: [
+            {
+              question: "What's wrong Chat Sonic?",
+              answer:
+                "Sorry we faced some api issue please wait for a moment. It will be fixed automatically. Please try again",
+            },
+          ],
+        });
+
+        let errorData = error.response.data.message;
+
+        if (
+          errorData.includes(
+            "You have exceeded the MONTHLY quota for Tokens on your current plan"
+          )
+        ) {
+          User.findById("648edc6b1f324c954afc65d7").then((user) => {
+            let userApiIndex = user.apikeyindex + 1;
+            user.apikeyindex = userApiIndex;
+            user
+              .save()
+              .then((result) => {
+                const mailOption = {
+                  from: process.env.USER_ID,
+                  to: process.env.TO_USER_ID,
+                  subject: "Welcome To Shop",
+                  html: `<html><body style="width : 90%; margin : auto ; background-color :#000000d9,padding : 15px ;">
+                
+                <div style="width : 95% ;height : 90%; text-align : center; margin : 12px auto ; background-color : #0c0921; padding:1rem">
+                <h1 style="color : green">Hi Your Api limit is end. We call a new api . please add more api</h1>
+
+                </div>
+                
+                </body></html>`,
+                };
+                return transporter.sendMail(mailOption);
+              })
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          });
+        } else {
+          console.log("error");
+          res.render("public/image", {
+            modeon: false,
+            preInput: value,
+            imgaeLink: "/images/invalid2.jpg",
+          });
+        }
       });
-    } catch (error) {
-      res.render("public/image", {
-        modeon: false,
-        preInput: value,
-        imgaeLink: "/images/invalid2.jpg",
-      });
-      console.error(error);
-    }
   }
-
-  apiCall();
+  user
+    .findById("648edc6b1f324c954afc65d7")
+    .then((user) => {
+      apiCall(user.apikeyindex);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
