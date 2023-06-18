@@ -208,79 +208,94 @@ body{
 .copy-message{
   position: absolute;
   bottom: 60px;
-  right: 10px;
-  color: whitesmoke;
+  right: 4px;
+  color: rgb(255, 255, 255);
   font-size: 11px;
-  background-color: #000000;
+  background-color: #13061f45;
   padding: 5px;
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: #727272;
+  display: none;
+  box-shadow: 1px 1px 7px black;
   
   
 }
 
 
 .anime{
-  animation-name: copyanimation;
+  display: inline ;
+  animation-name: newcopyanimation;
   animation-duration: 1s;
   animation-timing-function: ease-in;
 }
-@keyframes copyanimation{
+@keyframes newcopyanimation{
   0% {
     
      font-size: 0px;
-     right: 25px;
+     right: 28px;
      bottom: 12px;
      display: inline;
   }
    10%{
     font-size: 3px;
-    right: 21px;
+    right: 24px;
     bottom: 10px;
+    display: inline;
   }
 
   20%{
     font-size: 5px;
-    right: 17px;
+    right: 20px;
     bottom: 20px;
+    display: inline;
   }
    30%{
     font-size: 8px;
-    right: 11px;
+    right: 14px;
     bottom: 30px;
+     display: inline;
   }
   40%{
     font-size: 10px;
-    right: 5;
+    right: 8px;
     bottom: 40px;
+     display: inline;
   }
   50%{
     font-size: 12px;
     bottom: 50px;
-    right: 1;
+    right: 4px;
+     display: inline;
   }
   60%{
     font-size: 10px;
-    right: 5;
+    right: 8px;
     bottom: 40px;
+     display: inline;
   }
   70%{
     font-size: 8px;
-    right: 11px;
+    right: 14px;
     bottom: 30px;
+     display: inline;
   }
   80%{
      font-size: 5px;
-    right: 17px;
+    right: 20px;
     bottom: 20px;
+     display: inline;
   }
   90%{
      font-size: 3px;
-    right: 21px;
+    right: 24px;
     bottom: 10px;
+     display: inline;
   }
   100%{
      font-size: 0px;
      bottom: 0px;
-      right: 25px;
+      right: 28px;
      display: none;
   }
 
@@ -933,6 +948,82 @@ h1, h2 {
 }
 .code_two {
     margin-bottom: 2rem;
+}
+
+
+.copy-message{
+  bottom: 9px;
+  right: 70px;
+}
+
+
+.anime{
+  animation-name: copyanimation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+}
+@keyframes copyanimation{
+  0% {
+    
+     font-size: 0px;
+     right: 17px;
+     bottom: 16px;
+     display: inline;
+  }
+   10%{
+    font-size: 3px;
+    right: 31px;
+    bottom: 14px;
+  }
+
+  20%{
+    font-size: 5px;
+    right: 40px;
+    bottom: 12px;
+  }
+   30%{
+    font-size: 8px;
+    right: 46px;
+    bottom: 10px;
+  }
+  40%{
+    font-size: 10px;
+    right: 50px;
+    bottom: 5px;
+  }
+  50%{
+    font-size: 11px;
+    bottom: 4px;
+    right: 60px;
+  }
+  60%{
+    font-size: 10px;
+    right: 50px;
+    bottom: 5px;
+  }
+  70%{
+    font-size: 8px;
+    right: 46px;
+    bottom: 10px;
+  }
+  80%{
+     font-size: 5px;
+    right: 40px;
+    bottom: 12px;
+  }
+  90%{
+     font-size: 3px;
+    right: 31px;
+    bottom: 14px;
+  }
+  100%{
+     font-size: 0px;
+     bottom: 16px;
+      right: 17px;
+     display: none;
+  }
+
+
 }
 
 }

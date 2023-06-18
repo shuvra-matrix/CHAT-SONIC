@@ -153,7 +153,7 @@ copy.forEach((e) => {
 
       contTypee[9].classList.add("anime");
       const yourFunction = async () => {
-        await delay(2000);
+        await delay(900);
         contTypee[9].classList.remove("anime");
         console.log("done");
       };
@@ -163,7 +163,7 @@ copy.forEach((e) => {
       console.log(text);
       contTypee[7].classList.add("anime");
       const yourFunction = async () => {
-        await delay(1000);
+        await delay(900);
         contTypee[7].classList.remove("anime");
         console.log("done");
       };
