@@ -205,6 +205,88 @@ body{
   transform: scale(110%);
 }
 
+.copy-message{
+  position: absolute;
+  bottom: 60px;
+  right: 10px;
+  color: whitesmoke;
+  font-size: 11px;
+  background-color: #000000;
+  padding: 5px;
+  
+  
+}
+
+
+.anime{
+  animation-name: copyanimation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+}
+@keyframes copyanimation{
+  0% {
+    
+     font-size: 0px;
+     right: 25px;
+     bottom: 12px;
+     display: inline;
+  }
+   10%{
+    font-size: 3px;
+    right: 21px;
+    bottom: 10px;
+  }
+
+  20%{
+    font-size: 5px;
+    right: 17px;
+    bottom: 20px;
+  }
+   30%{
+    font-size: 8px;
+    right: 11px;
+    bottom: 30px;
+  }
+  40%{
+    font-size: 10px;
+    right: 5;
+    bottom: 40px;
+  }
+  50%{
+    font-size: 12px;
+    bottom: 50px;
+    right: 1;
+  }
+  60%{
+    font-size: 10px;
+    right: 5;
+    bottom: 40px;
+  }
+  70%{
+    font-size: 8px;
+    right: 11px;
+    bottom: 30px;
+  }
+  80%{
+     font-size: 5px;
+    right: 17px;
+    bottom: 20px;
+  }
+  90%{
+     font-size: 3px;
+    right: 21px;
+    bottom: 10px;
+  }
+  100%{
+     font-size: 0px;
+     bottom: 0px;
+      right: 25px;
+     display: none;
+  }
+
+
+}
+
 
 .input{
     position: fixed;

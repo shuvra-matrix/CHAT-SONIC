@@ -8,7 +8,8 @@ const copy = document.querySelectorAll(".copy");
 const code = document.querySelectorAll(".code");
 const publics = document.querySelector(".chat-section");
 const codeDiv = document.querySelector(".code-run");
-const gptDiv = document.querySelector(".chat-bt-gpt");
+
+console.log(publics);
 const undefineCode = document.querySelector(".language-css");
 
 // cookie function
@@ -139,18 +140,34 @@ if (publics) {
 }
 
 // copy content from element
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 copy.forEach((e) => {
   e.addEventListener("click", (f) => {
     let text = "";
 
     const contTypee = e.parentElement.childNodes;
     console.log(contTypee);
-    if (contTypee.length === 9) {
+    if (contTypee.length === 11) {
       text = contTypee[3].childNodes[1].textContent;
       console.log(text);
-      console.log(contTypee[3].childNodes);
+
+      contTypee[9].classList.add("anime");
+      const yourFunction = async () => {
+        await delay(2000);
+        contTypee[9].classList.remove("anime");
+        console.log("done");
+      };
+      yourFunction();
     } else {
       text = contTypee[1].textContent;
+      console.log(text);
+      contTypee[7].classList.add("anime");
+      const yourFunction = async () => {
+        await delay(1000);
+        contTypee[7].classList.remove("anime");
+        console.log("done");
+      };
+      yourFunction();
     }
 
     const copyContent = async () => {
@@ -163,6 +180,8 @@ copy.forEach((e) => {
     };
     copyContent();
   });
+
+  // e.parentNode.removeChild(e.parentNode.lastChild);
 });
 
 // take code from input and then split it code and other comment and view them dynamically
@@ -208,5 +227,3 @@ code.forEach((c) => {
 });
 
 //language-bash
-
-console.log(undefineCode);
