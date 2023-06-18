@@ -179,7 +179,11 @@ body{
     align-self: flex-end;
     border-top-left-radius: 24px;
     border-top-right-radius: 20px;
-    border-bottom-left-radius: 24px
+    border-bottom-left-radius: 24px;
+    
+    padding-top: 25px;
+    padding-bottom: 25px;
+
 }
 
 
@@ -674,7 +678,10 @@ h1, h2 {
     color: #cd4545 !important;
 }
 
-
+pre code.hljs {
+    display: inline !important;
+    padding: 0em !important;
+}
 
 @media (max-width : 1329px) {
 
