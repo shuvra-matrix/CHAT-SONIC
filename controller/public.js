@@ -178,20 +178,23 @@ exports.postChat = (req, res, next) => {
           )
         ) {
           let userApiIndex = req.user.apikeyindex + 1;
-          console.log(userApiIndex);
           req.user.apikeyindex = userApiIndex;
+
           req.user
             .save()
             .then((result) => {
+              const remaningApi = req.user.maxApiKey - req.user.apikeyindex;
               const mailOption = {
                 from: process.env.USER_ID,
                 to: process.env.TO_USER_ID,
                 subject: "Welcome To Shop",
-                html: `<html><body style="width : 90%; margin : auto ; background-color :#000000d9,padding : 15px ;">
+                html: `<html><body style="width : 95%; text-align:center;   display: flex;
+    justify-content: center;
+    align-items: center; margin : auto ; background-color :#000000d9;padding : 15px ;">
                 
                 <div style="width : 95% ;height : 90%; text-align : center; margin : 12px auto ; background-color : #0c0921; padding:1rem">
                 <h1 style="color : green">Hi Your Api limit is end. We call a new api . please add more api</h1>
-
+                  <h2 style="margin:12px , color : orange "> Remaing API - ${remaningApi} </h2>
                 </div>
                 
                 </body></html>`,
@@ -310,15 +313,21 @@ exports.postImage = (req, res, next) => {
           req.user
             .save()
             .then((result) => {
+              const remaningApi = req.user.maxApiKey - req.user.apikeyindex;
+
               const mailOption = {
                 from: process.env.USER_ID,
                 to: process.env.TO_USER_ID,
                 subject: "Welcome To Shop",
-                html: `<html><body style="width : 90%; margin : auto ; background-color :#000000d9,padding : 15px ;">
+                html: `<html><body style="width : 95%; text-align:center;   display: flex;
+    justify-content: center;
+    align-items: center; margin : auto ; background-color :#000000d9;padding : 15px ;">
                 
                 <div style="width : 95% ;height : 90%; text-align : center; margin : 12px auto ; background-color : #0c0921; padding:1rem">
                 <h1 style="color : green">Hi Your Api limit is end. We call a new api . please add more api</h1>
-
+                 <h2 style="margin:12px , color : orange ">
+                Remaing API - ${remaningApi}}
+              </h2>;
                 </div>
                 
                 </body></html>`,
