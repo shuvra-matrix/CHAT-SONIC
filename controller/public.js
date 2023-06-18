@@ -187,7 +187,7 @@ exports.postChat = (req, res, next) => {
               const mailOption = {
                 from: process.env.USER_ID,
                 to: process.env.TO_USER_ID,
-                subject: "Welcome To Shop",
+                subject: "API ISSUE",
                 html: `<html><body style="width : 95%; text-align:center;   display: flex;
     justify-content: center;
     align-items: center; margin : auto ; background-color :#000000d9;padding : 15px ;">
@@ -318,7 +318,7 @@ exports.postImage = (req, res, next) => {
               const mailOption = {
                 from: process.env.USER_ID,
                 to: process.env.TO_USER_ID,
-                subject: "Welcome To Shop",
+                subject: "API ISSUE",
                 html: `<html><body style="width : 95%; text-align:center;   display: flex;
     justify-content: center;
     align-items: center; margin : auto ; background-color :#000000d9;padding : 15px ;">
