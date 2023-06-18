@@ -7,7 +7,7 @@ const User = require("./model/user");
 const port = "3000";
 const path = require("path");
 require("dotenv").config();
-const MONGO_CONNECT = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}mymongoinit.6md0cxy.mongodb.net/chatguru?retryWrites=true&w=majority`;
+const MONGO_CONNECT = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}mymongoinit.6md0cxy.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
 
 const app = express();
 const store = new SessionStore({
@@ -49,7 +49,6 @@ app.use((req, res, next) => {
 
 const publicRoutes = require("./routes/public");
 const authRoutes = require("./routes/auth");
-const { Console } = require("console");
 
 app.use(authRoutes);
 app.use(publicRoutes);

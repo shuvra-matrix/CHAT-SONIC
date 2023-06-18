@@ -1,19 +1,7 @@
 require("dotenv").config();
 const { validationResult, Result } = require("express-validator");
 const axios = require("axios");
-const User = require("../model/user");
-const { response } = require("express");
-const user = require("../model/user");
 const nodeMailer = require("nodemailer");
-// const user = new User({
-//   apikeyindex: 0,
-// });
-// user
-//   .save()
-//   .then((response) => {
-//     console.log(response);
-//   })
-//   .catch((err) => console.log(err));
 
 const transporter = nodeMailer.createTransport({
   service: "gmail",
@@ -24,36 +12,6 @@ const transporter = nodeMailer.createTransport({
 });
 
 let total = 28896;
-async function api() {
-  const options = {
-    method: "POST",
-    url: "https://openai80.p.rapidapi.com/chat/completions",
-    headers: {
-      "Accept-Encoding": "gzip,deflate,compress",
-      "content-type": "application/json",
-      "X-RapidAPI-Key": "91e8d91d42msh9648b3d92531ed3p110591jsn998769c81a46",
-      "X-RapidAPI-Host": "openai80.p.rapidapi.com",
-    },
-    data: {
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: "make python code to print addition of two digit",
-        },
-      ],
-    },
-  };
-
-  try {
-    const response = await axios.request(options);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// api();
 
 exports.getChatIndex = (req, res, next) => {
   console.log(req.user);
@@ -94,7 +52,7 @@ exports.postChat = (req, res, next) => {
       ],
     });
   }
-  if (req.user.apikeyindex.toString() == req.user.maxApiKey.toString()) {
+  if (req.user.apikeyindex.toString() >= req.user.maxApiKey.toString()) {
     return res.render("public/chat", {
       answer: [
         {
@@ -113,11 +71,10 @@ exports.postChat = (req, res, next) => {
   req.session.message.push({ role: "user", content: que });
 
   async function apiCall(indexApi) {
-    console.log(indexApi);
+    const messageLimit = req.session.message.slice(-5);
     let api;
     if (indexApi >= 0) {
       api = process.env.API_KEY.split(",")[indexApi];
-      console.log(api);
     }
     const options = {
       method: "POST",
@@ -130,7 +87,7 @@ exports.postChat = (req, res, next) => {
       },
       data: {
         model: "gpt-3.5-turbo",
-        messages: req.session.message,
+        messages: messageLimit,
       },
     };
 
@@ -138,9 +95,7 @@ exports.postChat = (req, res, next) => {
       .request(options)
       .then((response) => {
         const reply = response.data.choices[0].message.content;
-        console.log(reply);
         total += Number(response.data.usage.total_tokens);
-        console.log(total);
         if (reply.includes("```")) {
           req.session.answer.push({
             question: que,
@@ -189,8 +144,8 @@ exports.postChat = (req, res, next) => {
                 to: process.env.TO_USER_ID,
                 subject: "API ISSUE",
                 html: `<html><body style="width : 95%; text-align:center;   display: flex;
-    justify-content: center;
-    align-items: center; margin : auto ; background-color :#000000d9;padding : 15px ;">
+                justify-content: center;
+                align-items: center; margin : auto ; background-color :#000000d9;padding : 15px ;">
                 
                 <div style="width : 95% ;height : 90%; text-align : center; margin : 12px auto ; background-color : #0c0921; padding:1rem">
                 <h1 style="color : green">Hi Your Api limit is end. We call a new api . please add more api</h1>
@@ -234,7 +189,7 @@ exports.postImage = (req, res, next) => {
       imgaeLink: "/images/invalid.jpg",
     });
   }
-  if (req.user.apikeyindex.toString() == req.user.maxApiKey.toString()) {
+  if (req.user.apikeyindex.toString() >= req.user.maxApiKey.toString()) {
     return res.render("public/chat", {
       answer: [
         {

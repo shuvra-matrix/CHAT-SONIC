@@ -6,7 +6,7 @@ Don't forget to give this project a star for additional support ;)
 Maybe you can mention me or this repo in the acknowledgements too
 -->
 <div align="center">
-  <h1>ChatGuru Ai Chat Web Application</h1>
+  <h1>Chat Sonic Ai Chat Web Application</h1>
   
   
 <!-- Badges -->
@@ -80,6 +80,7 @@ Maybe you can mention me or this repo in the acknowledgements too
     <li><a href="https://www.css3.com/">CSS 3</a></li>
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a></li>
     <li><a href="https://highlightjs.org/">highlight.js</a></li>
+    <li><a href="https://nodemailer.com/about/">nodemailer</a></li>
   </ul>
 </details>
 
@@ -120,6 +121,10 @@ To run this project, you will need to add the following variables to your backen
 `MONGO CONNECT - MONGO_USER`
 `MONGO CONNECT - MONGO_PASS`
 `SESSION SECRET - SECRET`
+`USER_ID - YOUR EMAIL ID`
+`PASSWORD - EMAIL PASSWORD`
+`TO_USER_ID - SEND TO EMAIL ADDRESS`
+`MONGO_DB_NAME - YOUR MONGO DB NAME`
 
 <!-- Getting Started -->
 ## :toolbox: Getting Started
@@ -153,7 +158,7 @@ Install dependencies
 Start the backend server
 
 ```bash
-  npm run dev
+  npm run dev 
 ```
 
 Use following paths
@@ -197,6 +202,7 @@ Project Link: [https://github.com/shuvra-matrix/CHAT-GURU](https://github.com/sh
 Following libraries have been used in this projects.
 
 - [highlight.js](https://highlightjs.org/)
--[express-validator](https://express-validator.github.io/docs/)
--[connect-mongodb-session](https://www.npmjs.com/package/connect-mongodb-session)
+- [express-validator](https://express-validator.github.io/docs/)
+- [connect-mongodb-session](https://www.npmjs.com/package/connect-mongodb-session)
+- [nodemailer](https://nodemailer.com/about/)
 
