@@ -183,7 +183,7 @@ pre::-webkit-scrollbar-thumb {
 
 .chat{
     width: 70%;
-    color: rgb(179 179 179);
+    color: rgb(201 201 201);;
     font-size: 1rem;
     padding: 1.5rem 1.5rem 4rem 1.5rem;
     margin: 1rem;
@@ -489,6 +489,22 @@ span[class^="dot-"]{
   100%{
     opacity: 1;
   }
+}
+
+
+.heading{
+  color: #e1c8aa;
+  font-weight: 400;
+}
+
+.number{
+   color: blueviolet;
+    font-weight: 700;
+    font-size: 16px;
+}
+.number-hash{
+   color: #ff3636;
+    font-weight: 700;
 }
 
 /* image section */
@@ -892,7 +908,7 @@ pre code.hljs {
 }
 
 .chat{
-       color: rgb(179 179 179);
+       color: rgb(201 201 201);
     font-size: 0.9rem;
     line-height: 1.6;
     text-align: left;
