@@ -6,7 +6,6 @@
     <div class="chat-by-public chat">
       <p class="question"><%= e.question %></p>
       <img class="logo-avator" src="/images/3.png" alt="" />
-     
     </div>
     <div class="chat-bt-gpt chat">
       <% if(!e.isCode) {%>
@@ -15,7 +14,6 @@
       <% } else { %>
       <input type="hidden" class="code" value="<%= e.answer %>" />
       <div class="code-run">
-
         <p style="display: none"></p>
       </div>
       <% } %>
@@ -27,10 +25,11 @@
         src="https://img.icons8.com/fluency/48/copy.png"
         alt="copy"
       />
-     <p class='copy-message'>Copy Done!</p>
+      <p class="copy-message">Copy Done!</p>
     </div>
     <% }); %>
   </div>
   <% } %>
   <form action="/" method="post"><%- include("./input.ejs") %></form>
+  <button style="display: none" class=".btnk"></button>
 </div>
