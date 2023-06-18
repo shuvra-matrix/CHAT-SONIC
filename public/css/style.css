@@ -538,7 +538,6 @@ h1, h2 {
 }
 
 .code_one{
-  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -771,8 +770,9 @@ h1, h2 {
     line-height: 1.6;
     text-align: left;
     width: 95%;
-    padding-bottom: 3rem;
-    padding-top: 11px;
+    padding-bottom: 1rem;
+    padding-top: 14px;
+    padding-right: 1rem;
    
 }
 
@@ -848,6 +848,9 @@ h1, h2 {
 
 .chat-bt-gpt{
   padding-left: 3rem;
+}
+.code_two {
+    margin-bottom: 2rem;
 }
 
 }
