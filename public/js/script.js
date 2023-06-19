@@ -242,13 +242,15 @@ code.forEach((c) => {
 // }
 
 //share function
-async function nativeShare(Title, Description) {
+async function nativeShare(Title, Description, urls) {
   const TitleConst = Title;
   const DescriptionConst = Description;
+  const Url = urls;
 
   try {
     await navigator.share({
       title: TitleConst,
+      url: Url,
       text: DescriptionConst,
     });
   } catch (error) {
@@ -266,10 +268,10 @@ if (typeof navigator.share === "undefined" || !navigator.share) {
       console.log(contTypee);
       if (contTypee.length === 13) {
         text = contTypee[3].childNodes[1].textContent;
-        text += "( Created by Chat Sonic - https://chat-sonic.onrender.com/ )";
-        nativeShare("Chat Sonic", text);
+        text += "( Created by Chat Sonic )";
+        nativeShare("Chat Sonic", "https://chat-sonic.onrender.com/", text);
       } else {
-        nativeShare("Chat Sonic", text);
+        nativeShare("Chat Sonic", "https://chat-sonic.onrender.com/", text);
       }
     });
   });
