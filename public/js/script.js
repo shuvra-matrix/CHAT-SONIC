@@ -234,51 +234,43 @@ code.forEach((c) => {
   </p>`;
 });
 
-//language-bash
+//if share not supported hide share button of user
+// if (typeof navigator.share === "undefined" || !navigator.share) {
+//   share.forEach((s) => {
+//     s.classList.add("forshedHidden");
+//   });
+// }
 
-async function AndroidNativeShare(Title, URL, Description) {
-  if (typeof navigator.share === "undefined" || !navigator.share) {
-    alert("Your browser does not support Android Native Share");
-  } else {
-    const TitleConst = Title;
-    const URLConst = URL;
-    const DescriptionConst = Description;
+//share function
+async function nativeShare(Title, Description) {
+  const TitleConst = Title;
+  const DescriptionConst = Description;
 
-    try {
-      await navigator.share({
-        title: TitleConst,
-        text: DescriptionConst,
-        url: URLConst,
-      });
-    } catch (error) {
-      console.log("Error sharing: " + error);
-      return;
-    }
+  try {
+    await navigator.share({
+      title: TitleConst,
+      text: DescriptionConst,
+    });
+  } catch (error) {
+    console.log("Error sharing: " + error);
+    return;
   }
 }
 
-share.forEach((s) => {
-  s.addEventListener("click", () => {
-    console.log("hi");
-    let text = "";
-    const contTypee = s.parentElement.childNodes;
-    console.log(contTypee);
-    if (contTypee.length === 13) {
-      text = contTypee[3].childNodes[1].textContent;
-      AndroidNativeShare(
-        "My Page Title",
-        "https://google.com.com",
-        "This is description"
-      );
-
-      console.log("done");
-    } else {
-      AndroidNativeShare(
-        "My Page Title",
-        "https://google.com.com",
-        "This is description"
-      );
-      console.log("done");
-    }
+//if share available run share function
+if (typeof navigator.share === "undefined" || !navigator.share) {
+  share.forEach((s) => {
+    s.addEventListener("click", () => {
+      let text = "";
+      const contTypee = s.parentElement.childNodes;
+      console.log(contTypee);
+      if (contTypee.length === 13) {
+        text = contTypee[3].childNodes[1].textContent;
+        text += "( Created by Chat Sonic - https://chat-sonic.onrender.com/ )";
+        nativeShare("Chat Sonic", text);
+      } else {
+        nativeShare("Chat Sonic", text);
+      }
+    });
   });
-});
+}
