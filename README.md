@@ -115,16 +115,16 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!-- Env Variables -->
 ### :key: Environment Variables
 
-To run this project, you will need to add the following variables to your backend/config.json file
+To run this project, you will need to add the following variables to your .env file
 
-`OPEN AI -  API_KEY`
-`MONGO CONNECT - MONGO_USER`
-`MONGO CONNECT - MONGO_PASS`
-`SESSION SECRET - SECRET`
-`USER_ID - YOUR EMAIL ID`
-`PASSWORD - EMAIL PASSWORD`
-`TO_USER_ID - SEND TO EMAIL ADDRESS`
-`MONGO_DB_NAME - YOUR MONGO DB NAME`
+`API_KEY = YOUR API KEY`
+`MONGO_USER = MONGO DB USE NAME`
+`MONGO_PASS = MONGODB PASSWORD`
+`SESSION SECRET = SESSION SECRET`
+`USER_ID = YOUR EMAIL ID`
+`PASSWORD = EMAIL PASSWORD`
+`TO_USER_ID = SEND TO EMAIL ADDRESS`
+`MONGO_DB_NAME = YOUR MONGO DB NAME`
 
 <!-- Getting Started -->
 ## :toolbox: Getting Started
