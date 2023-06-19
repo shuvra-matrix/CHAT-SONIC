@@ -560,13 +560,17 @@ span[class^="dot-"] {
 }
 
 .number-hash {
-  color: #ff3636;
+  color: #53c1a3;
   font-weight: 700;
 }
 
 .index-p {
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+.index-d {
+ color: #f26734;;
 }
 
 /* image section */
