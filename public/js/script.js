@@ -235,38 +235,50 @@ code.forEach((c) => {
 });
 
 //language-bash
+
+async function AndroidNativeShare(Title, URL, Description) {
+  if (typeof navigator.share === "undefined" || !navigator.share) {
+    alert("Your browser does not support Android Native Share");
+  } else {
+    const TitleConst = Title;
+    const URLConst = URL;
+    const DescriptionConst = Description;
+
+    try {
+      await navigator.share({
+        title: TitleConst,
+        text: DescriptionConst,
+        url: URLConst,
+      });
+    } catch (error) {
+      console.log("Error sharing: " + error);
+      return;
+    }
+  }
+}
+
 share.forEach((s) => {
   s.addEventListener("click", () => {
     console.log("hi");
-    if (window.isSecureContext && navigator.share) {
-      let text = "";
-      const contTypee = e.parentElement.childNodes;
-      console.log(contTypee);
-      if (contTypee.length === 13) {
-        text = contTypee[3].childNodes[1].textContent;
-        window.AndroidShareHandler.share("https://stackoverflow.com");
-        navigator
-          .share({
-            title: "hi",
-            url: "https://google.com",
-          })
-          .then((res) => {
-            alert(res);
-            console.log("dasdadas");
-          })
-          .catch((err) => {
-            alert(err);
-            console.log(err);
-          });
+    let text = "";
+    const contTypee = s.parentElement.childNodes;
+    console.log(contTypee);
+    if (contTypee.length === 13) {
+      text = contTypee[3].childNodes[1].textContent;
+      AndroidNativeShare(
+        "My Page Title",
+        "https://google.com.com",
+        "This is description"
+      );
 
-        console.log("done");
-      } else {
-        text = contTypee[1].textContent;
-
-        console.log("done");
-      }
+      console.log("done");
     } else {
-      alert("your browser not suported");
+      AndroidNativeShare(
+        "My Page Title",
+        "https://google.com.com",
+        "This is description"
+      );
+      console.log("done");
     }
   });
 });
