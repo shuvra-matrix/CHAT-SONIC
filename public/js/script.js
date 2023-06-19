@@ -243,21 +243,19 @@ if (typeof navigator.share === "undefined" || !navigator.share) {
 
 //share function
 async function nativeShare(Title, Description, urls) {
-  if (typeof navigator.share === "undefined" || !navigator.share) {
-    const TitleConst = Title;
-    const DescriptionConst = Description;
-    const Url = urls;
+  const TitleConst = Title;
+  const DescriptionConst = Description;
+  const Url = urls;
 
-    try {
-      await navigator.share({
-        title: TitleConst,
-        url: Url,
-        text: DescriptionConst,
-      });
-    } catch (error) {
-      console.log("Error sharing: " + error);
-      return;
-    }
+  try {
+    await navigator.share({
+      title: TitleConst,
+      url: Url,
+      text: DescriptionConst,
+    });
+  } catch (error) {
+    console.log("Error sharing: " + error);
+    return;
   }
 }
 
