@@ -236,7 +236,7 @@ code.forEach((c) => {
 
 //language-bash
 share.forEach((s) => {
-  s.addEventListener("click", async () => {
+  s.addEventListener("click", () => {
     console.log("hi");
     if (window.isSecureContext && navigator.share) {
       let text = "";
@@ -245,13 +245,13 @@ share.forEach((s) => {
       if (contTypee.length === 13) {
         text = contTypee[3].childNodes[1].textContent;
         window.AndroidShareHandler.share("https://stackoverflow.com");
-        await navigator
+        navigator
           .share({
             title: "hi",
-            url: "https//:google.com",
+            url: "https://google.com",
           })
           .then((res) => {
-            alert("ok");
+            alert(res);
             console.log("dasdadas");
           })
           .catch((err) => {
