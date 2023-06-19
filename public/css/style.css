@@ -213,7 +213,8 @@ pre::-webkit-scrollbar-thumb {
     position: relative;
     border-top-right-radius: 24px;
     border-top-left-radius: 20px;
-    border-bottom-right-radius: 24px
+    border-bottom-right-radius: 24px;
+    padding-left: 80px;
 }
 
 .copy{
@@ -230,6 +231,11 @@ pre::-webkit-scrollbar-thumb {
 .copy:hover{
   transform: scale(110%);
 }
+
+.answer{
+  width: 99%;
+}
+
 
 .copy-message{
   position: absolute;
@@ -398,11 +404,6 @@ pre::-webkit-scrollbar-thumb {
   top: 10px;
   left: 10px;
 }
-
-.chat-bt-gpt{
-  padding-left: 5.5rem;
-}
-
 
 .blinking-cursor {
   margin-left: 5px;
@@ -1076,6 +1077,11 @@ pre code.hljs {
 
 
 }
+.answer{
+  padding-bottom: 25px;
+  width: 100%;
+}
+
 
 }
 

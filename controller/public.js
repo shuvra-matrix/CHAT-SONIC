@@ -14,7 +14,6 @@ const transporter = nodeMailer.createTransport({
 let total = 28896;
 
 exports.getChatIndex = (req, res, next) => {
-  console.log(req.user);
   console.log(req.user.apikeyindex, req.user.maxApiKey);
   if (req.session.answer) {
     return res.render("public/chat", {
@@ -121,17 +120,6 @@ exports.postChat = (req, res, next) => {
         });
       })
       .catch((error) => {
-        res.render("public/chat", {
-          answer: [
-            {
-              question: "What's wrong Chat Sonic?",
-              answer:
-                "Sorry we faced some api issue please wait for a moment .It will be fixed automatically.Please try again",
-            },
-          ],
-          isIndex: false,
-        });
-
         let errorData = error.response.data.message;
 
         if (
@@ -139,6 +127,16 @@ exports.postChat = (req, res, next) => {
             "You have exceeded the MONTHLY quota for Tokens on your current plan"
           )
         ) {
+          res.render("public/chat", {
+            answer: [
+              {
+                question: "What's wrong Chat Sonic?",
+                answer:
+                  "Sorry we faced some api issue please wait for a moment .It will be fixed automatically.Please try again",
+              },
+            ],
+            isIndex: false,
+          });
           let userApiIndex = req.user.apikeyindex + 1;
           req.user.apikeyindex = userApiIndex;
 
@@ -244,17 +242,6 @@ exports.postImage = (req, res, next) => {
         });
       })
       .catch((error) => {
-        res.render("public/chat", {
-          answer: [
-            {
-              question: "What's wrong Chat Sonic?",
-              answer:
-                "Sorry we faced some api issue please wait for a moment. It will be fixed automatically. Please try again",
-            },
-          ],
-          isIndex: false,
-        });
-
         let errorData = error.response.data.message;
 
         if (
@@ -262,6 +249,17 @@ exports.postImage = (req, res, next) => {
             "You have exceeded the MONTHLY quota for Tokens on your current plan"
           )
         ) {
+          res.render("public/chat", {
+            answer: [
+              {
+                question: "What's wrong Chat Sonic?",
+                answer:
+                  "Sorry we faced some api issue please wait for a moment. It will be fixed automatically. Please try again",
+              },
+            ],
+            isIndex: false,
+          });
+
           let userApiIndex = req.user.apikeyindex + 1;
           req.user.apikeyindex = userApiIndex;
           if (userApiIndex == user.maxApiKey) {
