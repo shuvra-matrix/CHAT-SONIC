@@ -8,9 +8,10 @@ const copy = document.querySelectorAll(".copy");
 const code = document.querySelectorAll(".code");
 const publics = document.querySelector(".chat-section");
 const codeDiv = document.querySelector(".code-run");
-
-console.log(publics);
 const undefineCode = document.querySelector(".language-css");
+
+// create a funtion for add dealy
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 // cookie function
 
@@ -22,7 +23,7 @@ function delete_cookie(name) {
 }
 
 // when page relode it always go to last div
-if (publics) {
+if (document.cookie.includes("newuser")) {
   window.addEventListener("load", () => {
     publics.scrollIntoView({
       block: "end",
@@ -48,7 +49,8 @@ function loders() {
   if (input.value.length > 0) {
     button.classList.toggle("hidden");
     loder.classList.toggle("hidden");
-
+    //check if new use . if then dont set page to scroll down
+    set_cookie("newuser", "yes");
     // add question and loging dynamic when sumit button click
     // hide last chile because it's created for show your question letter by letter
     if (publics) {
@@ -96,12 +98,11 @@ input.addEventListener("keydown", () => {
 // then delete the cooker because when page relode any no input paresent i dont want show smae typing animation evertime
 if (publics) {
   window.addEventListener("load", () => {
-    let cookie = document.cookie.split(" ")[0].split("=");
-    let name = cookie[0];
     let list = [];
     answer.forEach((a) => {
       list.push(a);
     });
+    console.log(list);
     let index = 10;
 
     if (
@@ -109,26 +110,33 @@ if (publics) {
     ) {
       // remove code section text animation
     } else {
-      let text = list.slice(-1)[0].textContent.replaceAll("\n", "<br>");
+      let text = list.slice(-1)[0].textContent;
+      console.log(typeof text);
+      let newText = text.replaceAll("\n", "<br>");
+      console.log(newText);
       function type() {
-        if (index < text.length) {
+        if (index < newText.length) {
           list.slice(-1)[0].innerHTML =
-            text.slice(0, index) + '<span class="blinking-cursor">|</span>';
+            newText.slice(0, index) + '<span class="blinking-cursor">|</span>';
           index++;
           setTimeout(type, Math.random() * 40 + 10);
+
+          publics.scrollIntoView({
+            block: "end",
+            inline: "nearest",
+          });
         } else {
           list.slice(-1)[0].innerHTML =
-            text.slice(0, index) + '<span class="blinking-cursor">|</span>';
+            newText.slice(0, index) + '<span class="blinking-cursor">|</span>';
         }
-        delete_cookie(name);
+        // delete_cookie("newOutput");
       }
 
-      if (name == "newOutput") {
+      if (document.cookie.includes("newOutput")) {
         type();
       }
     }
     // check if cooke is corrent
-
     // replce all elemnt textcontain(\n) with <br> to show it next line in html
     if (question) {
       answer.forEach((a) => {
@@ -140,7 +148,7 @@ if (publics) {
 }
 
 // copy content from element
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 copy.forEach((e) => {
   e.addEventListener("click", (f) => {
     let text = "";

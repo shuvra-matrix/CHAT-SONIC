@@ -19,15 +19,18 @@ exports.getChatIndex = (req, res, next) => {
   if (req.session.answer) {
     return res.render("public/chat", {
       answer: req.session.answer,
+      isIndex: false,
     });
   }
+
   res.render("public/chat", {
     answer: [
       {
-        question: "Hi! Chat Sonic",
-        answer: `<p class="heading">Hello there! How can I assist you today?</p>\n\nYou can ask me anything you want! I'm here to help you in any way I can, whether you have a question, need assistance with a task, or just want to chat. So go ahead and ask me whatever is on your mind.\nhere are some topics and questions you can ask me:\n\n<span class="number">1</span>. I need to create a REST API endpoint for my web application. Can you provide an example of how to do that using Node.js and Express?\n<span class="number">2</span>. What's the difference between object-oriented and procedural programming?\n<span class="number">3.</span>. Find the bug with this code: <post code below>\n<span class="number">4</span>. Generate a 2-minute video script for a Facebook ad campaign promoting our new service [ Service description]\n<span class="number">5.</span>. Write an in-depth analysis of the current state of a specific industry and its potential for small business opportunities.\n<span class="number">6</span>. Can you provide me with some ideas for blog posts about [topic of your choice]?\n<span class="number">7</span>. Write a minute-long script for an advertisement about [product or service or company]\n<span class="number">8</span>. Teach me the <topic of your choice> and give me a quiz at the end, but don’t give me the answers and then tell me if I answered correctly.\n\n<span class="number-hash">##</span> Remember that this app only considers the last five questions as a conversation. So if you want to continue as a conversation with this chat bot, you need to complete your conversation with in five questions.\n\n`,
+        question: "",
+        answer: ``,
       },
     ],
+    isIndex: true,
   });
 };
 
@@ -50,6 +53,7 @@ exports.postChat = (req, res, next) => {
           answer: "Please enter a valid input",
         },
       ],
+      isIndex: false,
     });
   }
   if (req.user.apikeyindex.toString() >= req.user.maxApiKey.toString()) {
@@ -61,6 +65,7 @@ exports.postChat = (req, res, next) => {
             "We faced some major issues. We try to fixed it as soon as possible. Please try again later",
         },
       ],
+      isIndex: false,
     });
   }
 
@@ -112,6 +117,7 @@ exports.postChat = (req, res, next) => {
 
         res.render("public/chat", {
           answer: req.session.answer,
+          isIndex: false,
         });
       })
       .catch((error) => {
@@ -123,6 +129,7 @@ exports.postChat = (req, res, next) => {
                 "Sorry we faced some api issue please wait for a moment .It will be fixed automatically.Please try again",
             },
           ],
+          isIndex: false,
         });
 
         let errorData = error.response.data.message;
@@ -163,7 +170,7 @@ exports.postChat = (req, res, next) => {
               console.log(err);
             });
         } else {
-          console.log("error");
+          console.log(error);
           res.render("public/chat", {
             answer: [
               {
@@ -171,6 +178,7 @@ exports.postChat = (req, res, next) => {
                 answer: "Something went wrong. Please try again later",
               },
             ],
+            isIndex: false,
           });
         }
       });
@@ -198,6 +206,7 @@ exports.postImage = (req, res, next) => {
             "We faced some major issues. We try to fixed it as soon as possible. Please try again later",
         },
       ],
+      isIndex: false,
     });
   }
   async function apiCall(indexApi) {
@@ -243,6 +252,7 @@ exports.postImage = (req, res, next) => {
                 "Sorry we faced some api issue please wait for a moment. It will be fixed automatically. Please try again",
             },
           ],
+          isIndex: false,
         });
 
         let errorData = error.response.data.message;
@@ -263,6 +273,7 @@ exports.postImage = (req, res, next) => {
                     "Sorry we faced some major issue. We try to solve it as soon as possible. Please try again later",
                 },
               ],
+              isIndex: false,
             });
           }
           req.user
@@ -296,7 +307,7 @@ exports.postImage = (req, res, next) => {
               console.log(err);
             });
         } else {
-          console.log("error");
+          console.log(error);
           res.render("public/image", {
             modeon: false,
             preInput: value,

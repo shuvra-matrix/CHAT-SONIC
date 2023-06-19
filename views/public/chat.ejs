@@ -1,27 +1,33 @@
 <%- include("../include/head.ejs")%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/dark.min.css">
+</head>
 
+<body>
 
-  </head>
-  <body>
- 
-    <div class="main-div">
-      <!------- sidebar ----------------------------->
+  <div class="main-div">
+    <!------- sidebar ----------------------------->
 
-      <%- include("../include/sidebar.ejs") %>
+    <%- include("../include/sidebar.ejs") %>
 
-      <!-- sidebar close -->
+    <!-- sidebar close -->
 
-      <!----- nav bar  -->
-      <%- include("../include/navbar.ejs") %>
+    <!----- nav bar  -->
+    <%- include("../include/navbar.ejs") %>
 
-      <!--- nav bar close   -->
-      <!-- chat area -->
-      <%- include("../include/chat-area.ejs") %>
-      <!-- CHAT AREA CLOSE -->
-    </div>
-    <script src="/js/pwa.js"></script>
-     <script src="/js/status.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
-    <%- include("../include/footer.ejs")  %>
+    <!--- nav bar close   -->
+    <!-- chat area -->
+
+    <% if(isIndex) { %>
+    <%- include("../include/index-chat-section.ejs") %> <!-- check for first time open vs already user show them different views -->
+    <% } else { %>
+    <%- include("../include/chat-area.ejs") %>
+    <% } %>
+    <!-- CHAT AREA CLOSE -->
+  </div>
+  <script src="/js/pwa.js"></script>
+  <script src="/js/status.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+  <%- include("../include/footer.ejs")  %>
