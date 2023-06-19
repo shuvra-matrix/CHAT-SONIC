@@ -12,7 +12,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!-- Badges -->
 
 <h4>
-    <a href="https://dull-pink-prawn-sari.cyclic.app/">View Demo</a>
+    <a href="https://chat-sonic.onrender.com/">View Demo</a>
   <span> · </span>
     <a href="https://github.com/shuvra-matrix/CHAT-GURU/issues/">Report Bug</a>
   <span> · </span>
@@ -69,7 +69,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!--  live demo -->
 
 ### :house: LiveDemo
-[Live Demo](https://dull-pink-prawn-sari.cyclic.app/)
+[Live Demo](https://chat-sonic.onrender.com/)
 <!-- TechStack -->
 ### :space_invader: Tech Stack
 
