@@ -250,7 +250,6 @@ async function nativeShare(Title, Description, urls) {
   try {
     await navigator.share({
       title: TitleConst,
-      url: Url,
       text: DescriptionConst,
     });
   } catch (error) {
@@ -270,13 +269,9 @@ share.forEach((s) => {
     if (contTypee.length === 13) {
       text = contTypee[3].childNodes[1].textContent;
       text += "( Created by Chat Sonic )";
-      AndroidNativeShare(
-        "Chat Sonic",
-        "https://chat-sonic.onrender.com/",
-        text
-      );
+      nativeShare("Chat Sonic", text);
     } else {
-      nativeShare("Chat Sonic", "https://chat-sonic.onrender.com/", text);
+      nativeShare("Chat Sonic", text);
     }
   });
 });
