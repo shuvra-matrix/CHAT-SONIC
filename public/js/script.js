@@ -235,26 +235,29 @@ code.forEach((c) => {
 });
 
 // if share not supported hide share button of user
-// if (typeof navigator.share === "undefined" || !navigator.share) {
-//   share.forEach((s) => {
-//     s.classList.add("forshedHidden");
-//   });
-// }
+if (typeof navigator.share === "undefined" || !navigator.share) {
+  share.forEach((s) => {
+    s.classList.add("forshedHidden");
+  });
+}
 
 //share function
 async function nativeShare(Title, Description, urls) {
-  const TitleConst = Title;
-  const DescriptionConst = Description;
-  const Url = urls;
+  if (typeof navigator.share === "undefined" || !navigator.share) {
+    const TitleConst = Title;
+    const DescriptionConst = Description;
+    const Url = urls;
 
-  try {
-    await navigator.share({
-      title: TitleConst,
-      text: DescriptionConst,
-    });
-  } catch (error) {
-    console.log("Error sharing: " + error);
-    return;
+    try {
+      await navigator.share({
+        title: TitleConst,
+        url: Url,
+        text: DescriptionConst,
+      });
+    } catch (error) {
+      console.log("Error sharing: " + error);
+      return;
+    }
   }
 }
 
@@ -269,9 +272,15 @@ share.forEach((s) => {
     if (contTypee.length === 13) {
       text = contTypee[3].childNodes[1].textContent;
       text += "( Created by Chat Sonic )";
-      nativeShare("Chat Sonic", text);
+      AndroidNativeShare(
+        "Chat Sonic",
+        "https://chat-sonic.onrender.com/",
+        text
+      );
     } else {
-      nativeShare("Chat Sonic", text);
+      text = contTypee[3].childNodes[1].textContent;
+      text += "( Created by Chat Sonic )";
+      nativeShare("Chat Sonic", "https://chat-sonic.onrender.com/", text);
     }
   });
 });
