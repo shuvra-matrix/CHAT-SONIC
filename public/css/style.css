@@ -405,6 +405,11 @@ pre::-webkit-scrollbar-thumb {
   left: 10px;
 }
 
+
+.share{
+  display: none;
+}
+
 .blinking-cursor {
   margin-left: 5px;
   color: #cdcccc;
@@ -511,6 +516,7 @@ span[class^="dot-"]{
 
 .index-p{
   padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 /* image section */
@@ -870,6 +876,9 @@ pre code.hljs {
     .chat-div{
         height: 73vh;
     }
+
+
+
 }
 
 @media (max-width : 568px ){
@@ -1081,7 +1090,14 @@ pre code.hljs {
   padding-bottom: 25px;
   width: 100%;
 }
-
+    .share{
+      display: inline;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  bottom: 10px;
+  opacity: 0.8;
+}
 
 }
 

@@ -155,9 +155,8 @@ copy.forEach((e) => {
 
     const contTypee = e.parentElement.childNodes;
     console.log(contTypee);
-    if (contTypee.length === 11) {
+    if (contTypee.length === 13) {
       text = contTypee[3].childNodes[1].textContent;
-      console.log(text);
 
       contTypee[9].classList.add("anime");
       const yourFunction = async () => {
@@ -168,7 +167,7 @@ copy.forEach((e) => {
       yourFunction();
     } else {
       text = contTypee[1].textContent;
-      console.log(text);
+
       contTypee[7].classList.add("anime");
       const yourFunction = async () => {
         await delay(900);
@@ -177,11 +176,12 @@ copy.forEach((e) => {
       };
       yourFunction();
     }
-
     const copyContent = async () => {
       try {
-        await navigator.clipboard.writeText(text);
-        console.log("Content copied to clipboard");
+        if (window.isSecureContext && navigator.clipboard) {
+          await navigator.clipboard.writeText(text);
+          console.log("Content copied to clipboard");
+        }
       } catch (err) {
         console.error("Failed to copy: ", err);
       }
