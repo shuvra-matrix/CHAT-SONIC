@@ -9,7 +9,7 @@ const code = document.querySelectorAll(".code");
 const publics = document.querySelector(".chat-section");
 const codeDiv = document.querySelector(".code-run");
 const undefineCode = document.querySelector(".language-css");
-
+const share = document.querySelectorAll(".share");
 // create a funtion for add dealy
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -235,3 +235,38 @@ code.forEach((c) => {
 });
 
 //language-bash
+share.forEach((s) => {
+  s.addEventListener("click", async () => {
+    console.log("hi");
+    if (window.isSecureContext && navigator.share) {
+      let text = "";
+      const contTypee = e.parentElement.childNodes;
+      console.log(contTypee);
+      if (contTypee.length === 13) {
+        text = contTypee[3].childNodes[1].textContent;
+        window.AndroidShareHandler.share("https://stackoverflow.com");
+        await navigator
+          .share({
+            title: "hi",
+            url: "https//:google.com",
+          })
+          .then((res) => {
+            alert("ok");
+            console.log("dasdadas");
+          })
+          .catch((err) => {
+            alert(err);
+            console.log(err);
+          });
+
+        console.log("done");
+      } else {
+        text = contTypee[1].textContent;
+
+        console.log("done");
+      }
+    } else {
+      alert("your browser not suported");
+    }
+  });
+});
