@@ -129,7 +129,7 @@ if (publics) {
           list.slice(-1)[0].innerHTML =
             newText.slice(0, index) + '<span class="blinking-cursor">|</span>';
         }
-        // delete_cookie("newOutput");
+        delete_cookie("newOutput");
       }
 
       if (document.cookie.includes("newOutput")) {
