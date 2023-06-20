@@ -284,8 +284,7 @@ pre::-webkit-scrollbar-thumb {
 .chat {
   width: 70%;
   color: rgb(201 201 201);
-  ;
-  font-size: 1rem;
+  font-size: 1.1rem;
   padding: 1.5rem 1.5rem 4rem 1.5rem;
   margin: 1rem;
   display: block;
