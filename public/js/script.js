@@ -290,8 +290,8 @@ window.addEventListener("beforeinstallprompt", (event) => {
   
 });
 if(!document.cookie.includes("isPrompt")){
+console.log("hi");
 window.addEventListener("load", async () => {
-  delay(2000)
   set_cookie("isPrompt","yes")
   if (!installPrompt) {
     return;
