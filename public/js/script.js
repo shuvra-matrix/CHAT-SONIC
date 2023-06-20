@@ -282,21 +282,24 @@ share.forEach((s) => {
 });
 
 
+// add install prompt for pwa app 
 let installPrompt = null;
-const installButton = document.querySelector("#install");
 
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
   installPrompt = event;
-  installButton.removeAttribute("hidden");
+  
 });
 
-installButton.addEventListener("click", async () => {
+if(document.cookie.includes("isPrompt")){
+window.addEventListener("click", async () => {
+  delay(2000)
+  set_cookie("isPrompt","yes")
   if (!installPrompt) {
     return;
   }
   const result = await installPrompt.prompt();
   console.log(`Install prompt was: ${result.outcome}`);
   installPrompt = null;
-  installButton.setAttribute("hidden", "");
 });
+}
