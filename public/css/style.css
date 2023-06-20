@@ -104,7 +104,15 @@ pre::-webkit-scrollbar-thumb {
 .chat-gpt,
 .image-gpt {
   overflow: hidden;
-  border: 2px solid #45454559;
+  border: 2px solid  #0b0d12a6;
+}
+
+.chat-gpt {
+  border-top: 4px solid #0b0d12a6;
+}
+
+.git {
+  border-bottom: 4px solid #0b0d12a6;
 }
 
 .chat-gpt:hover img {
@@ -134,13 +142,16 @@ pre::-webkit-scrollbar-thumb {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  padding-right: 40px;
 }
 
 .profile img {
   border-radius: 50%;
-  width: 70px;
+  width: 45px;
   box-shadow: var(--logo-box-shadow);
-
+  background-color: #210f676b;
+  border: 2px solid;
+  border-color: #2b2b2ba3;
 }
 
 .logo-nav,
@@ -420,11 +431,19 @@ pre::-webkit-scrollbar-thumb {
 .logo-avator {
   top: 10px;
   right: 10px;
+  background-color: #2413654f;
+  border: 2px solid;
+  border-color: #1b163b;
+  box-shadow: 1px 1px 5px #000000b0;
 }
 
 .logo-gpt {
   top: 10px;
   left: 10px;
+  background-color: #543fa661;
+  border: 2px solid;
+  border-color: #180d528f;
+  box-shadow: 1px 1px 5px #000000ad;
 }
 
 
@@ -570,7 +589,8 @@ span[class^="dot-"] {
 }
 
 .index-d {
- color: #f26734;;
+  color: #f26734;
+  ;
 }
 
 /* image section */
@@ -919,7 +939,7 @@ pre code.hljs {
   }
 
   .profile {
-    padding-right: 1rem;
+    padding-right: 30px;
   }
 
   .regenerate {
@@ -980,14 +1000,20 @@ pre code.hljs {
     width: 35px;
     height: 35px;
     border-radius: 8px;
-
+    border: 2px solid;
+    border-color: #2b2b2b80;
   }
 
-
+  .profile {
+    padding-right: 18px;
+  }
 
   .profile img {
-    border-radius: 50%;
-    width: 40px;
+    border-radius: 8px;
+    width: 35px;
+    border: 2px solid;
+    border-color: #2b2b2b80;
+    opacity: 0.9;
 
   }
 
