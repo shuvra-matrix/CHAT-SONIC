@@ -243,19 +243,21 @@ if (typeof navigator.share === "undefined" || !navigator.share) {
 
 //share function
 async function nativeShare(Title, urls, Description) {
-  const TitleConst = Title;
-  const Url = urls;
-  const DescriptionConst = Description;
+  if (navigator.share) {
+    const TitleConst = Title;
+    const Url = urls;
+    const DescriptionConst = Description;
 
-  try {
-    await navigator.share({
-      title: TitleConst,
-      url: Url,
-      text: DescriptionConst,
-    });
-  } catch (error) {
-    console.log("Error sharing: " + error);
-    return;
+    try {
+      await navigator.share({
+        title: TitleConst,
+        url: Url,
+        text: DescriptionConst,
+      });
+    } catch (error) {
+      console.log("Error sharing: " + error);
+      return;
+    }
   }
 }
 
@@ -264,15 +266,16 @@ async function nativeShare(Title, urls, Description) {
 share.forEach((s) => {
   s.addEventListener("click", () => {
     console.log("yes");
-    let text = "( Created by Chat Sonic )";
+    let text = "";
     const contTypee = s.parentElement.childNodes;
-
     console.log(contTypee);
     if (contTypee.length === 13) {
-      text += contTypee[3].childNodes[1].textContent;
+      text = contTypee[3].childNodes[1].textContent;
+      text += "( Created by Chat Sonic )";
       nativeShare("Chat Sonic", "https://chat-sonic.onrender.com/", text);
     } else {
-      text += contTypee[1].textContent;
+      text = contTypee[1].textContent;
+      text += "( Created by Chat Sonic )";
       nativeShare("Chat Sonic", "https://chat-sonic.onrender.com/", text);
     }
   });
