@@ -13,6 +13,7 @@ const share = document.querySelectorAll(".share");
 const installPrompt = document.querySelector(".install-prompt")
 const closeBtn = document.querySelector(".close-install") 
 const installImage = document.querySelector(".install-image")
+const installBtn = document.querySelector(".install");
 // create a funtion for add dealy
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -75,7 +76,7 @@ function loders() {
     </h1>
   </div> <!--/Loading-text-->
 </div> </p>
-     <img class="logo-gpt" src="/images/chat.jpg" alt="" />
+     <img class="logo-gpt" src="/images/aibot.png" alt="" />
     </div>`;
 
       //after sumit button page view go to last div
@@ -286,8 +287,7 @@ share.forEach((s) => {
 
 //chcek if app alreay install or not
 if(!document.cookie.includes("appInstall")){
-  const installBtn = document.querySelector(".install");
-  installBtn.classList.remove("hidden")
+  installBtn.classList.remove("hidden-two")
 }
 
 
@@ -300,7 +300,6 @@ let promptEvent;
 });
 // listen to install button clic
 function listenToUserAction() {
-  const installBtn = document.getElementById("install");
   if(!document.cookie.includes("appInstall")){
   installBtn.addEventListener("click", presentAddToHome);
   }
@@ -312,10 +311,11 @@ function presentAddToHome() {
   promptEvent.prompt();  // Wait for the user to respond to the prompt
   promptEvent.userChoice
     .then(choice => {
+      console.log(choice.outcome)
       if (choice.outcome === 'accepted') {
         console.log('User accepted');
-        installBtn.classList.add("hidden")
-        installPrompt.classList.add("hidden")
+        installBtn.classList.add("hidden-two")
+        installPrompt.classList.add("hidden-two")
         set_cookie("appInstall","yes")
         if(!document.cookie.includes("isPrompt")){
           set_cookie("isPrompt" , "yes");
@@ -329,7 +329,7 @@ function presentAddToHome() {
 // install custom prompt show
 
 closeBtn.addEventListener("click",()=>{
-  installPrompt.classList.add("hidden");
+  installPrompt.classList.add("hidden-two");
   installImage.classList.remove("install-image-animation");
 
 })
@@ -337,12 +337,12 @@ closeBtn.addEventListener("click",()=>{
 if(!document.cookie.includes("isPrompt"))
 {
 
-  await delay(4000)
-  installPrompt.classList.remove("hidden"); 
+  await delay(5000)
+  installPrompt.classList.remove("hidden-two"); 
   installImage.classList.add("install-image-animation");
-  await delay(6000)
+  await delay(8000)
   set_cookie("isPrompt" , "yes");
-  installPrompt.classList.add("hidden");
+  installPrompt.classList.add("hidden-two");
   installImage.classList.remove("install-image-animation");
 
 

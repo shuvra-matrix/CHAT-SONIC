@@ -104,7 +104,7 @@ pre::-webkit-scrollbar-thumb {
 .chat-gpt,
 .image-gpt {
   overflow: hidden;
-  border: 2px solid  #0b0d12a6;
+  border: 2px solid #0b0d12a6;
 }
 
 .chat-gpt {
@@ -129,6 +129,10 @@ pre::-webkit-scrollbar-thumb {
 
 
 /* navbar style */
+
+.hidden-two {
+  display: none !;
+}
 
 .nav-bar {
   grid-area: navbar;
@@ -162,11 +166,11 @@ pre::-webkit-scrollbar-thumb {
 }
 
 
-#install{
-  position: relative;
+#install {
+  position: relative !important;
 }
 
-.install-prompt{
+.install-prompt {
   position: absolute;
   padding: 30px 19px;
   background-color: #0d0927f7;
@@ -182,18 +186,18 @@ pre::-webkit-scrollbar-thumb {
   width: 155px;
 }
 
-.install-text{
+.install-text {
   color: #ede096cf;
   font-weight: 700;
   padding-bottom: 47px;
 }
 
-.close-install{
+.close-install {
   color: #be456a;
-    font-weight: 700;
+  font-weight: 700;
 }
 
-.close-install{
+.close-install {
   position: absolute;
   display: inherit;
   top: 53px;
@@ -221,20 +225,22 @@ pre::-webkit-scrollbar-thumb {
   border-bottom: 21px solid #44086ce3;
 }
 
-.install-image-animation{
+.install-image-animation {
   animation: installAnime 1s linear infinite;
 }
 
-@keyframes installAnime{
+@keyframes installAnime {
   0% {
     background-color: #0c0921;
   }
-  50%{
+
+  50% {
     background-color: #1b1058;
-    border-color:#52009fa0 ;
+    border-color: #52009fa0;
   }
-  100%{
-    background-color:  #1d1070;
+
+  100% {
+    background-color: #1d1070;
     border-color: #240144ad;
   }
 
@@ -953,6 +959,13 @@ pre code.hljs {
 }
 
 @media (max-width : 823px) {
+  .hidden-two {
+    display: none !important;
+  }
+
+  .install {
+    position: relative !important;
+  }
 
   .side-bar {
     display: none;
@@ -1057,15 +1070,15 @@ pre code.hljs {
   }
 
   .install-prompt {
-            top:70px;
-              right: -52px;
-         }
+    top: 70px;
+    right: -52px;
+  }
 
-    .close-install{
-      width: 35px !important;
-      height: 35px !important;
-      top: 66px ;
-    }
+  .close-install {
+    width: 35px !important;
+    height: 35px !important;
+    top: 66px;
+  }
 }
 
 
@@ -1322,15 +1335,32 @@ pre code.hljs {
     opacity: 1;
   }
 
-    .install-prompt {
-      padding: 19px 19px;
-      background-color: #0d0927f7;
-      box-shadow: 1px 1px 10px black;
-      top: 61px;
-      right: -57px;
-      width: 155px;
-    }
+  .install-prompt {
+    padding: 19px 19px;
+    background-color: #0d0927f7;
+    box-shadow: 1px 1px 10px black;
+    top: 61px;
+    right: -78px;
+    width: 190px;
+    text-align: center;
+  }
 
+  .install {
+    position: relative !important;
+  }
+
+  .hidden-two {
+    display: none !important;
+  }
+
+  .arrow-up {
+    left: 83px;
+  }
+
+  .close-install {
+    top: 53px;
+    left: 75px;
+  }
 }
 
 
