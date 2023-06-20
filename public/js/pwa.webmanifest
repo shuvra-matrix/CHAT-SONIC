@@ -8,11 +8,6 @@
       "sizes": "512x512",
       "type": "image/png"
     },
-     {
-      "src": "/images/android-launchericon-192-192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
     {
       "src": "/images/android-launchericon-144-144.png",
       "type": "image/png",
@@ -35,7 +30,7 @@
     }
    
   ],
-  "start_url": "https://chat-sonic.onrender.com/",
+  "start_url": "/",
   "display_override": ["window-control-overlay", "standalone"],
   "display": "standalone",
   "theme_color": "#020105",
