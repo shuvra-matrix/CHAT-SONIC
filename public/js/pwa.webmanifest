@@ -1,7 +1,7 @@
 {
   "name": "Chat Sonic",
   "short_name": "Chat Sonic",
-  "description": "Chat Sonic is an intelligent chatbot app that leverages the power of OpenAI to deliver a truly remarkable conversational experience. Whether you're looking to chat about the weather, ask for advice, or simply pass the time, Chat Sonic is the perfect companion. With its state-of-the-art natural language processing technology, Chat Sonic is able to understand your queries and respond in a way that feels natural and human-like.Powered by OpenAI's advanced chatbot models such as GPT and DALL-E, Chat Sonic is able to engage users in intelligent conversations that can be personalized to their preferences. With its intuitive interface and easy-to-use design, Chat Sonic is accessible to anyone, regardless of their technical expertise. Whether you're a seasoned chatter or a newcomer to chatbots, Chat Sonic is sure to delight. So why wait? Download Chat Sonic today and experience the future of chatbot technology for yourself!",
+  "description": "Chat Sonic is an intelligent chatbot app that leverages the power of OpenAI to deliver a truly remarkable conversational experience.",
   "icons": [
     {
       "src": "/images/android-launchericon-512-512.png",
