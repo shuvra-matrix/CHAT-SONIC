@@ -43,7 +43,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 ## :star2: About the Project
 
   <p>
-    I have developed a web application using Node.js that incorporates the powerful capabilities of the OpenAI API and AI DALL·E. This application provides users with a chat interface, allowing them to interact with an AI-powered conversational agent.
+    Chat Sonic is an advanced chat application that utilizes cutting-edge technology to provide an unparalleled chat experience. Developed by Shuvra Chakrabarty as a self-project, Chat Sonic takes advantage of the Open AI API, Node JS, and employs state-of-the-art chatbots like GPT and DALL-E 2 for an immersive communication experience. This app is not developed for commercial purposes, but rather to showcase the power of AI in revolutionizing the way we chat. With Chat Sonic, you can expect to enjoy a seamless chat experience that is both fun and engaging.
   </p>
   <br>
   <p>
