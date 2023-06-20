@@ -284,15 +284,13 @@ share.forEach((s) => {
 
 // add install prompt for pwa app 
 let installPrompt = null;
-
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
   installPrompt = event;
   
 });
-
 if(document.cookie.includes("isPrompt")){
-window.addEventListener("click", async () => {
+window.addEventListener("load", async () => {
   delay(2000)
   set_cookie("isPrompt","yes")
   if (!installPrompt) {
