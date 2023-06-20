@@ -2,10 +2,11 @@ const CACHE_NAME = "sw-cache-example";
 const toCache = [
   "/",
   "/css/style.css",
-  "/images/avatar.jpg",
+  "/images/aibot.png",
   "/images/d4.jpg",
   "/images/dalhe.jpg",
   "/images/chat.jpg",
+  "/images/3.png",
   "/js/status.js",
 ];
 

@@ -10,6 +10,9 @@ const publics = document.querySelector(".chat-section");
 const codeDiv = document.querySelector(".code-run");
 const undefineCode = document.querySelector(".language-css");
 const share = document.querySelectorAll(".share");
+const installPrompt = document.querySelector(".install-prompt")
+const closeBtn = document.querySelector(".close-install") 
+const installImage = document.querySelector(".install-image")
 // create a funtion for add dealy
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -210,17 +213,17 @@ code.forEach((c) => {
         c.nextElementSibling.innerHTML += `
       
   <p class="code_one" >${textList[i]
-    .replaceAll("\n", "<br>")
-    .replaceAll("<", "&#60;")
-    .replaceAll(">", "&#62;")
-    .replaceAll("`", "'")}
+            .replaceAll("\n", "<br>")
+            .replaceAll("<", "&#60;")
+            .replaceAll(">", "&#62;")
+            .replaceAll("`", "'")}
     </p>`;
       }
       c.nextElementSibling.innerHTML += `
   <pre><code style="margin-bottom : 1rem "> ${a
-    .replaceAll("<", "&#60;")
-    .replaceAll(">", "&#62;")
-    .replaceAll(".", "&#46;")}  </code></pre>`;
+          .replaceAll("<", "&#60;")
+          .replaceAll(">", "&#62;")
+          .replaceAll(".", "&#46;")}  </code></pre>`;
 
       c.nextElementSibling.childNodes[1].innerHTML += list[i + 1]
         .replaceAll("<", "&#60;")
@@ -281,23 +284,74 @@ share.forEach((s) => {
   });
 });
 
-
-// add install prompt for pwa app 
-let installPrompt = null;
-window.addEventListener("beforeinstallprompt", (event) => {
-  event.preventDefault();
-  installPrompt = event;
-  
-});
-if(!document.cookie.includes("isPrompt")){
-console.log("hi");
-window.addEventListener("load", async () => {
-  set_cookie("isPrompt","yes")
-  if (!installPrompt) {
-    return;
-  }
-  const result = await installPrompt.prompt();
-  console.log(`Install prompt was: ${result.outcome}`);
-  installPrompt = null;
-});
+//chcek if app alreay install or not
+if(!document.cookie.includes("appInstall")){
+  const installBtn = document.querySelector(".install");
+  installBtn.classList.remove("hidden")
 }
+
+
+let promptEvent;
+// Capture event and defer
+  window.addEventListener('beforeinstallprompt', function (e) {
+  e.preventDefault();
+  promptEvent = e;
+  listenToUserAction();
+});
+// listen to install button clic
+function listenToUserAction() {
+  const installBtn = document.getElementById("install");
+  if(!document.cookie.includes("appInstall")){
+  installBtn.addEventListener("click", presentAddToHome);
+  }
+}
+
+// present install prompt to user
+
+function presentAddToHome() {
+  promptEvent.prompt();  // Wait for the user to respond to the prompt
+  promptEvent.userChoice
+    .then(choice => {
+      if (choice.outcome === 'accepted') {
+        console.log('User accepted');
+        installBtn.classList.add("hidden")
+        installPrompt.classList.add("hidden")
+        set_cookie("appInstall","yes")
+        if(!document.cookie.includes("isPrompt")){
+          set_cookie("isPrompt" , "yes");
+        }
+      } else {
+        console.log('User dismissed');
+      }
+    })
+}
+
+// install custom prompt show
+
+closeBtn.addEventListener("click",()=>{
+  installPrompt.classList.add("hidden");
+  installImage.classList.remove("install-image-animation");
+
+})
+
+if(!document.cookie.includes("isPrompt"))
+{
+
+  await delay(4000)
+  installPrompt.classList.remove("hidden"); 
+  installImage.classList.add("install-image-animation");
+  await delay(6000)
+  set_cookie("isPrompt" , "yes");
+  installPrompt.classList.add("hidden");
+  installImage.classList.remove("install-image-animation");
+
+
+}
+
+
+
+
+
+
+
+
