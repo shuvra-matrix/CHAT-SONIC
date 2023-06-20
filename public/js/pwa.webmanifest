@@ -8,6 +8,11 @@
       "sizes": "512x512",
       "type": "image/png"
     },
+     {
+      "src": "/images/android-launchericon-192-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
     {
       "src": "/images/android-launchericon-144-144.png",
       "type": "image/png",
@@ -30,7 +35,7 @@
     }
    
   ],
-  "start_url": "/",
+  "start_url": "https://chat-sonic.onrender.com/",
   "display_override": ["window-control-overlay", "standalone"],
   "display": "standalone",
   "theme_color": "#020105",
@@ -48,7 +53,7 @@
       "short_name": "Image",
       "description": "Ai Image Generate",
       "url": "/dalle",
-      "icons": [{ "src": "/images/img-192-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/images/dalhe192x192.jpg", "sizes": "192x192" }]
     }
   ],
   "screenshots": [
