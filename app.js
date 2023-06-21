@@ -4,7 +4,8 @@ const mongoos = require("mongoose");
 const session = require("express-session");
 const SessionStore = require("connect-mongodb-session")(session);
 const User = require("./model/user");
-const requestIp = require("request-ip")
+const Global = require("./model/global");
+const requestIp = require("request-ip");
 const port = "3000";
 const path = require("path");
 require("dotenv").config();
@@ -34,34 +35,50 @@ app.use(
   })
 );
 
-app.use(requestIp.mw())
+app.use(requestIp.mw());
+
+app.use((req, res, next) => {
+  if (req.global) {
+    next();
+  }
+  Global.findById("6492be0d06868ca1f8040e02")
+    .then((global) => {
+      console.log("hi");
+      req.global = global;
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 app.use((req, res, next) => {
   if (req.user) {
     next();
   }
-  User.find({ipAddress : req.clientIp}).then(user=>{
-    if(user.length === 0){
-      const newUser = new User({
-        ipAddress : req.clientIp,
-        apikeyindex : 0,
-        maxApiKey : 12
-      })
-      newUser.save()
-      User.find({ipAddress : req.clientIp}).then(user=>{
-        console.log(user)
-        req.user = user
-      })
+  User.find({ ipAddress: req.clientIp })
+    .then((user) => {
+      if (user.length === 0) {
+        const clientIp = req.clientIp;
+        const newUser = new User({
+          ipAddress: clientIp,
+        });
+        return newUser.save().then((response) => {
+          User.find({ ipAddress: clientIp }).then((users) => {
+            console.log(`new user - -- ${users}`);
+            req.user = users;
+            next();
+          });
+        });
+      } else {
+        req.user = user;
+        next();
+      }
       
-    }
-    else
-    {
-      req.user = user
-    }
-    next();
-  }).catch(err=>{
-    console.log(err)
-  })
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 const publicRoutes = require("./routes/public");

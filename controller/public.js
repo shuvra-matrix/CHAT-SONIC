@@ -13,9 +13,9 @@ const transporter = nodeMailer.createTransport({
 });
 
 exports.getChatIndex = (req, res, next) => {
-  if (req.session.answer) {
+  if (req.user[0].conversation.answer.length > 0) {
     return res.render("public/chat", {
-      answer: req.session.answer,
+      answer: req.user[0].conversation.answer,
       isIndex: false,
     });
   }
@@ -55,7 +55,7 @@ exports.postChat = (req, res, next) => {
       isIndex: false,
     });
   }
-  if (req.user[0].apikeyindex.toString() >= req.user[0].maxApiKey.toString()) {
+  if (req.global.apikeyindex.toString() >= req.global.maxApiKey.toString()) {
     return res.render("public/chat", {
       answer: [
         {
@@ -140,13 +140,13 @@ exports.postChat = (req, res, next) => {
             ],
             isIndex: false,
           });
-          let userApiIndex = req.user.apikeyindex + 1;
-          req.user.apikeyindex = userApiIndex;
+          let apiIndex = req.global.apikeyindex + 1;
+          req.global.apikeyindex = apiIndex;
 
           req.user
             .save()
             .then((result) => {
-              const remaningApi = req.user.maxApiKey - req.user.apikeyindex;
+              const remaningApi = req.global.maxApiKey - req.global.apikeyindex;
               const mailOption = {
                 from: process.env.USER_ID,
                 to: process.env.TO_USER_ID,
@@ -185,11 +185,16 @@ exports.postChat = (req, res, next) => {
       });
   }
   
-  apiCall(req.user[0].apikeyindex);
+  apiCall(req.global.apikeyindex);
 };
 
 exports.postImage = (req, res, next) => {
   const value = req.body.value;
+  req.user[0].addImageQuestion({question : value}).then(response=>{
+    console.log(response);
+  }).catch(err=>{
+    console.log(err);
+  })
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res.status(422).render("public/image", {
@@ -198,7 +203,7 @@ exports.postImage = (req, res, next) => {
       imgaeLink: "/images/invalid.jpg",
     });
   }
-  if (req.user[0].apikeyindex.toString() >= req.user[0].maxApiKey.toString()) {
+  if (req.global.apikeyindex.toString() >= req.global.maxApiKey.toString()) {
     return res.render("public/chat", {
       answer: [
         {
@@ -263,8 +268,8 @@ exports.postImage = (req, res, next) => {
             isIndex: false,
           });
 
-          let userApiIndex = req.user.apikeyindex + 1;
-          req.user.apikeyindex = userApiIndex;
+          let apiIndex = req.global.apikeyindex + 1;
+          req.global.apikeyindex = apiIndex;
           if (userApiIndex == user.maxApiKey) {
             return res.render("public/chat", {
               answer: [
@@ -280,8 +285,7 @@ exports.postImage = (req, res, next) => {
           req.user
             .save()
             .then((result) => {
-              const remaningApi = req.user.maxApiKey - req.user.apikeyindex;
-
+              const remaningApi = req.global.maxApiKey - req.global.apikeyindex;
               const mailOption = {
                 from: process.env.USER_ID,
                 to: process.env.TO_USER_ID,
@@ -318,5 +322,5 @@ exports.postImage = (req, res, next) => {
       });
   }
 
-  apiCall(req.user[0].apikeyindex);
+  apiCall(req.global.apikeyindex);
 };

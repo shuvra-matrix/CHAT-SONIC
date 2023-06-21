@@ -3,12 +3,6 @@ const mongoos = require("mongoose");
 const Schema = mongoos.Schema;
 
 const userSchema = new Schema({
-  apikeyindex: {
-    type: Number,
-  },
-  maxApiKey: {
-    type: Number,
-  },
   conversation : {
     message : [{
       type:Object
@@ -21,7 +15,10 @@ const userSchema = new Schema({
   },
   ipAddress : {
     type:String
-  }
+  },
+  imageQuestion : [{
+    type : Object
+  }]
 });
 
 
@@ -36,12 +33,21 @@ userSchema.methods.addMessage = function(message){
 userSchema.methods.addAnswer = function(answer)
 {
   const oldanswer = this.conversation.answer;
-  let updatedAnswer = [...oldanswer]
-  updatedAnswer.push(answer)
-  this.conversation.answer = updatedAnswer
+  let updatedAnswer = [...oldanswer];
+  updatedAnswer.push(answer);
+  this.conversation.answer = updatedAnswer;
   return this.save();
 } 
 
+
+userSchema.methods.addImageQuestion = function(imageQuestion){
+  const oldQuery = this.imageQuestion;
+  let updatedQuestion = [...oldQuery];
+  updatedQuestion.push(imageQuestion);
+  this.imageQuestion = updatedQuestion;
+  return this.save();
+
+}
 
 
 module.exports = mongoos.model("User", userSchema);
