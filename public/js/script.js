@@ -25,12 +25,14 @@ function delete_cookie(name) {
 }
 // when page relode it always go to last div
 if (document.cookie.includes("newuser")) {
+  if(publics){
   window.addEventListener("load", () => {
     publics.scrollIntoView({
       block: "end",
       inline: "nearest",
     });
   });
+}
 }
 // regenerate button loder on
 if (reButton) {
@@ -103,7 +105,6 @@ if (publics) {
     answer.forEach((a) => {
       list.push(a);
     });
-    console.log(list);
     let index = 10;
 
     if (
@@ -112,9 +113,7 @@ if (publics) {
       // remove code section text animation
     } else {
       let text = list.slice(-1)[0].textContent;
-      console.log(typeof text);
       let newText = text.replaceAll("\n", "<br>");
-      console.log(newText);
       function type() {
         if (index < newText.length) {
           list.slice(-1)[0].innerHTML =
@@ -157,7 +156,7 @@ copy.forEach((e) => {
     let text = "";
 
     const contTypee = e.parentElement.childNodes;
-    console.log(contTypee);
+ 
     if (contTypee.length === 13) {
       text = contTypee[3].childNodes[1].textContent;
 
@@ -271,7 +270,7 @@ share.forEach((s) => {
     console.log("yes");
     let text = "";
     const contTypee = s.parentElement.childNodes;
-    console.log(contTypee);
+   
     if (contTypee.length === 13) {
       text = contTypee[3].childNodes[1].textContent;
       text += "( Created by Chat Sonic )";
@@ -309,7 +308,7 @@ function presentAddToHome() {
   promptEvent.prompt();  // Wait for the user to respond to the prompt
   promptEvent.userChoice
     .then(choice => {
-      console.log(choice.outcome)
+     
       if (choice.outcome === 'accepted') {
         console.log('User accepted');
         installBtn.classList.add("hidden-two")

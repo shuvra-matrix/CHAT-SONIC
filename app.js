@@ -43,7 +43,6 @@ app.use((req, res, next) => {
   }
   Global.findById("6492be0d06868ca1f8040e02")
     .then((global) => {
-      console.log("hi");
       req.global = global;
       next();
     })
@@ -65,7 +64,6 @@ app.use((req, res, next) => {
         });
         return newUser.save().then((response) => {
           User.find({ ipAddress: clientIp }).then((users) => {
-            console.log(`new user - -- ${users}`);
             req.user = users;
             next();
           });
