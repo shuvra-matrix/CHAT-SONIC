@@ -283,9 +283,9 @@ share.forEach((s) => {
   });
 });
 
-//chcek if app alreay install or not
+// chcek if app alreay install or not
 if(!document.cookie.includes("appInstall")){
-  installBtn.classList.remove("hidden-two")
+    installImage.classList.remove("hidden-two");
 }
 
 let promptEvent;
@@ -311,7 +311,7 @@ function presentAddToHome() {
      
       if (choice.outcome === 'accepted') {
         console.log('User accepted');
-        installBtn.classList.add("hidden-two")
+        installImage.classList.add("hidden-two")
         installPrompt.classList.add("hidden-two")
         set_cookie("appInstall","yes")
         if(!document.cookie.includes("isPrompt")){
@@ -336,7 +336,7 @@ function getPWADisplayMode()
   {
     installPrompt.classList.add("hidden-two");
     installImage.classList.remove("install-image-animation");
-    installBtn.classList.add("hidden-two")
+    installImage.classList.add("hidden-two")
   }
   else{
       closeBtn.addEventListener("click",()=>{
