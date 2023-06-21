@@ -326,6 +326,15 @@ function presentAddToHome() {
     })
 }
 
+
+
+
+//
+const relatedApps = await navigator.getInstalledRelatedApps();
+const PWAisInstalled = relatedApps.length > 0;
+
+console.log(PWAisInstalled)
+
 // install custom prompt show
 
 closeBtn.addEventListener("click",()=>{
