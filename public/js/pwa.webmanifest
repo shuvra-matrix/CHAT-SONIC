@@ -81,5 +81,9 @@
       "sizes": "720x540",
       "form_factor": "wide"
     }
-  ]
+  ],
+   "related_applications": [{
+    "platform": "webapp",
+    "url": "https://dull-pink-prawn-sari.cyclic.app/"
+  }]
 }
