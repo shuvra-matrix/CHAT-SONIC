@@ -336,7 +336,6 @@ closeBtn.addEventListener("click",()=>{
 
 if(!document.cookie.includes("isPrompt"))
 {
-
   await delay(5000)
   installPrompt.classList.remove("hidden-two"); 
   installImage.classList.add("install-image-animation");
@@ -344,14 +343,6 @@ if(!document.cookie.includes("isPrompt"))
   set_cookie("isPrompt" , "yes");
   installPrompt.classList.add("hidden-two");
   installImage.classList.remove("install-image-animation");
-
-
 }
-
-
-
-
-
-
 
 
