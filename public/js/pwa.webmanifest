@@ -35,7 +35,7 @@
     }
    
   ],
-  "start_url": "https://chat-sonic.onrender.com/",
+  "start_url": "https://dull-pink-prawn-sari.cyclic.app/",
   "display_override": ["window-control-overlay", "standalone"],
   "display": "standalone",
   "theme_color": "#020105",
