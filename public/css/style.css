@@ -950,6 +950,10 @@ pre code.hljs {
 
   }
 
+  .chat-div{
+    height: 85vh;
+  }
+
 }
 
 @media (max-width : 823px) {
@@ -1078,7 +1082,7 @@ pre code.hljs {
 
 @media (max-width: 711px) {
   .chat-div {
-    height: 73vh;
+    height: 71vh;
   }
 
 
@@ -1132,7 +1136,7 @@ pre code.hljs {
   }
 
   .chat-div {
-    height: 80vh;
+    height: 74vh;
   }
 
   .chat {
@@ -1361,7 +1365,9 @@ pre code.hljs {
 
 /* loder */
 
-
+@media (max-width: 420px) {.chat-div {
+  height: 79vh;
+}}
 
 
 @media (max-width: 380px) {
