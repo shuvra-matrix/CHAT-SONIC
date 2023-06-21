@@ -16,11 +16,10 @@ const userSchema = new Schema({
   ipAddress : {
     type:String
   },
-  imageQuestion : [{
+  imagesection : [{
     type : Object
   }]
 });
-
 
 userSchema.methods.addMessage = function(message){
   const oldmessage = this.conversation.message;
@@ -40,13 +39,14 @@ userSchema.methods.addAnswer = function(answer)
 } 
 
 
-userSchema.methods.addImageQuestion = function(imageQuestion){
-  const oldQuery = this.imageQuestion;
-  let updatedQuestion = [...oldQuery];
-  updatedQuestion.push(imageQuestion);
-  this.imageQuestion = updatedQuestion;
+userSchema.methods.addToImageSection = function(imageobj){
+  const imageOldQuery = this.imagesection;
+  console.log(imageOldQuery)
+  let updatedImageSection = [...imageOldQuery];
+  updatedImageSection.push(imageobj);
+  console.log(updatedImageSection)
+  this.imagesection = updatedImageSection;
   return this.save();
-
 }
 
 

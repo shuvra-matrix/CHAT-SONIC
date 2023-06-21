@@ -190,11 +190,6 @@ exports.postChat = (req, res, next) => {
 
 exports.postImage = (req, res, next) => {
   const value = req.body.value;
-  req.user[0].addImageQuestion({question : value}).then(response=>{
-    console.log(response);
-  }).catch(err=>{
-    console.log(err);
-  })
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res.status(422).render("public/image", {
@@ -241,15 +236,22 @@ exports.postImage = (req, res, next) => {
       .request(options)
       .then((response) => {
         const imageLink = response.data.data[0].url;
-        console.log(response.data.data);
-
-        res.render("public/image", {
-          modeon: true,
-          preInput: value,
-          imgaeLink: imageLink,
-        });
+        req.user[0]
+          .addToImageSection({ question: value, imageLink: imageLink })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+           res.render("public/image", {
+             modeon: true,
+             preInput: value,
+             imgaeLink: imageLink,
+           });
       })
       .catch((error) => {
+        console.log(error)
         let errorData = error.response.data.message;
 
         if (
@@ -270,7 +272,7 @@ exports.postImage = (req, res, next) => {
 
           let apiIndex = req.global.apikeyindex + 1;
           req.global.apikeyindex = apiIndex;
-          if (userApiIndex == user.maxApiKey) {
+          if (apiIndex == global.maxApiKey) {
             return res.render("public/chat", {
               answer: [
                 {
@@ -282,7 +284,7 @@ exports.postImage = (req, res, next) => {
               isIndex: false,
             });
           }
-          req.user
+          req.global
             .save()
             .then((result) => {
               const remaningApi = req.global.maxApiKey - req.global.apikeyindex;
