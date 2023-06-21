@@ -16,16 +16,13 @@ const installImage = document.querySelector(".install-image")
 const installBtn = document.querySelector(".install");
 // create a funtion for add dealy
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
 // cookie function
-
 function set_cookie(name, value) {
   document.cookie = name + "=" + value + "; Path=/;";
 }
 function delete_cookie(name) {
   document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 }
-
 // when page relode it always go to last div
 if (document.cookie.includes("newuser")) {
   window.addEventListener("load", () => {
@@ -129,8 +126,10 @@ if (publics) {
             block: "end",
             inline: "nearest",
           });
-        } else {
-          list.slice(-1)[0].innerHTML =
+        } 
+        else 
+        {
+            list.slice(-1)[0].innerHTML =
             newText.slice(0, index) + '<span class="blinking-cursor">|</span>';
         }
         delete_cookie("newOutput");
@@ -290,7 +289,6 @@ if(!document.cookie.includes("appInstall")){
   installBtn.classList.remove("hidden-two")
 }
 
-
 let promptEvent;
 // Capture event and defer
   window.addEventListener('beforeinstallprompt', function (e) {
@@ -326,32 +324,58 @@ function presentAddToHome() {
     })
 }
 
-
-
-
-//
-const relatedApps = await navigator.getInstalledRelatedApps();
-const PWAisInstalled = relatedApps.length > 0;
-
-console.log(PWAisInstalled)
-
 // install custom prompt show
+// if pwa already install dont show install button
 
-closeBtn.addEventListener("click",()=>{
-  installPrompt.classList.add("hidden-two");
-  installImage.classList.remove("install-image-animation");
-
-})
-
-if(!document.cookie.includes("isPrompt"))
+function getPWADisplayMode()
 {
-  await delay(5000)
-  installPrompt.classList.remove("hidden-two"); 
-  installImage.classList.add("install-image-animation");
-  await delay(8000)
-  set_cookie("isPrompt" , "yes");
-  installPrompt.classList.add("hidden-two");
-  installImage.classList.remove("install-image-animation");
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+  if (document.referrer.startsWith('android-app://'))
+  {
+    return 'twa';
+  } else if (navigator.standalone || isStandalone) 
+  {
+    
+    installPrompt.classList.add("hidden-two");
+    installImage.classList.remove("install-image-animation");
+    installBtn.classList.add("hidden-two")
+
+  }
+  else{
+
+      closeBtn.addEventListener("click",()=>{
+      installPrompt.classList.add("hidden-two");
+      installImage.classList.remove("install-image-animation");
+
+    })
+
+    if(!document.cookie.includes("isPrompt"))
+    {
+      delay(5000).then(result=>{
+        installPrompt.classList.remove("hidden-two"); 
+        installImage.classList.add("install-image-animation");
+        return delay(8000)
+      }).then(result=>{
+        set_cookie("isPrompt" , "yes");
+        installPrompt.classList.add("hidden-two");
+        installImage.classList.remove("install-image-animation");
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+  }
+  
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
