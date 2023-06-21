@@ -335,18 +335,14 @@ function getPWADisplayMode()
     return 'twa';
   } else if (navigator.standalone || isStandalone) 
   {
-    
     installPrompt.classList.add("hidden-two");
     installImage.classList.remove("install-image-animation");
     installBtn.classList.add("hidden-two")
-
   }
   else{
-
       closeBtn.addEventListener("click",()=>{
       installPrompt.classList.add("hidden-two");
       installImage.classList.remove("install-image-animation");
-
     })
 
     if(!document.cookie.includes("isPrompt"))

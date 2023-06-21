@@ -11,8 +11,6 @@ const transporter = nodeMailer.createTransport({
   },
 });
 
-let total = 28896;
-
 exports.getChatIndex = (req, res, next) => {
   console.log(req.user.apikeyindex, req.user.maxApiKey);
   if (req.session.answer) {
@@ -99,7 +97,6 @@ exports.postChat = (req, res, next) => {
       .request(options)
       .then((response) => {
         const reply = response.data.choices[0].message.content;
-        total += Number(response.data.usage.total_tokens);
         if (reply.includes("```")) {
           req.session.answer.push({
             question: que,
