@@ -239,19 +239,14 @@ exports.postImage = (req, res, next) => {
         req.user[0]
           .addToImageSection({ question: value, imageLink: imageLink })
           .then((response) => {
-            console.log(response);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-           res.render("public/image", {
-             modeon: true,
-             preInput: value,
-             imgaeLink: imageLink,
-           });
+            res.render("public/image", {
+              modeon: true,
+              preInput: value,
+              imgaeLink: imageLink,
+            });
+          })  
       })
       .catch((error) => {
-        console.log(error)
         let errorData = error.response.data.message;
 
         if (
