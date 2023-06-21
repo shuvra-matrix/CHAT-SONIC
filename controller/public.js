@@ -2,7 +2,6 @@ require("dotenv").config();
 const { validationResult, Result } = require("express-validator");
 const axios = require("axios");
 const nodeMailer = require("nodemailer");
-const user = require("../model/user");
 
 const transporter = nodeMailer.createTransport({
   service: "gmail",
@@ -103,6 +102,7 @@ exports.postChat = (req, res, next) => {
             question: que,
             answer: reply,
             isCode: true,
+            isShow : "yes",
           }).then(res=>{
             console.log(res)
           }).catch(err=>console.log(err))
@@ -112,6 +112,7 @@ exports.postChat = (req, res, next) => {
             question: que,
             answer: reply,
             isCode: false,
+            isShow : "yes",
           }).then(res=>{
             console.log(res)
           }).catch(err=>console.log(err))
@@ -214,7 +215,6 @@ exports.postImage = (req, res, next) => {
     let api;
     if (indexApi >= 0) {
       api = process.env.API_KEY.split(",")[indexApi];
-      console.log(api);
     }
     const options = {
       method: "POST",

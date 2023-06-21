@@ -85,6 +85,7 @@ const authRoutes = require("./routes/auth");
 app.use(authRoutes);
 app.use(publicRoutes);
 
+
 mongoos
   .connect(MONGO_CONNECT)
   .then((result) => {

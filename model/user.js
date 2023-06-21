@@ -41,10 +41,8 @@ userSchema.methods.addAnswer = function(answer)
 
 userSchema.methods.addToImageSection = function(imageobj){
   const imageOldQuery = this.imagesection;
-  console.log(imageOldQuery)
   let updatedImageSection = [...imageOldQuery];
   updatedImageSection.push(imageobj);
-  console.log(updatedImageSection)
   this.imagesection = updatedImageSection;
   return this.save();
 }
