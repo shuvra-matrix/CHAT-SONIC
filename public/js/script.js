@@ -367,8 +367,7 @@ function getPWADisplayMode()
   
 }
 
-
-
+getPWADisplayMode();
 
 
 
