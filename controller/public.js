@@ -28,6 +28,8 @@ exports.getChatIndex = (req, res, next) => {
       },
     ],
     isIndex: true,
+    ip : req.ip,
+    clientIp : req.clientIp,
   });
 };
 

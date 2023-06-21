@@ -4,6 +4,7 @@ const mongoos = require("mongoose");
 const session = require("express-session");
 const SessionStore = require("connect-mongodb-session")(session);
 const User = require("./model/user");
+const requestIp = require("request-ip")
 const port = "3000";
 const path = require("path");
 require("dotenv").config();
@@ -32,6 +33,8 @@ app.use(
     },
   })
 );
+
+app.use(requestIp.mw())
 
 app.use((req, res, next) => {
   if (req.user) {
