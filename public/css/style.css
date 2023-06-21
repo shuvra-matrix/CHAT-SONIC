@@ -1362,9 +1362,6 @@ pre code.hljs {
 }
 
 
-
-/* loder */
-
 @media (max-width: 420px) {.chat-div {
   height: 79vh;
 }}
@@ -1398,6 +1395,6 @@ pre code.hljs {
   }
 
   .chat-div {
-    height: 75vh;
+    height: 72vh;
   }
 }
