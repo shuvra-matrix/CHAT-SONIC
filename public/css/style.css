@@ -263,7 +263,6 @@ pre::-webkit-scrollbar-thumb {
 
 }
 
-
 .chat-div::-webkit-scrollbar {
   display: none;
 }
@@ -276,9 +275,9 @@ pre::-webkit-scrollbar-thumb {
   /* Firefox */
 }
 
-.chat-section {
+.chat-section 
+{
   width: 95%;
-
   margin: 20px auto 2rem;
   padding-top: 1rem;
   display: flex;
@@ -359,8 +358,6 @@ pre::-webkit-scrollbar-thumb {
 
 
 }
-
-
 
 .anime {
   display: inline;
@@ -451,7 +448,6 @@ pre::-webkit-scrollbar-thumb {
 
 }
 
-
 .input {
   position: fixed;
   bottom: 20px;
@@ -531,11 +527,9 @@ pre::-webkit-scrollbar-thumb {
   box-shadow: 1px 1px 5px #000000ad;
 }
 
-
 .share {
   display: none;
 }
-
 
 .forshedHidden {
   display: none !important;
