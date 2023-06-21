@@ -2,6 +2,7 @@ require("dotenv").config();
 const { validationResult, Result } = require("express-validator");
 const axios = require("axios");
 const nodeMailer = require("nodemailer");
+const user = require("../model/user");
 
 const transporter = nodeMailer.createTransport({
   service: "gmail",
@@ -12,7 +13,6 @@ const transporter = nodeMailer.createTransport({
 });
 
 exports.getChatIndex = (req, res, next) => {
-  console.log(req.user.apikeyindex, req.user.maxApiKey);
   if (req.session.answer) {
     return res.render("public/chat", {
       answer: req.session.answer,
@@ -55,7 +55,7 @@ exports.postChat = (req, res, next) => {
       isIndex: false,
     });
   }
-  if (req.user.apikeyindex.toString() >= req.user.maxApiKey.toString()) {
+  if (req.user[0].apikeyindex.toString() >= req.user[0].maxApiKey.toString()) {
     return res.render("public/chat", {
       answer: [
         {
@@ -68,14 +68,13 @@ exports.postChat = (req, res, next) => {
     });
   }
 
-  if (!req.session.answer) {
-    req.session.message = [];
-    req.session.answer = [];
-  }
-  req.session.message.push({ role: "user", content: que });
-
+  req.user[0].addMessage({role:"user",content:que}).then(responce =>{
+    console.log(responce);
+  }).catch(err=>{
+    console.log(err)
+  })
   async function apiCall(indexApi) {
-    const messageLimit = req.session.message.slice(-5);
+    const messageLimit = req.user[0].conversation.message.slice(-5);
     let api;
     if (indexApi >= 0) {
       api = process.env.API_KEY.split(",")[indexApi];
@@ -100,21 +99,26 @@ exports.postChat = (req, res, next) => {
       .then((response) => {
         const reply = response.data.choices[0].message.content;
         if (reply.includes("```")) {
-          req.session.answer.push({
+          req.user[0].addAnswer({
             question: que,
             answer: reply,
             isCode: true,
-          });
+          }).then(res=>{
+            console.log(res)
+          }).catch(err=>console.log(err))
+
         } else {
-          req.session.answer.push({
+          req.user[0].addAnswer({
             question: que,
             answer: reply,
             isCode: false,
-          });
+          }).then(res=>{
+            console.log(res)
+          }).catch(err=>console.log(err))
         }
 
         res.render("public/chat", {
-          answer: req.session.answer,
+          answer: req.user[0].conversation.answer,
           isIndex: false,
         });
       })
@@ -180,8 +184,8 @@ exports.postChat = (req, res, next) => {
         }
       });
   }
-
-  apiCall(req.user.apikeyindex);
+  
+  apiCall(req.user[0].apikeyindex);
 };
 
 exports.postImage = (req, res, next) => {
@@ -194,7 +198,7 @@ exports.postImage = (req, res, next) => {
       imgaeLink: "/images/invalid.jpg",
     });
   }
-  if (req.user.apikeyindex.toString() >= req.user.maxApiKey.toString()) {
+  if (req.user[0].apikeyindex.toString() >= req.user[0].maxApiKey.toString()) {
     return res.render("public/chat", {
       answer: [
         {
@@ -314,5 +318,5 @@ exports.postImage = (req, res, next) => {
       });
   }
 
-  apiCall(req.user.apikeyindex);
+  apiCall(req.user[0].apikeyindex);
 };

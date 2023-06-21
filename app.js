@@ -40,14 +40,28 @@ app.use((req, res, next) => {
   if (req.user) {
     next();
   }
-  User.findById("648edc6b1f324c954afc65d7")
-    .then((user) => {
-      req.user = user;
-      next();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  User.find({ipAddress : req.clientIp}).then(user=>{
+    if(user.length === 0){
+      const newUser = new User({
+        ipAddress : req.clientIp,
+        apikeyindex : 0,
+        maxApiKey : 12
+      })
+      newUser.save()
+      User.find({ipAddress : req.clientIp}).then(user=>{
+        console.log(user)
+        req.user = user
+      })
+      
+    }
+    else
+    {
+      req.user = user
+    }
+    next();
+  }).catch(err=>{
+    console.log(err)
+  })
 });
 
 const publicRoutes = require("./routes/public");
