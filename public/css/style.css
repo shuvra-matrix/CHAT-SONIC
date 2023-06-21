@@ -1151,9 +1151,6 @@ pre code.hljs {
 
   }
 
-  .chat-section{
-    padding-top: 0px;
-  }
 
   .image-section {
     margin-top: 2rem;
@@ -1365,6 +1362,8 @@ pre code.hljs {
 }
 
 
+
+
 @media (max-width: 420px) {.chat-div {
   height: 79vh;
 }}
@@ -1398,15 +1397,7 @@ pre code.hljs {
   }
 
   .chat-div {
-    height: 80vh;
+    height: 75vh;
   }
 }
 
-
-@media (max-width: 376px) {
-
-  .chat-div{
-    height: 72vh;
-  }
-
-}
