@@ -1048,6 +1048,12 @@ pre code.hljs {
     padding-top: 14px;
     padding-right: 1rem;
   }
+  .chat-div {
+    padding-bottom: 1rem;
+  }
+  .chat-section {
+    padding-bottom: 6rem;
+  }
 
   .image-section {
     margin-top: 2rem;
