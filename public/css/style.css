@@ -465,7 +465,7 @@ form {
   border: none;
   color: rgb(194, 194, 194);
   font-size: 1rem;
-  padding-left: 1rem;
+  padding-left: 1.1rem;
   border: 1px solid var(--input-border-color);
   padding-right: 5.5rem;
   box-shadow: 1px 1px 19px #0000008c;
@@ -1060,7 +1060,7 @@ pre code.hljs {
   }
 
   .input input {
-    padding-right: 4.5rem;
+    padding-right: 5.5rem;
   }
 
   .input button {
