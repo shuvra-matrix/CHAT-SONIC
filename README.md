@@ -1,6 +1,6 @@
 <!--
-Hey, thanks for using the awesome-readme-template template.  
-If you have any enhancements, then fork this project and create a pull request 
+Hey, thanks for using the awesome-readme-template template.
+If you have any enhancements, then fork this project and create a pull request
 or just open an issue with the label "enhancement".
 Don't forget to give this project a star for additional support ;)
 Maybe you can mention me or this repo in the acknowledgements too
@@ -23,6 +23,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 <br />
 
 <!-- Table of Contents -->
+
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
@@ -40,6 +41,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 - [Acknowledgements](#gem-acknowledgements)
 
 <!-- About the Project -->
+
 ## :star2: About the Project
 
   <p>
@@ -69,8 +71,11 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!--  live demo -->
 
 ### :house: LiveDemo
+
 [Live Demo](https://chat-sonic.onrender.com/)
+
 <!-- TechStack -->
+
 ### :space_invader: Tech Stack
 
 <details>
@@ -101,18 +106,17 @@ Maybe you can mention me or this repo in the acknowledgements too
   </ul>
 </details>
 
-
-
 <!-- Features -->
+
 ### :dart: Features
 
 - User
   - do conversations and much more with the chatbot. The language model can answer questions and assist you with tasks, such as composing emails, essays, and code.
   - Text to image generate
-  
-
+  - It has Progressive Web App (PWA) capabilities, users can install the app on their home screens, just like a native app, and access it with a single tap.
 
 <!-- Env Variables -->
+
 ### :key: Environment Variables
 
 To run this project, you will need to add the following variables to your .env file
@@ -127,14 +131,17 @@ To run this project, you will need to add the following variables to your .env f
 `MONGO_DB_NAME = YOUR MONGO DB NAME`
 
 <!-- Getting Started -->
+
 ## :toolbox: Getting Started
 
 <!-- Prerequisites -->
+
 ### :bangbang: Prerequisites
 
 This project uses MongoDB as database. please install mongodb server in local environment.
 
 <!-- Run Locally -->
+
 ### :running: Run Locally
 
 Clone the project
@@ -158,17 +165,18 @@ Install dependencies
 Start the backend server
 
 ```bash
-  npm run dev 
+  npm run dev
 ```
 
 Use following paths
 
 ```bash
   Backend server : localhost:3000/
-  
+
 ```
 
 <!-- To Do -->
+
 ## :notes: to-do
 
   <ul>
@@ -176,6 +184,7 @@ Use following paths
   </ul>
 
 <!-- Contributing -->
+
 ## :wave: Contributing
 
 <a href="https://github.com/shuvra-matrix/CHAT-GURU/graphs/contributors">
@@ -185,11 +194,13 @@ Use following paths
 Contributions are always welcome!
 
 <!-- License -->
+
 ## :warning: License
 
 Distributed under the no License.
 
 <!-- Contact -->
+
 ## :handshake: Contact
 
 Shuvra Chakrabarty - <shuvrachakrabarty97@gmail.com>
@@ -197,6 +208,7 @@ Shuvra Chakrabarty - <shuvrachakrabarty97@gmail.com>
 Project Link: [https://github.com/shuvra-matrix/CHAT-GURU](https://github.com/shuvra-matrix/CHAT-GURU)
 
 <!-- Acknowledgments -->
+
 ## :gem: Acknowledgements
 
 Following libraries have been used in this projects.
@@ -205,4 +217,3 @@ Following libraries have been used in this projects.
 - [express-validator](https://express-validator.github.io/docs/)
 - [connect-mongodb-session](https://www.npmjs.com/package/connect-mongodb-session)
 - [nodemailer](https://nodemailer.com/about/)
-
