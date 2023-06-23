@@ -31,6 +31,19 @@ body {
   font-family: var(--font-family);
   text-shadow: var(--text-shadow);
   scroll-behavior: smooth;
+  overflow: auto;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 pre::-webkit-scrollbar {
@@ -127,6 +140,7 @@ pre::-webkit-scrollbar-thumb {
 .nav-bar {
   grid-area: navbar;
   background-color: var(--navbar-color);
+  height: 90px;
 }
 
 .profile {
@@ -917,7 +931,11 @@ pre code.hljs {
     z-index: 1;
     width: 100%;
     top: 0px;
-    height: 80px;
+    height: 68px;
+  }
+
+  body {
+    background-color: var(--navbar-color);
   }
 
   .logo-nav,
