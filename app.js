@@ -72,7 +72,6 @@ app.use((req, res, next) => {
         req.user = user;
         next();
       }
-      
     })
     .catch((err) => {
       console.log(err);
@@ -84,7 +83,6 @@ const authRoutes = require("./routes/auth");
 
 app.use(authRoutes);
 app.use(publicRoutes);
-
 
 mongoos
   .connect(MONGO_CONNECT)

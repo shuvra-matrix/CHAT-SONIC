@@ -27,8 +27,8 @@ exports.getChatIndex = (req, res, next) => {
       },
     ],
     isIndex: true,
-    ip : req.ip,
-    clientIp : req.clientIp,
+    ip: req.ip,
+    clientIp: req.clientIp,
   });
 };
 
@@ -67,11 +67,14 @@ exports.postChat = (req, res, next) => {
     });
   }
 
-  req.user[0].addMessage({role:"user",content:que}).then(responce =>{
-    console.log(responce);
-  }).catch(err=>{
-    console.log(err)
-  })
+  req.user[0]
+    .addMessage({ role: "user", content: que })
+    .then((responce) => {
+      console.log(responce);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   async function apiCall(indexApi) {
     const messageLimit = req.user[0].conversation.message.slice(-5);
     let api;
@@ -98,24 +101,29 @@ exports.postChat = (req, res, next) => {
       .then((response) => {
         const reply = response.data.choices[0].message.content;
         if (reply.includes("```")) {
-          req.user[0].addAnswer({
-            question: que,
-            answer: reply,
-            isCode: true,
-            isShow : "yes",
-          }).then(res=>{
-            console.log(res)
-          }).catch(err=>console.log(err))
-
+          req.user[0]
+            .addAnswer({
+              question: que,
+              answer: reply,
+              isCode: true,
+              isShow: "yes",
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => console.log(err));
         } else {
-          req.user[0].addAnswer({
-            question: que,
-            answer: reply,
-            isCode: false,
-            isShow : "yes",
-          }).then(res=>{
-            console.log(res)
-          }).catch(err=>console.log(err))
+          req.user[0]
+            .addAnswer({
+              question: que,
+              answer: reply,
+              isCode: false,
+              isShow: "yes",
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => console.log(err));
         }
 
         res.render("public/chat", {
@@ -144,7 +152,7 @@ exports.postChat = (req, res, next) => {
           let apiIndex = req.global.apikeyindex + 1;
           req.global.apikeyindex = apiIndex;
 
-          req.user
+          req.user[0]
             .save()
             .then((result) => {
               const remaningApi = req.global.maxApiKey - req.global.apikeyindex;
@@ -185,7 +193,7 @@ exports.postChat = (req, res, next) => {
         }
       });
   }
-  
+
   apiCall(req.global.apikeyindex);
 };
 
@@ -244,7 +252,7 @@ exports.postImage = (req, res, next) => {
               preInput: value,
               imgaeLink: imageLink,
             });
-          })  
+          });
       })
       .catch((error) => {
         let errorData = error.response.data.message;
