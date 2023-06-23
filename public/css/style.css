@@ -244,7 +244,6 @@ pre::-webkit-scrollbar-thumb {
 
 .chat-sub-div {
   height: 100%;
-  padding-bottom: 4rem;
   overflow-y: auto;
   overflow-x: none;
 }
@@ -268,6 +267,7 @@ pre::-webkit-scrollbar-thumb {
   display: flex;
   flex-flow: column wrap;
   align-items: flex-start;
+  padding-bottom: 5rem;
 }
 
 .chat {
