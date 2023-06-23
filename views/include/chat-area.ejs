@@ -1,35 +1,38 @@
 <div class="chat-div">
-  <% if(answer.length > 0 ) { %>
-  <div class="chat-section">
-    <% answer.forEach(e => { %>
+  <div class="chat-sub-div">
+    <% if(answer.length > 0 ) { %>
+    <div class="chat-section">
+      <% answer.forEach(e => { %>
 
-    <div class="chat-by-public chat">
-      <p class="question"><%= e.question %></p>
-      <img class="logo-avator" src="/images/3.png" alt="" />
-    </div>
-    <div class="chat-bt-gpt chat">
-      <% if(!e.isCode) {%>
-
-      <p class="answer loading"><%= e.answer %></p>
-      <% } else { %>
-      <input type="hidden" class="code" value="<%= e.answer %>" />
-      <div class="code-run">
-        <p style="display: none"></p>
+      <div class="chat-by-public chat">
+        <p class="question"><%= e.question %></p>
+        <img class="logo-avator" src="/images/3.png" alt="" />
       </div>
-      <% } %>
-      <img class="logo-gpt" src="/images/aibot.png" alt="chat bot logo" />
-      <img
-        class="copy"
-        width="48"
-        height="48"
-        src="https://img.icons8.com/fluency/48/copy.png"
-        alt="copy"
-      />
-      <p class="copy-message">Copy Done!</p>
-      <img class="share" src="/images/share.png" alt="forward-arrow" />
+      <div class="chat-bt-gpt chat">
+        <% if(!e.isCode) {%>
+
+        <p class="answer loading"><%= e.answer %></p>
+        <% } else { %>
+        <input type="hidden" class="code" value="<%= e.answer %>" />
+        <div class="code-run">
+          <p style="display: none"></p>
+        </div>
+        <% } %>
+        <img class="logo-gpt" src="/images/aibot.png" alt="chat bot logo" />
+        <img
+          class="copy"
+          width="48"
+          height="48"
+          src="https://img.icons8.com/fluency/48/copy.png"
+          alt="copy"
+        />
+        <p class="copy-message">Copy Done!</p>
+        <img class="share" src="/images/share.png" alt="forward-arrow" />
+      </div>
+      <% }); %>
     </div>
-    <% }); %>
   </div>
-  <% } %>
-  <form action="/" method="post"><%- include("./input.ejs") %></form>
+  <!--- input area --->
+  <%- include("../include/input.ejs") %>
+  <!--- input area close-->
 </div>
