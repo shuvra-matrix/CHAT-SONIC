@@ -31,7 +31,6 @@ body {
   font-family: var(--font-family);
   text-shadow: var(--text-shadow);
   scroll-behavior: smooth;
-  overflow: auto;
 }
 
 body::-webkit-scrollbar {
@@ -902,6 +901,9 @@ pre code.hljs {
 }
 
 @media (max-width: 823px) {
+  body {
+    overflow: auto;
+  }
   .hidden-two {
     display: none !important;
   }
