@@ -32,6 +32,9 @@ if (document.cookie.includes("newuser")) {
         inline: "nearest",
       });
     });
+
+    const element = document.querySelector("chat-sub-div");
+    element.scrollTop = element.scrollHeight;
   }
 }
 // regenerate button loder on
