@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 
 *,
@@ -9,7 +9,6 @@
   box-sizing: border-box;
 }
 
-
 :root {
   --body-color: #0c0921;
   --input-background: #1f1c32;
@@ -17,13 +16,12 @@
   --public-background-color: #1e1940;
   --gpt-background-color: #1f1c32;
   --navbar-color: #09061a;
-  --font-family: 'Open Sans', sans-serif;
+  --font-family: "Open Sans", sans-serif;
   --text-shadow: 3px 3px 10px black;
   --side-bar-color: #000000d9;
   --logo-box-shadow: 1px 1px 10px #000000;
   --chat-section-color: linear-gradient(45deg, #00000082, #060123);
 }
-
 
 body {
   background-color: var(--body-color);
@@ -33,14 +31,11 @@ body {
   font-family: var(--font-family);
   text-shadow: var(--text-shadow);
   scroll-behavior: smooth;
-
-
 }
 
 pre::-webkit-scrollbar {
   width: 4px;
   height: 10px;
-
 }
 
 pre::-webkit-scrollbar-thumb:hover {
@@ -55,24 +50,22 @@ pre::-webkit-scrollbar-thumb {
   background-color: #120f22;
   outline: 2px solid #27224a;
   border-radius: 8px;
-
 }
 
 .main-div {
   width: 100%;
   display: grid;
-  grid-template-areas: 'sidebar  navbar navbar navbar navbar  '
-    'sidebar  chat chat chat chat ';
+  grid-template-areas:
+    "sidebar  navbar navbar navbar navbar  "
+    "sidebar  chat chat chat chat ";
 
   grid-template-rows: 90px 1fr 30px;
   grid-template-columns: 170px 1fr;
-
 }
 
 /* side bar style */
 
 .side-bar {
-
   min-height: 100vh;
   grid-area: sidebar;
   background-color: var(--side-bar-color);
@@ -87,19 +80,16 @@ pre::-webkit-scrollbar-thumb {
   width: 100px;
 }
 
-
 .chat-gpt img,
 .image-gpt img {
   width: 100%;
   height: 160px;
-  opacity: .8;
-
+  opacity: 0.8;
 }
 
 .image-gpt img {
   transform: scale(140%);
 }
-
 
 .chat-gpt,
 .image-gpt {
@@ -118,15 +108,14 @@ pre::-webkit-scrollbar-thumb {
 .chat-gpt:hover img {
   transform: scale(110%);
   z-index: -1;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 .image-gpt:hover img {
   transform: scale(160%);
   z-index: -1;
-  opacity: .9;
+  opacity: 0.9;
 }
-
 
 /* navbar style */
 
@@ -138,7 +127,6 @@ pre::-webkit-scrollbar-thumb {
   grid-area: navbar;
   background-color: var(--navbar-color);
   position: relative;
-
 }
 
 .profile {
@@ -164,7 +152,6 @@ pre::-webkit-scrollbar-thumb {
 .image-gpt-nav {
   display: none;
 }
-
 
 #install {
   position: relative !important;
@@ -243,9 +230,7 @@ pre::-webkit-scrollbar-thumb {
     background-color: #1d1070;
     border-color: #240144ad;
   }
-
 }
-
 
 /* chat div */
 
@@ -259,8 +244,6 @@ pre::-webkit-scrollbar-thumb {
   padding-bottom: 4rem;
   overflow-wrap: break-word;
   background: var(--chat-section-color);
-
-
 }
 
 .chat-div::-webkit-scrollbar {
@@ -275,8 +258,7 @@ pre::-webkit-scrollbar-thumb {
   /* Firefox */
 }
 
-.chat-section 
-{
+.chat-section {
   width: 95%;
   margin: 20px auto 2rem;
   padding-top: 1rem;
@@ -284,7 +266,6 @@ pre::-webkit-scrollbar-thumb {
   flex-flow: column wrap;
   align-items: flex-start;
 }
-
 
 .chat {
   width: 70%;
@@ -295,12 +276,9 @@ pre::-webkit-scrollbar-thumb {
   display: block;
   line-height: 1.6;
   text-align: justify;
-
 }
 
-
 .chat-by-public {
-
   background-color: var(--public-background-color);
   align-self: flex-end;
   border-top-left-radius: 24px;
@@ -309,9 +287,7 @@ pre::-webkit-scrollbar-thumb {
 
   padding-top: 25px;
   padding-bottom: 25px;
-
 }
-
 
 .chat-bt-gpt {
   background-color: var(--gpt-background-color);
@@ -341,7 +317,6 @@ pre::-webkit-scrollbar-thumb {
   width: 99%;
 }
 
-
 .copy-message {
   position: absolute;
   bottom: 60px;
@@ -355,8 +330,6 @@ pre::-webkit-scrollbar-thumb {
   border-color: #727272;
   display: none;
   box-shadow: 1px 1px 7px black;
-
-
 }
 
 .anime {
@@ -368,7 +341,6 @@ pre::-webkit-scrollbar-thumb {
 
 @keyframes newcopyanimation {
   0% {
-
     font-size: 0px;
     right: 28px;
     bottom: 12px;
@@ -444,8 +416,6 @@ pre::-webkit-scrollbar-thumb {
     right: 28px;
     display: none;
   }
-
-
 }
 
 .input {
@@ -456,11 +426,9 @@ pre::-webkit-scrollbar-thumb {
   margin: auto;
   height: 60px;
   text-align: center;
-
 }
 
 .input input {
-
   width: 90%;
   margin: auto;
   height: 48px;
@@ -473,7 +441,6 @@ pre::-webkit-scrollbar-thumb {
   border: 1px solid var(--input-border-color);
   padding-right: 5.5rem;
   box-shadow: 1px 1px 19px #0000008c;
-
 }
 
 .input button {
@@ -491,13 +458,11 @@ pre::-webkit-scrollbar-thumb {
 
 .input input:focus {
   outline: none;
-
 }
 
 .chat-by-public {
   position: relative;
   padding-right: 5.5rem;
-
 }
 
 .logo-avator,
@@ -507,7 +472,6 @@ pre::-webkit-scrollbar-thumb {
   height: 50px;
   border-radius: 50%;
 }
-
 
 .logo-avator {
   top: 10px;
@@ -542,7 +506,6 @@ pre::-webkit-scrollbar-thumb {
 }
 
 @keyframes blink {
-
   0%,
   50% {
     opacity: 1;
@@ -554,11 +517,9 @@ pre::-webkit-scrollbar-thumb {
   }
 }
 
-
-
 h1 {
   font-size: 1.2rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
 
@@ -567,27 +528,27 @@ span[class^="dot-"] {
 }
 
 .dot-one {
-  animation: dot-one 2s infinite linear
+  animation: dot-one 2s infinite linear;
 }
 
 .dot-two {
-  animation: dot-two 2s infinite linear
+  animation: dot-two 2s infinite linear;
 }
 
 .dot-three {
-  animation: dot-three 2s infinite linear
+  animation: dot-three 2s infinite linear;
 }
 
 .dot-four {
-  animation: dot-three 2s infinite linear
+  animation: dot-three 2s infinite linear;
 }
 
 .dot-five {
-  animation: dot-three 2s infinite linear
+  animation: dot-three 2s infinite linear;
 }
 
 .dot-six {
-  animation: dot-three 2s infinite linear
+  animation: dot-three 2s infinite linear;
 }
 
 @keyframes dot-one {
@@ -644,7 +605,6 @@ span[class^="dot-"] {
   }
 }
 
-
 .heading {
   color: #e1c8aa;
   font-weight: 400;
@@ -669,7 +629,6 @@ span[class^="dot-"] {
 
 .index-d {
   color: #f26734;
-  ;
 }
 
 /* image section */
@@ -691,7 +650,6 @@ span[class^="dot-"] {
   align-items: center;
   justify-content: center;
   position: relative;
-
 }
 
 .download {
@@ -700,7 +658,6 @@ span[class^="dot-"] {
   position: absolute;
   bottom: 10px;
   right: 15px;
-
 }
 
 .image .main-image {
@@ -709,9 +666,6 @@ span[class^="dot-"] {
   border-radius: 8px;
   box-shadow: var(--logo-box-shadow);
 }
-
-
-
 
 .regenerate {
   width: 100%;
@@ -740,13 +694,12 @@ span[class^="dot-"] {
   white-space: nowrap;
   cursor: pointer;
   border: 2px solid #41414199;
-
 }
 
 .rebtn img {
   width: 20px;
   height: 20px;
-  padding-left: .5rem;
+  padding-left: 0.5rem;
 }
 
 .rebtn:hover {
@@ -767,14 +720,14 @@ span[class^="dot-"] {
   display: inline-block;
   position: relative;
   border: 3px solid;
-  border-color: #FFF #FFF transparent transparent;
+  border-color: #fff #fff transparent transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }
 
 .loader::after,
 .loader::before {
-  content: '';
+  content: "";
   box-sizing: border-box;
   position: absolute;
   left: 0;
@@ -795,10 +748,9 @@ span[class^="dot-"] {
 .loader::before {
   width: 22px;
   height: 22px;
-  border-color: #FFF #FFF transparent transparent;
+  border-color: #fff #fff transparent transparent;
   animation: rotation 1.5s linear infinite;
 }
-
 
 .hidden {
   display: none;
@@ -824,12 +776,9 @@ span[class^="dot-"] {
   }
 }
 
-
-
 /* highlight js */
 
 pre {
-
   background: #00000073 !important;
   color: #c4c4c4 !important;
   border-radius: 8px !important;
@@ -852,7 +801,6 @@ h2 {
 .code_one {
   margin-bottom: 1rem;
 }
-
 
 .hljs-deletion,
 .hljs-number,
@@ -888,18 +836,15 @@ h2 {
   color: #b48608 !important;
 }
 
-
 .hljs-punctuation,
 .hljs-tag {
   color: #ffffffaa !important;
 }
 
-
 .hljs-name {
   font-weight: 700 !important;
   color: #cb63b7 !important;
 }
-
 
 .hljs-attr {
   color: #cd4545 !important;
@@ -910,53 +855,38 @@ pre code.hljs {
   padding: 0em !important;
 }
 
-@media (max-width : 1329px) {
-
+@media (max-width: 1329px) {
   .input {
     left: 15%;
     width: 85%;
-
   }
 
   .chat {
     width: 74%;
   }
-
-
-
 }
 
-
-@media (max-width : 1090px) {
-
+@media (max-width: 1090px) {
   .input {
     left: 16%;
-
-
   }
 
   .chat {
     width: 80%;
   }
-
-
 }
 
-
-@media (max-width : 997px) {
-
+@media (max-width: 997px) {
   .input {
     left: 17%;
-
   }
 
-  .chat-div{
+  .chat-div {
     height: 85vh;
   }
-
 }
 
-@media (max-width : 823px) {
+@media (max-width: 823px) {
   .hidden-two {
     display: none !important;
   }
@@ -972,12 +902,12 @@ pre code.hljs {
   .main-div {
     width: 100%;
     display: grid;
-    grid-template-areas: 'navbar  navbar navbar navbar navbar  '
-      'chat  chat chat chat chat ';
+    grid-template-areas:
+      "navbar  navbar navbar navbar navbar  "
+      "chat  chat chat chat chat ";
 
     grid-template-rows: 100px 1fr 30px;
     grid-template-columns: 170px 1fr;
-
   }
 
   .input {
@@ -999,7 +929,6 @@ pre code.hljs {
     display: inline;
   }
 
-
   .profile {
     flex-basis: 50%;
   }
@@ -1008,7 +937,6 @@ pre code.hljs {
     width: 45px;
     height: 45px;
     border-radius: 8px;
-
   }
 
   .chat-gpt-nav img,
@@ -1033,7 +961,6 @@ pre code.hljs {
   }
 
   .regenerate {
-
     margin-top: 0px;
   }
 
@@ -1046,7 +973,6 @@ pre code.hljs {
     width: 40px;
     height: 40px;
   }
-
 
   .logo-avator {
     top: 10px;
@@ -1079,21 +1005,15 @@ pre code.hljs {
   }
 }
 
-
 @media (max-width: 711px) {
   .chat-div {
     height: 71vh;
   }
-
-
 }
 
-@media (max-width : 568px) {
-
+@media (max-width: 568px) {
   .main-div {
-
     grid-template-rows: 80px 1fr 30px;
-
   }
 
   .logo-nav img {
@@ -1114,7 +1034,6 @@ pre code.hljs {
     border: 2px solid;
     border-color: #2b2b2b80;
     opacity: 0.9;
-
   }
 
   .chat-gpt-nav img,
@@ -1129,10 +1048,7 @@ pre code.hljs {
   }
 
   .input button {
-
-
     right: 40px;
-
   }
 
   .chat-div {
@@ -1148,14 +1064,11 @@ pre code.hljs {
     padding-bottom: 1rem;
     padding-top: 14px;
     padding-right: 1rem;
-
   }
-
 
   .image-section {
     margin-top: 2rem;
     width: 90%;
-
   }
 
   .image {
@@ -1163,7 +1076,6 @@ pre code.hljs {
     width: 95%;
     height: 400px;
     margin: 1rem auto;
-
   }
 
   .download {
@@ -1172,7 +1084,6 @@ pre code.hljs {
 
     bottom: 10px;
     right: 15px;
-
   }
 
   .image .main-image {
@@ -1180,10 +1091,8 @@ pre code.hljs {
     height: 300px;
   }
 
-
   .regenerate {
     width: 100%;
-
 
     margin-top: 4rem;
   }
@@ -1193,7 +1102,6 @@ pre code.hljs {
   }
 
   .copy {
-
     right: 10px;
     bottom: 10px;
     width: 25px;
@@ -1211,7 +1119,6 @@ pre code.hljs {
     height: 30px;
   }
 
-
   .logo-avator {
     top: 10px;
     right: 10px;
@@ -1228,12 +1135,10 @@ pre code.hljs {
     padding-bottom: 42px;
   }
 
-
   .copy-message {
     bottom: 9px;
     right: 70px;
   }
-
 
   .anime {
     animation-name: copyanimation;
@@ -1243,7 +1148,6 @@ pre code.hljs {
 
   @keyframes copyanimation {
     0% {
-
       font-size: 0px;
       right: 17px;
       bottom: 16px;
@@ -1310,8 +1214,6 @@ pre code.hljs {
       right: 17px;
       display: none;
     }
-
-
   }
 
   .answer {
@@ -1361,20 +1263,16 @@ pre code.hljs {
   }
 }
 
-
-
-
-@media (max-width: 420px) {.chat-div {
-  height: 79vh;
-}}
-
+@media (max-width: 420px) {
+  .chat-div {
+    height: 79vh;
+  }
+}
 
 @media (max-width: 380px) {
-
   .image-section {
     margin-top: 1rem;
     width: 95%;
-
   }
 
   .image {
@@ -1382,13 +1280,11 @@ pre code.hljs {
     width: 95%;
     height: 300px;
     margin: 0 auto 1rem;
-
   }
 
   .download {
     width: 25px;
     height: 25px;
-
   }
 
   .image .main-image {
@@ -1401,3 +1297,8 @@ pre code.hljs {
   }
 }
 
+@media (max-width: 362px) {
+  .chat-div {
+    height: 68vh;
+  }
+}
