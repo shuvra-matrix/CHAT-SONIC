@@ -61,6 +61,7 @@ pre::-webkit-scrollbar-thumb {
 
   grid-template-rows: 90px 1fr 30px;
   grid-template-columns: 150px 1fr;
+  position: relative;
 }
 
 /* side bar style */
@@ -126,7 +127,6 @@ pre::-webkit-scrollbar-thumb {
 .nav-bar {
   grid-area: navbar;
   background-color: var(--navbar-color);
-  position: relative;
 }
 
 .profile {
@@ -241,12 +241,14 @@ pre::-webkit-scrollbar-thumb {
   overflow-wrap: break-word;
   background: var(--chat-section-color);
   z-index: 0;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .chat-sub-div {
   height: 100%;
   overflow-y: auto;
-  overflow-x: none;
+  overflow-x: auto;
 }
 
 .chat-sub-div::-webkit-scrollbar {
@@ -911,6 +913,11 @@ pre code.hljs {
     align-items: center;
     gap: 10px;
     padding: 0 0 0 1rem;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0px;
+    height: 80px;
   }
 
   .logo-nav,
@@ -1048,11 +1055,9 @@ pre code.hljs {
     padding-top: 14px;
     padding-right: 1rem;
   }
-  .chat-div {
-    padding-bottom: 1rem;
-  }
+
   .chat-section {
-    padding-bottom: 6rem;
+    padding-bottom: 10rem;
   }
 
   .image-section {
