@@ -240,6 +240,7 @@ pre::-webkit-scrollbar-thumb {
   height: 88vh;
   overflow-wrap: break-word;
   background: var(--chat-section-color);
+  z-index: 0;
 }
 
 .chat-sub-div {
