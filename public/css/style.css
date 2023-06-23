@@ -60,7 +60,7 @@ pre::-webkit-scrollbar-thumb {
     "sidebar  chat chat chat chat ";
 
   grid-template-rows: 90px 1fr 30px;
-  grid-template-columns: 170px 1fr;
+  grid-template-columns: 150px 1fr;
 }
 
 /* side bar style */
