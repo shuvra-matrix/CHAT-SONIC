@@ -235,23 +235,26 @@ pre::-webkit-scrollbar-thumb {
 /* chat div */
 
 .chat-div {
-  grid-area: chat;
   position: relative;
-  overflow-y: auto;
-  overflow-x: auto;
-  height: 75vh;
-  overflow: scroll;
-  padding-bottom: 4rem;
+  grid-area: chat;
+  height: 88vh;
   overflow-wrap: break-word;
   background: var(--chat-section-color);
 }
 
-.chat-div::-webkit-scrollbar {
+.chat-sub-div {
+  height: 100%;
+  padding-bottom: 4rem;
+  overflow-y: auto;
+  overflow-x: none;
+}
+
+.chat-sub-div::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.chat-div {
+.chat-sub-div {
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
@@ -419,17 +422,25 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .input {
-  position: fixed;
-  bottom: 20px;
-  left: 31%;
-  width: 50%;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
   margin: auto;
-  height: 60px;
+  height: 85px;
   text-align: center;
+  background-color: var(--body-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  position: relative;
+  width: 85%;
 }
 
 .input input {
-  width: 90%;
+  width: 100%;
   margin: auto;
   height: 48px;
   border-radius: 8px;
@@ -856,33 +867,14 @@ pre code.hljs {
 }
 
 @media (max-width: 1329px) {
-  .input {
-    left: 15%;
-    width: 85%;
-  }
-
   .chat {
     width: 74%;
   }
 }
 
 @media (max-width: 1090px) {
-  .input {
-    left: 16%;
-  }
-
   .chat {
     width: 80%;
-  }
-}
-
-@media (max-width: 997px) {
-  .input {
-    left: 17%;
-  }
-
-  .chat-div {
-    height: 85vh;
   }
 }
 
@@ -908,11 +900,6 @@ pre code.hljs {
 
     grid-template-rows: 100px 1fr 30px;
     grid-template-columns: 170px 1fr;
-  }
-
-  .input {
-    left: 0;
-    width: 100%;
   }
 
   .nav-bar {
@@ -1003,11 +990,8 @@ pre code.hljs {
     height: 35px !important;
     top: 66px;
   }
-}
-
-@media (max-width: 711px) {
-  .chat-div {
-    height: 71vh;
+  .input {
+    position: fixed;
   }
 }
 
@@ -1049,10 +1033,6 @@ pre code.hljs {
 
   .input button {
     right: 40px;
-  }
-
-  .chat-div {
-    height: 74vh;
   }
 
   .chat {
@@ -1263,12 +1243,6 @@ pre code.hljs {
   }
 }
 
-@media (max-width: 420px) {
-  .chat-div {
-    height: 79vh;
-  }
-}
-
 @media (max-width: 380px) {
   .image-section {
     margin-top: 1rem;
@@ -1290,15 +1264,5 @@ pre code.hljs {
   .image .main-image {
     width: 95%;
     height: 220px;
-  }
-
-  .chat-div {
-    height: 75vh;
-  }
-}
-
-@media (max-width: 362px) {
-  .chat-div {
-    height: 68vh;
   }
 }

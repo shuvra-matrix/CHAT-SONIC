@@ -14,7 +14,6 @@ const installPrompt = document.querySelector(".install-prompt");
 const closeBtn = document.querySelector(".close-install");
 const installImage = document.querySelector(".install-image");
 const installBtn = document.querySelector(".install");
-const chatDiv = document.querySelector(".chat-div");
 // create a funtion for add dealy
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 // cookie function
@@ -328,7 +327,6 @@ function getPWADisplayMode() {
   if (document.referrer.startsWith("android-app://")) {
     return "twa";
   } else if (navigator.standalone || isStandalone) {
-    chatDiv.style.height = "75vh";
     installPrompt.classList.add("hidden-two");
     installImage.classList.remove("install-image-animation");
     installImage.classList.add("hidden-two");
