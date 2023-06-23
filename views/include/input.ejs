@@ -1,5 +1,6 @@
 <div class="input">
-  <form action="/" method="post">
+  <form <% if(isImage){ %>
+    action="/dalle" <% } else { %> action="/" <% } %> method="post" >
     <input class="value-input" type="text" name="value" placeholder="Search" />
     <button type="submit" class="btns">
       <img

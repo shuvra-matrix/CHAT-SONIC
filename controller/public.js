@@ -16,6 +16,7 @@ exports.getChatIndex = (req, res, next) => {
     return res.render("public/chat", {
       answer: req.user[0].conversation.answer,
       isIndex: false,
+      isImage: false,
     });
   }
 
@@ -27,8 +28,7 @@ exports.getChatIndex = (req, res, next) => {
       },
     ],
     isIndex: true,
-    ip: req.ip,
-    clientIp: req.clientIp,
+    isImage: false,
   });
 };
 
@@ -37,6 +37,7 @@ exports.getImageIndex = (req, res, next) => {
     modeon: false,
     preInput: "",
     imgaeLink: "/images/dalhe.jpg",
+    isImage: true,
   });
 };
 
@@ -52,6 +53,7 @@ exports.postChat = (req, res, next) => {
         },
       ],
       isIndex: false,
+      isImage: false,
     });
   }
   if (req.global.apikeyindex.toString() >= req.global.maxApiKey.toString()) {
@@ -64,6 +66,7 @@ exports.postChat = (req, res, next) => {
         },
       ],
       isIndex: false,
+      isImage: false,
     });
   }
 
@@ -129,6 +132,7 @@ exports.postChat = (req, res, next) => {
         res.render("public/chat", {
           answer: req.user[0].conversation.answer,
           isIndex: false,
+          isImage: false,
         });
       })
       .catch((error) => {
@@ -148,6 +152,7 @@ exports.postChat = (req, res, next) => {
               },
             ],
             isIndex: false,
+            isImage: false,
           });
           let apiIndex = req.global.apikeyindex + 1;
           req.global.apikeyindex = apiIndex;
@@ -189,6 +194,7 @@ exports.postChat = (req, res, next) => {
               },
             ],
             isIndex: false,
+            isImage: false,
           });
         }
       });
@@ -205,6 +211,7 @@ exports.postImage = (req, res, next) => {
       modeon: false,
       preInput: value,
       imgaeLink: "/images/invalid.jpg",
+      isImage: true,
     });
   }
   if (req.global.apikeyindex.toString() >= req.global.maxApiKey.toString()) {
@@ -217,6 +224,7 @@ exports.postImage = (req, res, next) => {
         },
       ],
       isIndex: false,
+      isImage: false,
     });
   }
   async function apiCall(indexApi) {
@@ -251,6 +259,7 @@ exports.postImage = (req, res, next) => {
               modeon: true,
               preInput: value,
               imgaeLink: imageLink,
+              isImage: true,
             });
           });
       })
@@ -271,6 +280,7 @@ exports.postImage = (req, res, next) => {
               },
             ],
             isIndex: false,
+            isImage: false,
           });
 
           let apiIndex = req.global.apikeyindex + 1;
@@ -285,6 +295,7 @@ exports.postImage = (req, res, next) => {
                 },
               ],
               isIndex: false,
+              isImage: false,
             });
           }
           req.global
@@ -320,6 +331,7 @@ exports.postImage = (req, res, next) => {
           console.log(error);
           res.render("public/image", {
             modeon: false,
+            isImage: true,
             preInput: value,
             imgaeLink: "/images/invalid2.jpg",
           });

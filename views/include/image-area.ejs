@@ -13,18 +13,18 @@
       </a>
     </div>
     <% if(modeon) { %>
-    <form action="/dalle" method="post">
+    <form style="width: 100%" action="/dalle" method="post">
       <div class="regenerate">
         <input type="hidden" name="value" value="<%= preInput  %>" />
         <button class="rebtn" type="submit">
           Regenerate
-          <img src="https://img.icons8.com/ultraviolet/40/available-updates.png" alt="available-updates"/>
+          <img
+            src="https://img.icons8.com/ultraviolet/40/available-updates.png"
+            alt="available-updates"
+          />
         </button>
       </div>
     </form>
   </div>
-  <% } %> 
-  <form action="/dalle" method="post">
-    <%- include("./input.ejs") %>
-      </form>
+  <% } %> <%- include("./input.ejs") %>
 </div>
