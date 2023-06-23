@@ -80,7 +80,7 @@ pre::-webkit-scrollbar-thumb {
 /* side bar style */
 
 .side-bar {
-  min-height: 100vh;
+  min-height: 110vh;
   grid-area: sidebar;
   background-color: var(--side-bar-color);
 }
