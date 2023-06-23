@@ -194,7 +194,7 @@ exports.postChat = (req, res, next) => {
       });
   }
 
-  // apiCall(req.global.apikeyindex);
+  apiCall(req.global.apikeyindex);
 };
 
 exports.postImage = (req, res, next) => {
