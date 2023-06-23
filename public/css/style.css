@@ -453,7 +453,7 @@ pre::-webkit-scrollbar-thumb {
 
 form {
   position: relative;
-  width: 85%;
+  width: 60%;
 }
 
 .input input {
@@ -894,6 +894,10 @@ pre code.hljs {
 @media (max-width: 1090px) {
   .chat {
     width: 80%;
+  }
+  form {
+    position: relative;
+    width: 90%;
   }
 }
 
