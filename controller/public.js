@@ -12,9 +12,9 @@ const transporter = nodeMailer.createTransport({
 });
 
 exports.getChatIndex = (req, res, next) => {
-  if (req.user[0].conversation.answer.length > 0) {
+  if (req.session.answer > 0) {
     return res.render("public/chat", {
-      answer: req.user[0].conversation.answer,
+      answer: req.session.answer,
       isIndex: false,
       isImage: false,
     });
@@ -69,7 +69,9 @@ exports.postChat = (req, res, next) => {
       isImage: false,
     });
   }
-
+  if (!req.session.answer) {
+    req.session.answer = [];
+  }
   req.user[0]
     .addMessage({ role: "user", content: que })
     .then((responce) => {
@@ -104,24 +106,34 @@ exports.postChat = (req, res, next) => {
       .then((response) => {
         const reply = response.data.choices[0].message.content;
         if (reply.includes("```")) {
+          req.session.answer.push({
+            question: que,
+            answer: reply,
+            isCode: true,
+            isShow: "yes",
+          });
           req.user[0]
             .addAnswer({
               question: que,
               answer: reply,
               isCode: true,
-              isShow: "yes",
             })
             .then((res) => {
               console.log(res);
             })
             .catch((err) => console.log(err));
         } else {
+          req.session.answer.push({
+            question: que,
+            answer: reply,
+            isCode: false,
+            isShow: "yes",
+          });
           req.user[0]
             .addAnswer({
               question: que,
               answer: reply,
               isCode: false,
-              isShow: "yes",
             })
             .then((res) => {
               console.log(res);
@@ -130,7 +142,7 @@ exports.postChat = (req, res, next) => {
         }
 
         res.render("public/chat", {
-          answer: req.user[0].conversation.answer,
+          answer: req.session.answer,
           isIndex: false,
           isImage: false,
         });
