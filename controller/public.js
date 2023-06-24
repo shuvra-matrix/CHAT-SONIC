@@ -12,7 +12,10 @@ const transporter = nodeMailer.createTransport({
 });
 
 exports.getChatIndex = (req, res, next) => {
-  if (req.session.answer > 0) {
+  if (!req.session.answer) {
+    req.session.answer = [];
+  }
+  if (req.session.answer.length > 0) {
     return res.render("public/chat", {
       answer: req.session.answer,
       isIndex: false,
@@ -68,9 +71,6 @@ exports.postChat = (req, res, next) => {
       isIndex: false,
       isImage: false,
     });
-  }
-  if (!req.session.answer) {
-    req.session.answer = [];
   }
   req.user[0]
     .addMessage({ role: "user", content: que })
