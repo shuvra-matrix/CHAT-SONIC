@@ -405,11 +405,19 @@ exports.postStableDiffusion = (req, res, next) => {
                 options
               );
               fs.unlinkSync(imageFile);
-              res.render("public/image2", {
-                modeon: true,
-                preInput: value,
-                imgaeLink: result.url,
-              });
+              req.user[0]
+                .addToImageSection({
+                  question: value,
+                  imageLink: result.url,
+                })
+                .then((result) => {
+                  console.log("stable difusion question add to db done");
+                  res.render("public/image2", {
+                    modeon: true,
+                    preInput: value,
+                    imgaeLink: result.url,
+                  });
+                });
             } catch (error) {
               console.error(error);
             }
