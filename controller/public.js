@@ -420,6 +420,12 @@ exports.postStableDiffusion = (req, res, next) => {
                 });
             } catch (error) {
               console.error(error);
+              res.render("public/image2", {
+                modeon: false,
+
+                preInput: value,
+                imgaeLink: "/images/invalid2.jpg",
+              });
             }
           };
           uploadImage();
@@ -428,5 +434,11 @@ exports.postStableDiffusion = (req, res, next) => {
     })
     .catch((err) => {
       console.log(err);
+      res.render("public/image2", {
+        modeon: false,
+
+        preInput: value,
+        imgaeLink: "/images/invalid2.jpg",
+      });
     });
 };
