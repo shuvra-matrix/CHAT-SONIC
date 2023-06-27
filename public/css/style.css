@@ -1365,3 +1365,9 @@ pre code.hljs {
     width: 65%;
   }
 }
+
+@media (max-width: 335px) {
+  .logo-nav {
+    display: none;
+  }
+}
