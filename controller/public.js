@@ -410,7 +410,7 @@ exports.postStableDiffusion = (req, res, next) => {
                   question: value,
                   imageLink: result.url,
                 })
-                .then((result) => {
+                .then((results) => {
                   console.log("stable difusion question add to db done");
                   res.render("public/image2", {
                     modeon: true,
