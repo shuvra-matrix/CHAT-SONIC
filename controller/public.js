@@ -2,7 +2,9 @@ require("dotenv").config();
 const { validationResult } = require("express-validator");
 const axios = require("axios");
 const nodeMailer = require("nodemailer");
-
+const rootDir = require("../util/path");
+const fs = require("fs");
+const path = require("path");
 const transporter = nodeMailer.createTransport({
   service: "gmail",
   auth: {
@@ -354,4 +356,56 @@ exports.postImage = (req, res, next) => {
   }
 
   apiCall(req.global.apikeyindex);
+};
+
+exports.getStableDiffusion = (req, res, next) => {
+  res.render("public/image2", {
+    modeon: false,
+    preInput: "",
+    imgaeLink: "/images/dalhe.jpg",
+    isImage: true,
+  });
+};
+
+exports.postStableDiffusion = (req, res, next) => {
+  const name = Math.floor(Math.random() * 200 + 10);
+  const value = req.body.value + " " + name;
+  async function query(data) {
+    const response = await fetch(process.env.DIFFUSION_API_URL, {
+      headers: {
+        Authorization: `Bearer ${process.env.DIFFUSION_API}`,
+      },
+      method: "POST",
+      body: data,
+    });
+    const result = await response;
+    return result;
+  }
+  query(value)
+    .then((response) => {
+      response.arrayBuffer().then((data) => {
+        let buffer = Buffer.from(data);
+        const location = path.join(
+          rootDir,
+          "public/images",
+          `image${name}.png`
+        );
+        new Promise(function (resolve, reject) {
+          fs.writeFile(location, buffer, function (err) {
+            if (err) reject(err);
+            else resolve(data);
+          });
+        }).then((q) => {
+          res.render("public/image2", {
+            modeon: true,
+            preInput: value,
+            imgaeLink: `images/image${name}.png`,
+            isImage: true,
+          });
+        });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

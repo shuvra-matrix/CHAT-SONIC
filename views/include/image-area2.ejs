@@ -1,0 +1,30 @@
+<div class="chat-div">
+  <div class="image-section">
+    <div class="image">
+      <img class="main-image" src="<%= imgaeLink  %>" alt="" />
+      <a href="<%= imgaeLink %>" target="_blank" download
+        ><img
+          class="download"
+          width="48"
+          height="48"
+          src="https://img.icons8.com/external-kmg-design-flat-kmg-design/64/external-download-user-interface-kmg-design-flat-kmg-design.png"
+          alt="external-download-web-flaticons-flat-flat-icons-2"
+        />
+      </a>
+    </div>
+    <% if(modeon) { %>
+    <form style="width: 100%" action="/stable" method="post">
+      <div class="regenerate">
+        <input type="hidden" name="value" value="<%= preInput  %>" />
+        <button class="rebtn" type="submit">
+          Regenerate
+          <img
+            src="https://img.icons8.com/ultraviolet/40/available-updates.png"
+            alt="available-updates"
+          />
+        </button>
+      </div>
+    </form>
+  </div>
+  <% } %> <%- include("./input2.ejs") %>
+</div>
