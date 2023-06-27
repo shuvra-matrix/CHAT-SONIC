@@ -45,27 +45,31 @@ Maybe you can mention me or this repo in the acknowledgements too
 ## :star2: About the Project
 
   <p>
-    Chat Sonic is an advanced chat application that utilizes cutting-edge technology to provide an unparalleled chat experience. Developed by me as a self-project, Chat Sonic takes advantage of the Open AI API, Node JS, and employs state-of-the-art chatbots like GPT and DALL-E 2 for an immersive communication experience. This app is not developed for commercial purposes, but rather to showcase the power of AI in revolutionizing the way we chat. With Chat Sonic, you can expect to enjoy a seamless chat experience that is both fun and engaging.
+    Chat Sonic is an innovative web application developed using Node.js, OpenAI API, and harnessing the capabilities of Stable Diffusion v2.1 models. This powerful app combines the functionalities of a chatbot, image generation, and Progressive Web App (PWA) support, offering users a seamless and immersive experience.
   </p>
   <br>
   <p>
-    By integrating the OpenAI API, the web application enables natural language processing, allowing users to have dynamic conversations with the AI. Users can ask questions, request information, or seek assistance, and the AI will provide relevant responses based on the input.
+    With Chat Sonic, you can engage in natural language conversations just like chatting with a friend. Powered by the advanced ChatGPT model, it understands your inputs, provides insightful responses, and even engages in casual banter. Whether you need information, creative suggestions, or friendly conversation, Chat Sonic is here to assist you.
   </p>
    <br>
   <p>
-    Additionally, the application features an AI DALL·E image generation option. Users can describe the type of image they would like to see, and the AI DALL·E model will generate a unique and creative image based on their description. This adds a visually appealing and interactive element to the application, enhancing the user experience.
+   But Chat Sonic doesn't stop at text-based interactions. Leveraging the cutting-edge DALL·E 2 model, this app brings your words to life with visually stunning results. Describe your desired image in detail, and Chat Sonic will generate realistic and visually coherent representations. From landscapes and artwork to imaginative characters, let your imagination run wild as Chat Sonic transforms your text into captivating visuals.
   </p>
    <br>
   <p>
-    The combination of the OpenAI API's chat capabilities and AI DALL·E's image generation feature creates a versatile and engaging web application. Users can seamlessly switch between conversing with the AI and requesting customized images, making it a compelling and interactive platform.
+   The magic of Stable Diffusion v2.1 models ensures that the generated images exhibit stability and realism. Through a combination of AI techniques and state-of-the-art image processing, Chat Sonic delivers high-quality visual outputs that amaze and inspire.
   </p>
    <br>
   <p>
-    By harnessing the power of Node.js, the application ensures efficient and scalable performance, allowing multiple users to engage with the chat and image generation features simultaneously.
+    Moreover, Chat Sonic supports PWA functionality, allowing you to install it as a standalone app on your device. Enjoy the convenience of quick access and a native app-like experience across various platforms and browsers.
   </p>
    <br>
   <p>
-    Overall, this web application represents a novel and exciting way to leverage AI technologies, providing users with an immersive and dynamic experience through conversational interactions and visually stunning image generation.
+   Experience the fusion of language and images with Chat Sonic. Whether you're an artist seeking inspiration, a content creator in need of unique visuals, or simply curious about AI-generated images, this web app has you covered. Engage in meaningful conversations, unleash your creativity, and enjoy the flexibility of a Progressive Web App.
+  </p>
+  <br>
+  <p>
+   Chat Sonic: Where conversations create art. Embrace the power of Node.js, OpenAI API, Stable Diffusion v2.1, and PWA support. Start chatting and visualizing today!
   </p>
 
 <!--  live demo -->
@@ -95,7 +99,9 @@ Maybe you can mention me or this repo in the acknowledgements too
     <li><a href="https://www.nodejs.org">Node.js</a></li>
     <li><a href="https://www.expressjs.com/">Express.js</a></li>
     <li><a href="https://mongoosejs.com/">Mongoos</a></li>
-      <li><a href="https://www.npmjs.com/package/express-session">Express-session</a></li>
+    <li><a href="https://www.npmjs.com/package/express-session">Express-session</a></li>
+    <li><a href="https://console.cloudinary.com/">Cloudinary</a></li>
+    <li><a href="https://github.com/Stability-AI/stablediffusion">stable-diffusion-2-1</a></li>
   </ul>
 </details>
 
@@ -112,7 +118,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 - User
   - do conversations and much more with the chatbot. The language model can answer questions and assist you with tasks, such as composing emails, essays, and code.
-  - Text to image generate
+  - Text to image generate (DALL-E 2 and Stable Diffusion)
   - It has Progressive Web App (PWA) capabilities, users can install the app on their home screens, just like a native app, and access it with a single tap.
 
 <!-- Env Variables -->
@@ -129,6 +135,10 @@ To run this project, you will need to add the following variables to your .env f
 `PASSWORD = EMAIL PASSWORD`
 `TO_USER_ID = SEND TO EMAIL ADDRESS`
 `MONGO_DB_NAME = YOUR MONGO DB NAME`
+`DIFFUSION_API = Stable Diffusion Api Key`
+`DIFFUSION_API_URL = Stable Diffusion Api Url`
+`CLOUDINARY_API = Cloudinary Api Key`
+`CLOUDINARY_SECRET = Cloudinary Secret Key`
 
 <!-- Getting Started -->
 
@@ -217,3 +227,4 @@ Following libraries have been used in this projects.
 - [express-validator](https://express-validator.github.io/docs/)
 - [connect-mongodb-session](https://www.npmjs.com/package/connect-mongodb-session)
 - [nodemailer](https://nodemailer.com/about/)
+- [cloudinary](https://www.npmjs.com/package/cloudinary)

@@ -369,9 +369,9 @@ exports.postStableDiffusion = (req, res, next) => {
         Authorization: `Bearer ${process.env.DIFFUSION_API}`,
       },
       method: "POST",
-      body: data,
+      body: JSON.stringify(data),
     });
-    const result = await response;
+    const result = await response.blob();
     return result;
   }
   query(value)
@@ -381,7 +381,7 @@ exports.postStableDiffusion = (req, res, next) => {
         const location = path.join(
           rootDir,
           "public/images",
-          `image${name}.png`
+          `image${name}.jpg`
         );
         new Promise(function (resolve, reject) {
           fs.writeFile(location, buffer, function (err) {
