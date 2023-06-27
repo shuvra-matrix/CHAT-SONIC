@@ -5,6 +5,13 @@ const nodeMailer = require("nodemailer");
 const rootDir = require("../util/path");
 const fs = require("fs");
 const path = require("path");
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: "dqone7ala",
+  api_key: process.env.CLOUDINARY_API,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
+
 const transporter = nodeMailer.createTransport({
   service: "gmail",
   auth: {
@@ -368,7 +375,7 @@ exports.getStableDiffusion = (req, res, next) => {
 };
 
 exports.postStableDiffusion = (req, res, next) => {
-  const name = Math.floor(Math.random() * 200 + 10);
+  const name = Math.floor(Math.random() * 9999 + 2);
   const value = req.body.value + " " + name;
   async function query(data) {
     const response = await fetch(process.env.DIFFUSION_API_URL, {
@@ -395,13 +402,34 @@ exports.postStableDiffusion = (req, res, next) => {
             if (err) reject(err);
             else resolve(data);
           });
-        }).then((q) => {
-          res.render("public/image2", {
-            modeon: true,
-            preInput: value,
-            imgaeLink: `images/image${name}.png`,
-            isImage: true,
-          });
+        }).then((result) => {
+          const imageFile = location;
+          const uploadImage = async (imagePath) => {
+            // Use the uploaded file's name as the asset's public ID and
+            // allow overwriting the asset with new versions
+            const options = {
+              use_filename: true,
+              unique_filename: false,
+              overwrite: true,
+            };
+            try {
+              // Upload the image
+              const result = await cloudinary.uploader.upload(
+                imageFile,
+                options
+              );
+              fs.unlinkSync(imageFile);
+              res.render("public/image2", {
+                modeon: true,
+                preInput: value,
+                imgaeLink: result.url,
+                isImage: true,
+              });
+            } catch (error) {
+              console.error(error);
+            }
+          };
+          uploadImage();
         });
       });
     })
