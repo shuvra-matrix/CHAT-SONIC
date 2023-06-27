@@ -87,7 +87,7 @@ app.use(publicRoutes);
 mongoos
   .connect(MONGO_CONNECT)
   .then((result) => {
-    app.listen(process.env.POST || port, () => {
+    app.listen(process.env.PORT || port, () => {
       console.log(`listning to the port ${port}`);
     });
   })

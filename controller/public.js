@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { validationResult, Result } = require("express-validator");
+const { validationResult } = require("express-validator");
 const axios = require("axios");
 const nodeMailer = require("nodemailer");
 
