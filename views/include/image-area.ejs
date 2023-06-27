@@ -26,5 +26,10 @@
       </div>
     </form>
   </div>
-  <% } %> <%- include("./input.ejs") %>
+  <% } else { %>
+  <div class="type-of-image">
+    <p>DALL-E 2</p>
+  </div>
+
+  <% } %> <%- include("./input3.ejs") %>
 </div>

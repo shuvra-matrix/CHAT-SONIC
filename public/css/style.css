@@ -464,9 +464,9 @@ form {
   border: none;
   color: rgb(194, 194, 194);
   font-size: 1rem;
-  padding-left: 1.1rem;
+  padding-left: 1.2rem;
   border: 1px solid var(--input-border-color);
-  padding-right: 5.5rem;
+  padding-right: 8.5rem;
   box-shadow: 1px 1px 19px #0000008c;
 }
 
@@ -668,6 +668,18 @@ span[class^="dot-"] {
   text-align: center;
 }
 
+.chat-div::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chat-div {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
 .image {
   background-color: #1e1940d9;
   padding: 2rem;
@@ -785,6 +797,40 @@ span[class^="dot-"] {
   display: none;
 }
 
+/* stable deffusion section */
+
+.stable {
+  transform: scale(0.95) !important;
+}
+
+.stable img {
+  transform: scale(106%) !important;
+}
+
+.stable img:hover {
+  transform: scale(120%) !important;
+}
+
+.stable:hover .stable::after {
+  position: absolute;
+  top: 50%;
+  content: "Stable Diffusion";
+  color: white;
+}
+
+.type-of-image {
+  width: 20%;
+  margin: auto;
+  padding: 1rem;
+  background-color: var(--gpt-background-color);
+  color: #1a92b693;
+  border-radius: 8px;
+  border: 1px solid rgba(8, 63, 85, 0.541);
+  box-shadow: var(--logo-box-shadow);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -897,6 +943,10 @@ pre code.hljs {
   form {
     position: relative;
     width: 90%;
+  }
+
+  .type-of-image {
+    width: 30%;
   }
 }
 
@@ -1026,6 +1076,10 @@ pre code.hljs {
   }
   .input {
     position: fixed;
+  }
+
+  .type-of-image {
+    width: 35%;
   }
 }
 
@@ -1279,6 +1333,10 @@ pre code.hljs {
     top: 53px;
     left: 75px;
   }
+
+  .type-of-image {
+    width: 60%;
+  }
 }
 
 @media (max-width: 380px) {
@@ -1301,5 +1359,9 @@ pre code.hljs {
   .image .main-image {
     width: 95%;
     height: 220px;
+  }
+
+  .type-of-image {
+    width: 65%;
   }
 }
