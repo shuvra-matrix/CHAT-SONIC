@@ -89,7 +89,6 @@ Maybe you can mention me or this repo in the acknowledgements too
     <li><a href="https://www.css3.com/">CSS 3</a></li>
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a></li>
     <li><a href="https://highlightjs.org/">highlight.js</a></li>
-    <li><a href="https://nodemailer.com/about/">nodemailer</a></li>
   </ul>
 </details>
 
@@ -102,6 +101,7 @@ Maybe you can mention me or this repo in the acknowledgements too
     <li><a href="https://www.npmjs.com/package/express-session">Express-session</a></li>
     <li><a href="https://console.cloudinary.com/">Cloudinary</a></li>
     <li><a href="https://github.com/Stability-AI/stablediffusion">stable-diffusion-2-1</a></li>
+     <li><a href="https://nodemailer.com/about/">nodemailer</a></li>
   </ul>
 </details>
 
