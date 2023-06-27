@@ -59,7 +59,8 @@ exports.postChat = (req, res, next) => {
       isImage: false,
     });
   }
-  if (req.global.apikeyindex.toString() >= req.global.maxApiKey.toString()) {
+
+  if (req.global.apikeyindex >= req.global.maxApiKey) {
     return res.render("public/chat", {
       answer: [
         {
@@ -75,7 +76,7 @@ exports.postChat = (req, res, next) => {
   req.user[0]
     .addMessage({ role: "user", content: que })
     .then((responce) => {
-      console.log(responce);
+      console.log("ADD MESSAGE DONE");
     })
     .catch((err) => {
       console.log(err);
@@ -119,7 +120,7 @@ exports.postChat = (req, res, next) => {
               isCode: true,
             })
             .then((res) => {
-              console.log(res);
+              console.log("add question done");
             })
             .catch((err) => console.log(err));
         } else {
@@ -136,7 +137,7 @@ exports.postChat = (req, res, next) => {
               isCode: false,
             })
             .then((res) => {
-              console.log(res);
+              console.log("add question done");
             })
             .catch((err) => console.log(err));
         }
@@ -169,7 +170,7 @@ exports.postChat = (req, res, next) => {
           let apiIndex = req.global.apikeyindex + 1;
           req.global.apikeyindex = apiIndex;
 
-          req.user[0]
+          req.global
             .save()
             .then((result) => {
               const remaningApi = req.global.maxApiKey - req.global.apikeyindex;
@@ -191,7 +192,7 @@ exports.postChat = (req, res, next) => {
               return transporter.sendMail(mailOption);
             })
             .then((response) => {
-              console.log(response);
+              console.log("email send done");
             })
             .catch((err) => {
               console.log(err);
@@ -226,7 +227,7 @@ exports.postImage = (req, res, next) => {
       isImage: true,
     });
   }
-  if (req.global.apikeyindex.toString() >= req.global.maxApiKey.toString()) {
+  if (req.global.apikeyindex >= req.global.maxApiKey) {
     return res.render("public/chat", {
       answer: [
         {
@@ -267,6 +268,7 @@ exports.postImage = (req, res, next) => {
         req.user[0]
           .addToImageSection({ question: value, imageLink: imageLink })
           .then((response) => {
+            console.log("image question add done");
             res.render("public/image", {
               modeon: true,
               preInput: value,
@@ -334,7 +336,7 @@ exports.postImage = (req, res, next) => {
               return transporter.sendMail(mailOption);
             })
             .then((response) => {
-              console.log(response);
+              console.log("email sent done");
             })
             .catch((err) => {
               console.log(err);
