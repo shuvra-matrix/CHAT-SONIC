@@ -354,11 +354,25 @@ exports.postImage = (req, res, next) => {
 
 exports.getStableDiffusion = (req, res, next) => {
   const mode = req.query.mode;
+  let modeName;
+  let imagePath;
+  let promptsLink;
+  if (mode == "stableDiffusion") {
+    modeName = "STABLE DIFFUSION 2.1";
+    imagePath = "/images/sd.png";
+    promptsLink = "https://prompthero.com/stable-diffusion-prompts";
+  } else if (mode == "openjourney") {
+    modeName = "OPENJOURNEY";
+    imagePath = "/images/open.png";
+    promptsLink = "https://prompthero.com/openjourney-prompts";
+  }
   res.render("public/image2", {
     modeon: false,
     preInput: "",
-    imgaeLink: "/images/sd.png",
+    imgaeLink: imagePath,
     mode: mode,
+    modeName: modeName,
+    promptsLink: promptsLink,
   });
 };
 

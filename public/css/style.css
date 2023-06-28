@@ -822,13 +822,24 @@ span[class^="dot-"] {
   width: 20%;
   margin: auto;
   padding: 1rem;
-  background-color: var(--gpt-background-color);
+  background-color: rgba(0, 0, 0, 0.205)55, 255, 255);
   color: #1a92b693;
   border-radius: 8px;
   border: 1px solid rgba(8, 63, 85, 0.541);
   box-shadow: var(--logo-box-shadow);
   font-weight: 700;
   font-size: 1.1rem;
+}
+
+.promptslink {
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.promptslink a {
+  text-decoration: none;
+  color: #1a92b693;
+  cursor: pointer;
 }
 
 @keyframes rotation {

@@ -29,7 +29,10 @@
   </div>
   <% } else { %>
   <div class="type-of-image">
-    <p>STABLE DIFFUSION 2.1</p>
+    <p><%= modeName %></p>
+    <p class="promptslink">
+      <a href="<%= promptsLink %>" target="_blank">CLICK HERE FOR PROMPTS</a>
+    </p>
   </div>
 
   <% } %> <%- include("./input2.ejs") %>
