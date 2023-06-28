@@ -353,18 +353,32 @@ exports.postImage = (req, res, next) => {
 };
 
 exports.getStableDiffusion = (req, res, next) => {
+  const mode = req.query.mode;
   res.render("public/image2", {
     modeon: false,
     preInput: "",
     imgaeLink: "/images/sd.png",
+    mode: mode,
   });
 };
 
 exports.postStableDiffusion = (req, res, next) => {
   const name = Math.floor(Math.random() * 9999 + 2);
-  const value = req.body.value + " " + name;
+  const mode = req.body.mode;
+  console.log(mode);
+  let value;
+  let url;
+  if (mode == "stableDiffusion") {
+    url = process.env.DIFFUSION_API_URL;
+    value = req.body.value + " " + name;
+  } else if (mode == "openjourney") {
+    value = "mdjrny-v4 style" + " " + req.body.value + " " + name;
+    url = process.env.OPENJOURNEY_API_URL;
+  }
+  console.log(url);
+  console.log(value);
   async function query(data) {
-    const response = await fetch(process.env.DIFFUSION_API_URL, {
+    const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${process.env.DIFFUSION_API}`,
       },
@@ -416,13 +430,14 @@ exports.postStableDiffusion = (req, res, next) => {
                     modeon: true,
                     preInput: value,
                     imgaeLink: result.url,
+                    mode: mode,
                   });
                 });
             } catch (error) {
               console.error(error);
               res.render("public/image2", {
                 modeon: false,
-
+                mode: mode,
                 preInput: value,
                 imgaeLink: "/images/invalid2.jpg",
               });
@@ -436,7 +451,7 @@ exports.postStableDiffusion = (req, res, next) => {
       console.log(err);
       res.render("public/image2", {
         modeon: false,
-
+        mode: mode,
         preInput: value,
         imgaeLink: "/images/invalid2.jpg",
       });
