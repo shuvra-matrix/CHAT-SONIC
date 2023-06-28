@@ -13,7 +13,7 @@
       </a>
     </div>
     <% if(modeon) { %>
-    <form style="width: 100%" action="/stable" method="post">
+    <form style="width: 100%" action="/diffusion" method="post">
       <div class="regenerate">
         <input type="hidden" name="value" value="<%= preInput  %>" />
         <input type="hidden" name="mode" value="<%= mode %>" />
@@ -35,5 +35,5 @@
     </p>
   </div>
 
-  <% } %> <%- include("./input2.ejs") %>
+  <% } %> <%- include("./input-diffusion.ejs") %>
 </div>

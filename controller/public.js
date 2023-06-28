@@ -365,8 +365,14 @@ exports.getStableDiffusion = (req, res, next) => {
     modeName = "OPENJOURNEY";
     imagePath = "/images/open.png";
     promptsLink = "https://prompthero.com/openjourney-prompts";
+  } else {
+    return res.render("public/image", {
+      modeon: false,
+      preInput: "",
+      imgaeLink: "/images/dalhe.jpg",
+    });
   }
-  res.render("public/image2", {
+  res.render("public/image-defusion", {
     modeon: false,
     preInput: "",
     imgaeLink: imagePath,
@@ -388,6 +394,12 @@ exports.postStableDiffusion = (req, res, next) => {
   } else if (mode == "openjourney") {
     value = "mdjrny-v4 style" + " " + req.body.value + " " + name;
     url = process.env.OPENJOURNEY_API_URL;
+  } else {
+    return res.render("public/image", {
+      modeon: false,
+      preInput: "",
+      imgaeLink: "/images/dalhe.jpg",
+    });
   }
   console.log(url);
   console.log(value);
@@ -440,7 +452,7 @@ exports.postStableDiffusion = (req, res, next) => {
                 })
                 .then((results) => {
                   console.log("stable difusion question add to db done");
-                  res.render("public/image2", {
+                  res.render("public/image-defusion", {
                     modeon: true,
                     preInput: value,
                     imgaeLink: result.url,
@@ -449,7 +461,7 @@ exports.postStableDiffusion = (req, res, next) => {
                 });
             } catch (error) {
               console.error(error);
-              res.render("public/image2", {
+              res.render("public/image-defusion", {
                 modeon: false,
                 mode: mode,
                 preInput: value,
@@ -463,7 +475,7 @@ exports.postStableDiffusion = (req, res, next) => {
     })
     .catch((err) => {
       console.log(err);
-      res.render("public/image2", {
+      res.render("public/image-defusion", {
         modeon: false,
         mode: mode,
         preInput: value,
