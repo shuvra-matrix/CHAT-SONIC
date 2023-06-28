@@ -57,7 +57,7 @@ Maybe you can mention me or this repo in the acknowledgements too
   </p>
    <br>
   <p>
-   The magic of Stable Diffusion v2.1 models ensures that the generated images exhibit stability and realism. Through a combination of AI techniques and state-of-the-art image processing, Chat Sonic delivers high-quality visual outputs that amaze and inspire.
+   The magic of Stable Diffusion v2.1 and openjourney models ensures that the generated images exhibit stability and realism. Through a combination of AI techniques and state-of-the-art image processing, Chat Sonic delivers high-quality visual outputs that amaze and inspire.
   </p>
    <br>
   <p>
@@ -89,6 +89,7 @@ Maybe you can mention me or this repo in the acknowledgements too
     <li><a href="https://www.css3.com/">CSS 3</a></li>
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a></li>
     <li><a href="https://highlightjs.org/">highlight.js</a></li>
+    <li><a href="https://nodemailer.com/about/">nodemailer</a></li>
   </ul>
 </details>
 
@@ -101,7 +102,7 @@ Maybe you can mention me or this repo in the acknowledgements too
     <li><a href="https://www.npmjs.com/package/express-session">Express-session</a></li>
     <li><a href="https://console.cloudinary.com/">Cloudinary</a></li>
     <li><a href="https://github.com/Stability-AI/stablediffusion">stable-diffusion-2-1</a></li>
-     <li><a href="https://nodemailer.com/about/">nodemailer</a></li>
+     <li><a href="https://github.com/prompthero/openjourney">OpenJourney</a></li>
   </ul>
 </details>
 
@@ -118,7 +119,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 - User
   - do conversations and much more with the chatbot. The language model can answer questions and assist you with tasks, such as composing emails, essays, and code.
-  - Text to image generate (DALL-E 2 and Stable Diffusion)
+  - Text to image generate (DALL-E 2 ,Stable Diffusion, openjourney models )
   - It has Progressive Web App (PWA) capabilities, users can install the app on their home screens, just like a native app, and access it with a single tap.
 
 <!-- Env Variables -->
@@ -137,6 +138,7 @@ To run this project, you will need to add the following variables to your .env f
 `MONGO_DB_NAME = YOUR MONGO DB NAME`
 `DIFFUSION_API = Stable Diffusion Api Key`
 `DIFFUSION_API_URL = Stable Diffusion Api Url`
+`OPENJOURNEY_API_URL = openjourney api url`
 `CLOUDINARY_API = Cloudinary Api Key`
 `CLOUDINARY_SECRET = Cloudinary Secret Key`
 
