@@ -138,6 +138,7 @@ To run this project, you will need to add the following variables to your .env f
 `MONGO_DB_NAME = YOUR MONGO DB NAME`
 `DIFFUSION_API = Stable Diffusion Api Key`
 `DIFFUSION_API_URL = Stable Diffusion Api Url`
+`OPENJOURNEY_API_URL = openjourney api url`
 `CLOUDINARY_API = Cloudinary Api Key`
 `CLOUDINARY_SECRET = Cloudinary Secret Key`
 
