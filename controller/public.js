@@ -5,7 +5,11 @@ const nodeMailer = require("nodemailer");
 const rootDir = require("../util/path");
 const fs = require("fs");
 const path = require("path");
+const { Console } = require("console");
 const cloudinary = require("cloudinary").v2;
+const huggingFace = require("@huggingface/inference").HfInference;
+const hf = new huggingFace(process.env.DIFFUSION_API);
+
 cloudinary.config({
   cloud_name: "dqone7ala",
   api_key: process.env.CLOUDINARY_API,
@@ -105,7 +109,7 @@ exports.postChat = (req, res, next) => {
       data: {
         model: "gpt-3.5-turbo",
         messages: messageLimit,
-        temperature: 0.8,
+        temperature: 1,
       },
     };
 
@@ -373,15 +377,36 @@ exports.getStableDiffusion = (req, res, next) => {
 exports.postStableDiffusion = (req, res, next) => {
   const name = Math.floor(Math.random() * 9999 + 2);
   const mode = req.body.mode;
+  let promptsLink;
   console.log(mode);
+  let inputValue = req.body.value;
+  let splitInputValue;
   let value;
+  let negativePrompt;
+  if (inputValue.includes("[n]")) {
+    splitInputValue = inputValue.split("[n]");
+    value = splitInputValue[0] + " " + name;
+    negativePrompt = splitInputValue[1];
+  } else {
+    value = inputValue + " " + name;
+    negativePrompt = "";
+  }
   let url;
+  let model;
+  let numInferenceSteps;
+  let guidanceScale;
   if (mode == "stableDiffusion") {
     url = process.env.DIFFUSION_API_URL;
-    value = req.body.value + " " + name;
+    model = process.env.DIFFUSION_MODEL;
+    promptsLink = "https://prompthero.com/stable-diffusion-prompts";
+    numInferenceSteps = 40;
+    guidanceScale = 10;
   } else if (mode == "openjourney") {
-    value = "mdjrny-v4 style" + " " + req.body.value + " " + name;
     url = process.env.OPENJOURNEY_API_URL;
+    model = process.env.OPENJOURNEY_MODEL;
+    promptsLink = "https://prompthero.com/openjourney-prompts";
+    numInferenceSteps = 60;
+    guidanceScale = 20;
   } else {
     return res.render("public/image", {
       modeon: false,
@@ -391,16 +416,22 @@ exports.postStableDiffusion = (req, res, next) => {
   }
   console.log(url);
   console.log(value);
+  console.log(model);
+  console.log(negativePrompt);
+  console.log(numInferenceSteps);
+  console.log(guidanceScale);
   async function query(data) {
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${process.env.DIFFUSION_API}`,
+    const responce = hf.textToImage({
+      inputs: data,
+      model: model,
+      sampler: "Euler a",
+      parameters: {
+        num_inference_steps: numInferenceSteps,
+        guidance_scale: guidanceScale,
+        negative_prompt: negativePrompt,
       },
-      method: "POST",
-      body: JSON.stringify(data),
     });
-    const result = await response.blob();
-    return result;
+    return responce;
   }
   query(value)
     .then((response) => {
@@ -442,7 +473,7 @@ exports.postStableDiffusion = (req, res, next) => {
                   console.log("stable difusion question add to db done");
                   res.render("public/image-defusion", {
                     modeon: true,
-                    preInput: value,
+                    preInput: inputValue,
                     imgaeLink: result.url,
                     mode: mode,
                   });
@@ -452,6 +483,8 @@ exports.postStableDiffusion = (req, res, next) => {
               res.render("public/image-defusion", {
                 modeon: false,
                 mode: mode,
+                modeName: mode,
+                promptsLink: promptsLink,
                 preInput: value,
                 imgaeLink: "/images/invalid2.jpg",
               });
@@ -467,6 +500,8 @@ exports.postStableDiffusion = (req, res, next) => {
         modeon: false,
         mode: mode,
         preInput: value,
+        modeName: mode,
+        promptsLink: promptsLink,
         imgaeLink: "/images/invalid2.jpg",
       });
     });
