@@ -65,16 +65,19 @@ exports.postChat = (req, res, next) => {
     });
   }
 
-  if (req.global.apikeyindex >= req.global.maxApiKey) {
-    return res.render("public/chat", {
-      answer: [
-        {
-          question: "What's wrong Chat Sonic?",
-          answer:
-            "We faced some major issues. We try to fixed it as soon as possible. Please try again later",
-        },
-      ],
-      isIndex: false,
+  if (req.global.chatApiKey >= req.global.chatMaxApiKey) {
+    req.global.chatApiKey = 0;
+    return req.global.save().then((response) => {
+      res.render("public/chat", {
+        answer: [
+          {
+            question: "What's wrong Chat Sonic?",
+            answer:
+              "We faced some major issues. We try to fixed it as soon as possible. Please try again later",
+          },
+        ],
+        isIndex: false,
+      });
     });
   }
   req.user[0]
