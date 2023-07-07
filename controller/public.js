@@ -93,16 +93,16 @@ exports.postChat = (req, res, next) => {
     }
     const options = {
       method: "POST",
-      url: "https://openai80.p.rapidapi.com/chat/completions",
+      url: "https://chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com/v1/chat/completions",
       headers: {
-        "Accept-Encoding": "gzip,deflate,compress",
         "content-type": "application/json",
-        "X-RapidAPI-Key": api,
-        "X-RapidAPI-Host": "openai80.p.rapidapi.com",
+        "X-RapidAPI-Key": process.env.NEW_GPT_API,
+        "X-RapidAPI-Host": "chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com",
       },
       data: {
         model: "gpt-3.5-turbo",
         messages: messageLimit,
+        temperature: 0.8,
       },
     };
 
