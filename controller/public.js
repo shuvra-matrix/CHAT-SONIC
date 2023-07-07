@@ -487,7 +487,7 @@ exports.postStableDiffusion = (req, res, next) => {
                 preInput: value,
                 imgaeLink: "/images/invalid2.jpg",
               });
-              next(new Error("Server Error"));
+              return next(new Error("Server Error"));
             }
           };
           uploadImage();
@@ -503,6 +503,7 @@ exports.postStableDiffusion = (req, res, next) => {
         promptsLink: promptsLink,
         imgaeLink: "/images/invalid2.jpg",
       });
+
+      return next(new Error("Server Error"));
     });
-  next(new Error("Server Error"));
 };
