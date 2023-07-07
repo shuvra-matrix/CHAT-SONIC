@@ -188,7 +188,16 @@ exports.postChat = (req, res, next) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        res.render("public/chat", {
+          answer: [
+            {
+              question: "What's wrong Chat Sonic?",
+              answer:
+                "You have exceeded the rate limit per minute. Please wait for one minutes",
+            },
+          ],
+          isIndex: false,
+        });
       });
   }
   apiCall(req.global.chatApiKey);
@@ -205,6 +214,8 @@ exports.postImage = (req, res, next) => {
     });
   }
   if (req.global.apikeyindex >= req.global.maxApiKey) {
+    req.global.apikeyindex = 0;
+    req.global.save();
     return res.render("public/chat", {
       answer: [
         {
