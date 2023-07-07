@@ -89,14 +89,14 @@ exports.postChat = (req, res, next) => {
     const messageLimit = req.user[0].conversation.message.slice(-5);
     let api;
     if (indexApi >= 0) {
-      api = process.env.API_KEY.split(",")[indexApi];
+      api = process.env.NEW_GPT_API.split(",")[indexApi];
     }
     const options = {
       method: "POST",
       url: "https://chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com/v1/chat/completions",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": process.env.NEW_GPT_API,
+        "X-RapidAPI-Key": api,
         "X-RapidAPI-Host": "chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com",
       },
       data: {
@@ -109,6 +109,9 @@ exports.postChat = (req, res, next) => {
     axios
       .request(options)
       .then((response) => {
+        const remaningRequest = Number(
+          response.headers["x-ratelimit-requests-remaining"]
+        );
         const reply = response.data.choices[0].message.content;
         if (reply.includes("```")) {
           req.session.answer.push({
@@ -150,32 +153,15 @@ exports.postChat = (req, res, next) => {
           answer: req.session.answer,
           isIndex: false,
         });
-      })
-      .catch((error) => {
-        let errorData = error.response.data.message;
 
-        if (
-          errorData.includes(
-            "You have exceeded the MONTHLY quota for Tokens on your current plan"
-          )
-        ) {
-          res.render("public/chat", {
-            answer: [
-              {
-                question: "What's wrong Chat Sonic?",
-                answer:
-                  "Sorry we faced some api issue please wait for a moment .It will be fixed automatically.Please try again",
-              },
-            ],
-            isIndex: false,
-          });
-          let apiIndex = req.global.apikeyindex + 1;
-          req.global.apikeyindex = apiIndex;
-
+        if (remaningRequest <= 1) {
+          let apiIndex = req.global.chatApiKey + 1;
+          req.global.chatApiKey = apiIndex;
           req.global
             .save()
-            .then((result) => {
-              const remaningApi = req.global.maxApiKey - req.global.apikeyindex;
+            .then((response) => {
+              const remaningApi =
+                req.global.chatMaxApiKey - req.global.chatApiKey - 1;
               const mailOption = {
                 from: process.env.USER_ID,
                 to: process.env.TO_USER_ID,
@@ -195,26 +181,14 @@ exports.postChat = (req, res, next) => {
             })
             .then((response) => {
               console.log("email send done");
-            })
-            .catch((err) => {
-              console.log(err);
             });
-        } else {
-          console.log(error);
-          res.render("public/chat", {
-            answer: [
-              {
-                question: "What's wrong Chat Sonic?",
-                answer: "Something went wrong. Please try again later",
-              },
-            ],
-            isIndex: false,
-          });
         }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
-
-  apiCall(req.global.apikeyindex);
+  apiCall(req.global.chatApiKey);
 };
 
 exports.postImage = (req, res, next) => {
