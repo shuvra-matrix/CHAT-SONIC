@@ -5,7 +5,6 @@ const nodeMailer = require("nodemailer");
 const rootDir = require("../util/path");
 const fs = require("fs");
 const path = require("path");
-const { Console } = require("console");
 const cloudinary = require("cloudinary").v2;
 const huggingFace = require("@huggingface/inference").HfInference;
 const hf = new huggingFace(process.env.DIFFUSION_API);
@@ -420,11 +419,11 @@ exports.postStableDiffusion = (req, res, next) => {
   console.log(negativePrompt);
   console.log(numInferenceSteps);
   console.log(guidanceScale);
+
   async function query(data) {
     const responce = hf.textToImage({
       inputs: data,
       model: model,
-      sampler: "Euler a",
       parameters: {
         num_inference_steps: numInferenceSteps,
         guidance_scale: guidanceScale,
@@ -488,6 +487,7 @@ exports.postStableDiffusion = (req, res, next) => {
                 preInput: value,
                 imgaeLink: "/images/invalid2.jpg",
               });
+              next(new Error("Server Error"));
             }
           };
           uploadImage();
@@ -495,7 +495,6 @@ exports.postStableDiffusion = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
       res.render("public/image-defusion", {
         modeon: false,
         mode: mode,
@@ -505,4 +504,5 @@ exports.postStableDiffusion = (req, res, next) => {
         imgaeLink: "/images/invalid2.jpg",
       });
     });
+  next(new Error("Server Error"));
 };
