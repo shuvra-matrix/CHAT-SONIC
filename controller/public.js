@@ -2,12 +2,10 @@ require("dotenv").config();
 const { validationResult } = require("express-validator");
 const axios = require("axios");
 const nodeMailer = require("nodemailer");
-const rootDir = require("../util/path");
-const fs = require("fs");
-const path = require("path");
 const cloudinary = require("cloudinary").v2;
 const huggingFace = require("@huggingface/inference").HfInference;
 const hf = new huggingFace(process.env.DIFFUSION_API);
+const { Readable } = require("stream");
 
 cloudinary.config({
   cloud_name: "dqone7ala",
@@ -436,62 +434,52 @@ exports.postStableDiffusion = (req, res, next) => {
     .then((response) => {
       response.arrayBuffer().then((data) => {
         let buffer = Buffer.from(data);
-        const location = path.join(
-          rootDir,
-          "public/images",
-          `image${name}.jpg`
-        );
-        new Promise(function (resolve, reject) {
-          fs.writeFile(location, buffer, function (err) {
-            if (err) reject(err);
-            else resolve(data);
-          });
-        }).then((result) => {
-          const imageFile = location;
-          const uploadImage = async (imagePath) => {
-            // Use the uploaded file's name as the asset's public ID and
-            // allow overwriting the asset with new versions
-            const options = {
-              use_filename: true,
-              unique_filename: false,
-              overwrite: true,
-            };
-            try {
-              // Upload the image
-              const result = await cloudinary.uploader.upload(
-                imageFile,
-                options
-              );
-              fs.unlinkSync(imageFile);
-              req.user[0]
-                .addToImageSection({
-                  question: value,
-                  imageLink: result.url,
-                })
-                .then((results) => {
-                  console.log("stable difusion question add to db done");
-                  res.render("public/image-defusion", {
-                    modeon: true,
-                    preInput: inputValue,
-                    imgaeLink: result.url,
-                    mode: mode,
-                  });
-                });
-            } catch (error) {
-              console.error(error);
-              res.render("public/image-defusion", {
-                modeon: false,
-                mode: mode,
-                modeName: mode,
-                promptsLink: promptsLink,
-                preInput: value,
-                imgaeLink: "/images/invalid2.jpg",
-              });
-              return next(new Error("Server Error"));
-            }
+        const uploadImage = async (bufferData) => {
+          const options = {
+            unique_filename: true,
+            overwrite: true,
+            public_id: "Chat Sonic/image" + name,
           };
-          uploadImage();
-        });
+          try {
+            const writeBufferFile = cloudinary.uploader.upload_stream(
+              options,
+              (err, result) => {
+                if (err) {
+                  return next(new Error(err));
+                }
+                console.log(result);
+                return req.user[0]
+                  .addToImageSection({
+                    question: value,
+                    imageLink: result.secure_url,
+                  })
+                  .then((results) => {
+                    console.log("stable difusion question add to db done");
+                    res.render("public/image-defusion", {
+                      modeon: true,
+                      preInput: inputValue,
+                      imgaeLink: result.secure_url,
+                      mode: mode,
+                    });
+                  });
+              }
+            );
+            const readStream = Readable.from(bufferData);
+            readStream.pipe(writeBufferFile);
+          } catch (error) {
+            console.error(error);
+            res.render("public/image-defusion", {
+              modeon: false,
+              mode: mode,
+              modeName: mode,
+              promptsLink: promptsLink,
+              preInput: value,
+              imgaeLink: "/images/invalid2.jpg",
+            });
+            return next(new Error("Server Error"));
+          }
+        };
+        uploadImage(buffer);
       });
     })
     .catch((err) => {
