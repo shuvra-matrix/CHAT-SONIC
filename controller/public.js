@@ -426,6 +426,8 @@ exports.postStableDiffusion = (req, res, next) => {
         num_inference_steps: numInferenceSteps,
         guidance_scale: guidanceScale,
         negative_prompt: negativePrompt,
+        height: 768,
+        width: 768,
       },
     });
     return responce;
