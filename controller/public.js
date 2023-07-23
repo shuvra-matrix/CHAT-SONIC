@@ -189,6 +189,7 @@ exports.postChat = (req, res, next) => {
         }
       })
       .catch((error) => {
+        console.log(error);
         res.render("public/chat", {
           answer: [
             {
