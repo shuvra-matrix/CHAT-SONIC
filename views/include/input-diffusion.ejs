@@ -1,6 +1,7 @@
 <div class="input">
-  <form action="/" method="post">
-    <input class="value-input" type="text" name="value" placeholder="Search " />
+  <form action="/diffusion" method="post">
+    <input type="hidden" name="mode" value="<%= mode %>" />
+    <input class="value-input" type="text" name="value" placeholder="Search" />
     <button type="submit" class="btns">
       <img
         class="btns-image"

@@ -13,9 +13,10 @@
       </a>
     </div>
     <% if(modeon) { %>
-    <form style="width: 100%" action="/dalle" method="post">
+    <form style="width: 100%" action="/diffusion" method="post">
       <div class="regenerate">
         <input type="hidden" name="value" value="<%= preInput  %>" />
+        <input type="hidden" name="mode" value="<%= mode %>" />
         <button class="rebtn" type="submit">
           Regenerate
           <img
@@ -28,8 +29,14 @@
   </div>
   <% } else { %>
   <div class="type-of-image">
-    <p>DALL-E 2</p>
+    <p><%= modeName %></p>
+    <p class="promptslink">
+      <a href="<%= promptsLink %>" target="_blank">CLICK HERE FOR PROMPTS</a>
+    </p>
+    <p style="font-size: 12px; margin-top: 8px">
+      HOW ADD NEGATIVE PROMPT - YOUR INPUT PROMPT ,[n] NEGATIVE PROMPT
+    </p>
   </div>
 
-  <% } %> <%- include("./input-dalle.ejs") %>
+  <% } %> <%- include("./input-diffusion.ejs") %>
 </div>

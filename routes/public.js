@@ -18,4 +18,7 @@ routes.post(
   publicController.postImage
 );
 
+routes.get("/diffusion", publicController.getStableDiffusion);
+routes.post("/diffusion", publicController.postStableDiffusion);
+
 module.exports = routes;

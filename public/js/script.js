@@ -10,30 +10,29 @@ const publics = document.querySelector(".chat-section");
 const codeDiv = document.querySelector(".code-run");
 const undefineCode = document.querySelector(".language-css");
 const share = document.querySelectorAll(".share");
-const installPrompt = document.querySelector(".install-prompt")
-const closeBtn = document.querySelector(".close-install") 
-const installImage = document.querySelector(".install-image")
+const installPrompt = document.querySelector(".install-prompt");
+const closeBtn = document.querySelector(".close-install");
+const installImage = document.querySelector(".install-image");
 const installBtn = document.querySelector(".install");
 // create a funtion for add dealy
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
 // cookie function
-
 function set_cookie(name, value) {
   document.cookie = name + "=" + value + "; Path=/;";
 }
 function delete_cookie(name) {
   document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 }
-
 // when page relode it always go to last div
 if (document.cookie.includes("newuser")) {
-  window.addEventListener("load", () => {
-    publics.scrollIntoView({
-      block: "end",
-      inline: "nearest",
+  if (publics) {
+    window.addEventListener("load", () => {
+      publics.scrollIntoView({
+        block: "end",
+        inline: "nearest",
+      });
     });
-  });
+  }
 }
 // regenerate button loder on
 if (reButton) {
@@ -106,7 +105,6 @@ if (publics) {
     answer.forEach((a) => {
       list.push(a);
     });
-    console.log(list);
     let index = 10;
 
     if (
@@ -115,9 +113,7 @@ if (publics) {
       // remove code section text animation
     } else {
       let text = list.slice(-1)[0].textContent;
-      console.log(typeof text);
       let newText = text.replaceAll("\n", "<br>");
-      console.log(newText);
       function type() {
         if (index < newText.length) {
           list.slice(-1)[0].innerHTML =
@@ -158,7 +154,7 @@ copy.forEach((e) => {
     let text = "";
 
     const contTypee = e.parentElement.childNodes;
-    console.log(contTypee);
+
     if (contTypee.length === 13) {
       text = contTypee[3].childNodes[1].textContent;
 
@@ -214,17 +210,17 @@ code.forEach((c) => {
         c.nextElementSibling.innerHTML += `
       
   <p class="code_one" >${textList[i]
-            .replaceAll("\n", "<br>")
-            .replaceAll("<", "&#60;")
-            .replaceAll(">", "&#62;")
-            .replaceAll("`", "'")}
+    .replaceAll("\n", "<br>")
+    .replaceAll("<", "&#60;")
+    .replaceAll(">", "&#62;")
+    .replaceAll("`", "'")}
     </p>`;
       }
       c.nextElementSibling.innerHTML += `
   <pre><code style="margin-bottom : 1rem "> ${a
-          .replaceAll("<", "&#60;")
-          .replaceAll(">", "&#62;")
-          .replaceAll(".", "&#46;")}  </code></pre>`;
+    .replaceAll("<", "&#60;")
+    .replaceAll(">", "&#62;")
+    .replaceAll(".", "&#46;")}  </code></pre>`;
 
       c.nextElementSibling.childNodes[1].innerHTML += list[i + 1]
         .replaceAll("<", "&#60;")
@@ -272,7 +268,7 @@ share.forEach((s) => {
     console.log("yes");
     let text = "";
     const contTypee = s.parentElement.childNodes;
-    console.log(contTypee);
+
     if (contTypee.length === 13) {
       text = contTypee[3].childNodes[1].textContent;
       text += "( Created by Chat Sonic )";
@@ -285,64 +281,78 @@ share.forEach((s) => {
   });
 });
 
-//chcek if app alreay install or not
-if(!document.cookie.includes("appInstall")){
-  installBtn.classList.remove("hidden-two")
+// chcek if app alreay install or not
+if (!document.cookie.includes("appInstall")) {
+  installImage.classList.remove("hidden-two");
 }
-
 
 let promptEvent;
 // Capture event and defer
-  window.addEventListener('beforeinstallprompt', function (e) {
+window.addEventListener("beforeinstallprompt", function (e) {
   e.preventDefault();
   promptEvent = e;
   listenToUserAction();
 });
 // listen to install button clic
 function listenToUserAction() {
-  if(!document.cookie.includes("appInstall")){
-  installBtn.addEventListener("click", presentAddToHome);
+  if (!document.cookie.includes("appInstall")) {
+    installBtn.addEventListener("click", presentAddToHome);
   }
 }
 
 // present install prompt to user
 
 function presentAddToHome() {
-  promptEvent.prompt();  // Wait for the user to respond to the prompt
-  promptEvent.userChoice
-    .then(choice => {
-      console.log(choice.outcome)
-      if (choice.outcome === 'accepted') {
-        console.log('User accepted');
-        installBtn.classList.add("hidden-two")
-        installPrompt.classList.add("hidden-two")
-        set_cookie("appInstall","yes")
-        if(!document.cookie.includes("isPrompt")){
-          set_cookie("isPrompt" , "yes");
-        }
-      } else {
-        console.log('User dismissed');
+  promptEvent.prompt(); // Wait for the user to respond to the prompt
+  promptEvent.userChoice.then((choice) => {
+    if (choice.outcome === "accepted") {
+      console.log("User accepted");
+      installImage.classList.add("hidden-two");
+      installPrompt.classList.add("hidden-two");
+      set_cookie("appInstall", "yes");
+      if (!document.cookie.includes("isPrompt")) {
+        set_cookie("isPrompt", "yes");
       }
-    })
+    } else {
+      console.log("User dismissed");
+    }
+  });
 }
 
 // install custom prompt show
+// if pwa already install dont show install button
 
-closeBtn.addEventListener("click",()=>{
-  installPrompt.classList.add("hidden-two");
-  installImage.classList.remove("install-image-animation");
+function getPWADisplayMode() {
+  const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
+  if (document.referrer.startsWith("android-app://")) {
+    return "twa";
+  } else if (navigator.standalone || isStandalone) {
+    installPrompt.classList.add("hidden-two");
+    installImage.classList.remove("install-image-animation");
+    installImage.classList.add("hidden-two");
+  } else {
+    closeBtn.addEventListener("click", () => {
+      installPrompt.classList.add("hidden-two");
+      installImage.classList.remove("install-image-animation");
+    });
 
-})
-
-if(!document.cookie.includes("isPrompt"))
-{
-  await delay(5000)
-  installPrompt.classList.remove("hidden-two"); 
-  installImage.classList.add("install-image-animation");
-  await delay(8000)
-  set_cookie("isPrompt" , "yes");
-  installPrompt.classList.add("hidden-two");
-  installImage.classList.remove("install-image-animation");
+    if (!document.cookie.includes("isPrompt")) {
+      delay(5000)
+        .then((result) => {
+          installPrompt.classList.remove("hidden-two");
+          installImage.classList.add("install-image-animation");
+          return delay(8000);
+        })
+        .then((result) => {
+          set_cookie("isPrompt", "yes");
+          installPrompt.classList.add("hidden-two");
+          installImage.classList.remove("install-image-animation");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
 }
 
-
+getPWADisplayMode();

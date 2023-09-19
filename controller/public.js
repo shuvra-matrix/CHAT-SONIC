@@ -1,7 +1,17 @@
 require("dotenv").config();
-const { validationResult, Result } = require("express-validator");
+const { validationResult } = require("express-validator");
 const axios = require("axios");
 const nodeMailer = require("nodemailer");
+const cloudinary = require("cloudinary").v2;
+const huggingFace = require("@huggingface/inference").HfInference;
+const hf = new huggingFace(process.env.DIFFUSION_API);
+const { Readable } = require("stream");
+
+cloudinary.config({
+  cloud_name: "dqone7ala",
+  api_key: process.env.CLOUDINARY_API,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
 
 const transporter = nodeMailer.createTransport({
   service: "gmail",
@@ -11,11 +21,11 @@ const transporter = nodeMailer.createTransport({
   },
 });
 
-let total = 28896;
-
 exports.getChatIndex = (req, res, next) => {
-  console.log(req.user.apikeyindex, req.user.maxApiKey);
-  if (req.session.answer) {
+  if (!req.session.answer) {
+    req.session.answer = [];
+  }
+  if (req.session.answer.length > 0) {
     return res.render("public/chat", {
       answer: req.session.answer,
       isIndex: false,
@@ -55,95 +65,111 @@ exports.postChat = (req, res, next) => {
       isIndex: false,
     });
   }
-  if (req.user.apikeyindex.toString() >= req.user.maxApiKey.toString()) {
-    return res.render("public/chat", {
-      answer: [
-        {
-          question: "What's wrong Chat Sonic?",
-          answer:
-            "We faced some major issues. We try to fixed it as soon as possible. Please try again later",
-        },
-      ],
-      isIndex: false,
+
+  if (req.global.chatApiKey >= req.global.chatMaxApiKey) {
+    req.global.chatApiKey = 0;
+    return req.global.save().then((response) => {
+      res.render("public/chat", {
+        answer: [
+          {
+            question: "What's wrong Chat Sonic?",
+            answer:
+              "We faced some major issues. We try to fixed it as soon as possible. Please try again later",
+          },
+        ],
+        isIndex: false,
+      });
     });
   }
-
-  if (!req.session.answer) {
-    req.session.message = [];
-    req.session.answer = [];
-  }
-  req.session.message.push({ role: "user", content: que });
-
+  req.user[0]
+    .addMessage({ role: "user", content: que })
+    .then((responce) => {
+      console.log("ADD MESSAGE DONE");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   async function apiCall(indexApi) {
-    const messageLimit = req.session.message.slice(-5);
+    const messageLimit = req.user[0].conversation.message.slice(-5);
+    const newMessageList = messageLimit.map((data) => {
+      return { role: data.role, content: data.content };
+    });
     let api;
     if (indexApi >= 0) {
-      api = process.env.API_KEY.split(",")[indexApi];
+      api = process.env.NEW_GPT_API.split(",")[indexApi];
     }
+    console.log(api);
     const options = {
       method: "POST",
-      url: "https://openai80.p.rapidapi.com/chat/completions",
+      url: "https://chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com/v1/chat/completions",
       headers: {
-        "Accept-Encoding": "gzip,deflate,compress",
         "content-type": "application/json",
-        "X-RapidAPI-Key": api,
-        "X-RapidAPI-Host": "openai80.p.rapidapi.com",
+        "X-RapidAPI-Key": api.trim(),
+        "X-RapidAPI-Host": "chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com",
       },
       data: {
         model: "gpt-3.5-turbo",
-        messages: messageLimit,
+        messages: newMessageList,
+        temperature: 0.8,
       },
     };
 
     axios
       .request(options)
       .then((response) => {
+        const remaningRequest = Number(
+          response.headers["x-ratelimit-requests-remaining"]
+        );
         const reply = response.data.choices[0].message.content;
-        total += Number(response.data.usage.total_tokens);
         if (reply.includes("```")) {
           req.session.answer.push({
             question: que,
             answer: reply,
             isCode: true,
+            isShow: "yes",
           });
+          req.user[0]
+            .addAnswer({
+              question: que,
+              answer: reply,
+              isCode: true,
+            })
+            .then((res) => {
+              console.log("add question done");
+            })
+            .catch((err) => console.log(err));
         } else {
           req.session.answer.push({
             question: que,
             answer: reply,
             isCode: false,
+            isShow: "yes",
           });
+          req.user[0]
+            .addAnswer({
+              question: que,
+              answer: reply,
+              isCode: false,
+            })
+            .then((res) => {
+              console.log("add question done");
+            })
+            .catch((err) => console.log(err));
         }
 
         res.render("public/chat", {
           answer: req.session.answer,
           isIndex: false,
         });
-      })
-      .catch((error) => {
-        let errorData = error.response.data.message;
 
-        if (
-          errorData.includes(
-            "You have exceeded the MONTHLY quota for Tokens on your current plan"
-          )
-        ) {
-          res.render("public/chat", {
-            answer: [
-              {
-                question: "What's wrong Chat Sonic?",
-                answer:
-                  "Sorry we faced some api issue please wait for a moment .It will be fixed automatically.Please try again",
-              },
-            ],
-            isIndex: false,
-          });
-          let userApiIndex = req.user.apikeyindex + 1;
-          req.user.apikeyindex = userApiIndex;
-
-          req.user
+        if (remaningRequest <= 1) {
+          let apiIndex = req.global.chatApiKey + 1;
+          req.global.chatApiKey = apiIndex;
+          req.global
             .save()
-            .then((result) => {
-              const remaningApi = req.user.maxApiKey - req.user.apikeyindex;
+            .then((response) => {
+              const remaningApi =
+                req.global.chatMaxApiKey - req.global.chatApiKey - 1;
               const mailOption = {
                 from: process.env.USER_ID,
                 to: process.env.TO_USER_ID,
@@ -162,27 +188,25 @@ exports.postChat = (req, res, next) => {
               return transporter.sendMail(mailOption);
             })
             .then((response) => {
-              console.log(response);
-            })
-            .catch((err) => {
-              console.log(err);
+              console.log("email send done");
             });
-        } else {
-          console.log(error);
-          res.render("public/chat", {
-            answer: [
-              {
-                question: "What's wrong Chat Sonic?",
-                answer: "Something went wrong. Please try again later",
-              },
-            ],
-            isIndex: false,
-          });
         }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.render("public/chat", {
+          answer: [
+            {
+              question: "What's wrong Chat Sonic?",
+              answer:
+                "You have exceeded the rate limit per minute. Please wait for one minutes",
+            },
+          ],
+          isIndex: false,
+        });
       });
   }
-
-  apiCall(req.user.apikeyindex);
+  apiCall(req.global.chatApiKey);
 };
 
 exports.postImage = (req, res, next) => {
@@ -195,7 +219,9 @@ exports.postImage = (req, res, next) => {
       imgaeLink: "/images/invalid.jpg",
     });
   }
-  if (req.user.apikeyindex.toString() >= req.user.maxApiKey.toString()) {
+  if (req.global.apikeyindex >= req.global.maxApiKey) {
+    req.global.apikeyindex = 0;
+    req.global.save();
     return res.render("public/chat", {
       answer: [
         {
@@ -211,7 +237,6 @@ exports.postImage = (req, res, next) => {
     let api;
     if (indexApi >= 0) {
       api = process.env.API_KEY.split(",")[indexApi];
-      console.log(api);
     }
     const options = {
       method: "POST",
@@ -233,13 +258,16 @@ exports.postImage = (req, res, next) => {
       .request(options)
       .then((response) => {
         const imageLink = response.data.data[0].url;
-        console.log(response.data.data);
-
-        res.render("public/image", {
-          modeon: true,
-          preInput: value,
-          imgaeLink: imageLink,
-        });
+        req.user[0]
+          .addToImageSection({ question: value, imageLink: imageLink })
+          .then((response) => {
+            console.log("image question add done");
+            res.render("public/image", {
+              modeon: true,
+              preInput: value,
+              imgaeLink: imageLink,
+            });
+          });
       })
       .catch((error) => {
         let errorData = error.response.data.message;
@@ -260,9 +288,9 @@ exports.postImage = (req, res, next) => {
             isIndex: false,
           });
 
-          let userApiIndex = req.user.apikeyindex + 1;
-          req.user.apikeyindex = userApiIndex;
-          if (userApiIndex == user.maxApiKey) {
+          let apiIndex = req.global.apikeyindex + 1;
+          req.global.apikeyindex = apiIndex;
+          if (apiIndex == global.maxApiKey) {
             return res.render("public/chat", {
               answer: [
                 {
@@ -274,11 +302,10 @@ exports.postImage = (req, res, next) => {
               isIndex: false,
             });
           }
-          req.user
+          req.global
             .save()
             .then((result) => {
-              const remaningApi = req.user.maxApiKey - req.user.apikeyindex;
-
+              const remaningApi = req.global.maxApiKey - req.global.apikeyindex;
               const mailOption = {
                 from: process.env.USER_ID,
                 to: process.env.TO_USER_ID,
@@ -299,7 +326,7 @@ exports.postImage = (req, res, next) => {
               return transporter.sendMail(mailOption);
             })
             .then((response) => {
-              console.log(response);
+              console.log("email sent done");
             })
             .catch((err) => {
               console.log(err);
@@ -308,6 +335,7 @@ exports.postImage = (req, res, next) => {
           console.log(error);
           res.render("public/image", {
             modeon: false,
+
             preInput: value,
             imgaeLink: "/images/invalid2.jpg",
           });
@@ -315,5 +343,163 @@ exports.postImage = (req, res, next) => {
       });
   }
 
-  apiCall(req.user.apikeyindex);
+  apiCall(req.global.apikeyindex);
+};
+
+exports.getStableDiffusion = (req, res, next) => {
+  const mode = req.query.mode;
+  let modeName;
+  let imagePath;
+  let promptsLink;
+  if (mode == "stableDiffusion") {
+    modeName = "STABLE DIFFUSION 2.1";
+    imagePath = "/images/sd.png";
+    promptsLink = "https://prompthero.com/stable-diffusion-prompts";
+  } else if (mode == "openjourney") {
+    modeName = "OPENJOURNEY";
+    imagePath = "/images/open.png";
+    promptsLink = "https://prompthero.com/openjourney-prompts";
+  } else {
+    return res.render("public/image", {
+      modeon: false,
+      preInput: "",
+      imgaeLink: "/images/dalhe.jpg",
+    });
+  }
+  res.render("public/image-defusion", {
+    modeon: false,
+    preInput: "",
+    imgaeLink: imagePath,
+    mode: mode,
+    modeName: modeName,
+    promptsLink: promptsLink,
+  });
+};
+
+exports.postStableDiffusion = (req, res, next) => {
+  const name = Math.floor(Math.random() * 9999 + 2);
+  const mode = req.body.mode;
+  let promptsLink;
+  console.log(mode);
+  let inputValue = req.body.value;
+  let splitInputValue;
+  let value;
+  let negativePrompt;
+  if (inputValue.includes("[n]")) {
+    splitInputValue = inputValue.split("[n]");
+    value = splitInputValue[0] + " " + name;
+    negativePrompt = splitInputValue[1];
+  } else {
+    value = inputValue + " " + name;
+    negativePrompt = "";
+  }
+  let url;
+  let model;
+  let numInferenceSteps;
+  let guidanceScale;
+  if (mode == "stableDiffusion") {
+    url = process.env.DIFFUSION_API_URL;
+    model = process.env.DIFFUSION_MODEL;
+    promptsLink = "https://prompthero.com/stable-diffusion-prompts";
+    numInferenceSteps = 40;
+    guidanceScale = 10;
+  } else if (mode == "openjourney") {
+    url = process.env.OPENJOURNEY_API_URL;
+    model = process.env.OPENJOURNEY_MODEL;
+    promptsLink = "https://prompthero.com/openjourney-prompts";
+    numInferenceSteps = 60;
+    guidanceScale = 20;
+  } else {
+    return res.render("public/image", {
+      modeon: false,
+      preInput: "",
+      imgaeLink: "/images/dalhe.jpg",
+    });
+  }
+  console.log(url);
+  console.log(value);
+  console.log(model);
+  console.log(negativePrompt);
+  console.log(numInferenceSteps);
+  console.log(guidanceScale);
+
+  async function query(data) {
+    const responce = hf.textToImage({
+      inputs: data,
+      model: model,
+      parameters: {
+        num_inference_steps: numInferenceSteps,
+        guidance_scale: guidanceScale,
+        negative_prompt: negativePrompt,
+        height: 768,
+        width: 768,
+      },
+    });
+    return responce;
+  }
+  query(value)
+    .then((response) => {
+      response.arrayBuffer().then((data) => {
+        let buffer = Buffer.from(data);
+        const uploadImage = async (bufferData) => {
+          const options = {
+            unique_filename: true,
+            overwrite: true,
+            public_id: "Chat Sonic/image" + name,
+          };
+          try {
+            const writeBufferFile = cloudinary.uploader.upload_stream(
+              options,
+              (err, result) => {
+                if (err) {
+                  return next(new Error(err));
+                }
+                console.log(result);
+                return req.user[0]
+                  .addToImageSection({
+                    question: value,
+                    imageLink: result.secure_url,
+                  })
+                  .then((results) => {
+                    console.log("stable difusion question add to db done");
+                    res.render("public/image-defusion", {
+                      modeon: true,
+                      preInput: inputValue,
+                      imgaeLink: result.secure_url,
+                      mode: mode,
+                    });
+                  });
+              }
+            );
+            const readStream = Readable.from(bufferData);
+            readStream.pipe(writeBufferFile);
+          } catch (error) {
+            console.error(error);
+            res.render("public/image-defusion", {
+              modeon: false,
+              mode: mode,
+              modeName: mode,
+              promptsLink: promptsLink,
+              preInput: value,
+              imgaeLink: "/images/invalid2.jpg",
+            });
+            return next(new Error("Server Error"));
+          }
+        };
+        uploadImage(buffer);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.render("public/image-defusion", {
+        modeon: false,
+        mode: mode,
+        preInput: value,
+        modeName: mode,
+        promptsLink: promptsLink,
+        imgaeLink: "/images/invalid2.jpg",
+      });
+
+      return next(new Error("Server Error"));
+    });
 };
