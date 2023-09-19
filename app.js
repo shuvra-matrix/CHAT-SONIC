@@ -7,6 +7,7 @@ const User = require("./model/user");
 const Global = require("./model/global");
 const requestIp = require("request-ip");
 const port = "3000";
+const UAParser = require("ua-parser-js");
 const path = require("path");
 require("dotenv").config();
 const MONGO_CONNECT = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}mymongoinit.6md0cxy.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
@@ -52,15 +53,17 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  if (req.user) {
-    next();
-  }
   User.find({ ipAddress: req.clientIp })
     .then((user) => {
       if (user.length === 0) {
+        console.log("new user");
+        const useragent = req.headers["user-agent"];
+        let parser = new UAParser(useragent);
+        let parserResults = parser.getResult();
         const clientIp = req.clientIp;
         const newUser = new User({
           ipAddress: clientIp,
+          userDetails: parserResults,
         });
         return newUser.save().then((response) => {
           User.find({ ipAddress: clientIp }).then((users) => {
@@ -69,6 +72,7 @@ app.use((req, res, next) => {
           });
         });
       } else {
+        console.log("old user");
         req.user = user;
         next();
       }

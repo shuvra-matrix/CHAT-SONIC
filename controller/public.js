@@ -91,22 +91,26 @@ exports.postChat = (req, res, next) => {
     });
   async function apiCall(indexApi) {
     const messageLimit = req.user[0].conversation.message.slice(-5);
+    const newMessageList = messageLimit.map((data) => {
+      return { role: data.role, content: data.content };
+    });
     let api;
     if (indexApi >= 0) {
       api = process.env.NEW_GPT_API.split(",")[indexApi];
     }
+    console.log(api);
     const options = {
       method: "POST",
       url: "https://chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com/v1/chat/completions",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": api,
+        "X-RapidAPI-Key": api.trim(),
         "X-RapidAPI-Host": "chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com",
       },
       data: {
         model: "gpt-3.5-turbo",
-        messages: messageLimit,
-        temperature: 1,
+        messages: newMessageList,
+        temperature: 0.8,
       },
     };
 
@@ -486,6 +490,7 @@ exports.postStableDiffusion = (req, res, next) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       res.render("public/image-defusion", {
         modeon: false,
         mode: mode,
