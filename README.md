@@ -12,7 +12,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!-- Badges -->
 
 <h4>
-    <a href="https://chat-sonic.onrender.com/">View Demo</a>
+    <a href="https://chatsonic.cyclic.cloud/">View Demo</a>
   <span> · </span>
     <a href="https://github.com/shuvra-matrix/CHAT-GURU/issues/">Report Bug</a>
   <span> · </span>
@@ -26,19 +26,20 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 # :notebook_with_decorative_cover: Table of Contents
 
-- [About the Project](#star2-about-the-project)
-  - [Live Demo](#house-livedemo)
-  - [Tech Stack](#space_invader-tech-stack)
-  - [Features](#dart-features)
-  - [Environment Variables](#key-environment-variables)
-- [Getting Started](#toolbox-getting-started)
-  - [Prerequisites](#bangbang-prerequisites)
-  - [Run Locally](#running-run-locally)
-- [To-do](#notes-to-do)
-- [Contributing](#wave-contributing)
-- [License](#warning-license)
-- [Contact](#handshake-contact)
-- [Acknowledgements](#gem-acknowledgements)
+- [:notebook_with_decorative_cover: Table of Contents](#notebook_with_decorative_cover-table-of-contents)
+  - [:star2: About the Project](#star2-about-the-project)
+    - [:house: LiveDemo](#house-livedemo)
+    - [:space_invader: Tech Stack](#space_invader-tech-stack)
+    - [:dart: Features](#dart-features)
+    - [:key: Environment Variables](#key-environment-variables)
+  - [:toolbox: Getting Started](#toolbox-getting-started)
+    - [:bangbang: Prerequisites](#bangbang-prerequisites)
+    - [:running: Run Locally](#running-run-locally)
+  - [:notes: to-do](#notes-to-do)
+  - [:wave: Contributing](#wave-contributing)
+  - [:warning: License](#warning-license)
+  - [:handshake: Contact](#handshake-contact)
+  - [:gem: Acknowledgements](#gem-acknowledgements)
 
 <!-- About the Project -->
 
@@ -76,7 +77,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 ### :house: LiveDemo
 
-[Live Demo](https://chat-sonic.onrender.com/)
+[Live Demo](https://chatsonic.cyclic.cloud/)
 
 <!-- TechStack -->
 
