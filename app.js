@@ -81,6 +81,12 @@ app.use((req, res, next) => {
     });
 });
 
+const publicRoutes = require("./routes/public");
+const authRoutes = require("./routes/auth");
+
+app.use(authRoutes);
+app.use(publicRoutes);
+
 app.use((error, req, res, next) => {
   console.log(error);
   let statusCode = error.statusCode;
@@ -93,13 +99,6 @@ app.use((error, req, res, next) => {
     message: message,
   });
 });
-
-const publicRoutes = require("./routes/public");
-const authRoutes = require("./routes/auth");
-const { error } = require("console");
-
-app.use(authRoutes);
-app.use(publicRoutes);
 
 mongoos
   .connect(MONGO_CONNECT)

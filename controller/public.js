@@ -404,14 +404,14 @@ exports.postStableDiffusion = (req, res, next) => {
     url = process.env.DIFFUSION_API_URL;
     model = process.env.DIFFUSION_MODEL;
     promptsLink = "https://prompthero.com/stable-diffusion-prompts";
-    numInferenceSteps = 40;
-    guidanceScale = 10;
+    numInferenceSteps = 15;
+    guidanceScale = 7;
   } else if (mode == "openjourney") {
     url = process.env.OPENJOURNEY_API_URL;
     model = process.env.OPENJOURNEY_MODEL;
     promptsLink = "https://prompthero.com/openjourney-prompts";
-    numInferenceSteps = 40;
-    guidanceScale = 20;
+    numInferenceSteps = 20;
+    guidanceScale = 10;
   } else {
     return res.render("public/image", {
       modeon: false,
