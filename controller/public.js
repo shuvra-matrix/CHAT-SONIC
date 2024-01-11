@@ -329,7 +329,10 @@ exports.postImage = (req, res, next) => {
               console.log("email sent done");
             })
             .catch((err) => {
-              console.log(err);
+              if (!err.statusCode) {
+                err.statusCode = 500;
+              }
+              next(err);
             });
         } else {
           console.log(error);
@@ -407,7 +410,7 @@ exports.postStableDiffusion = (req, res, next) => {
     url = process.env.OPENJOURNEY_API_URL;
     model = process.env.OPENJOURNEY_MODEL;
     promptsLink = "https://prompthero.com/openjourney-prompts";
-    numInferenceSteps = 60;
+    numInferenceSteps = 40;
     guidanceScale = 20;
   } else {
     return res.render("public/image", {
@@ -431,8 +434,8 @@ exports.postStableDiffusion = (req, res, next) => {
         num_inference_steps: numInferenceSteps,
         guidance_scale: guidanceScale,
         negative_prompt: negativePrompt,
-        height: 768,
-        width: 768,
+        height: 512,
+        width: 512,
       },
     });
     return responce;
@@ -474,7 +477,6 @@ exports.postStableDiffusion = (req, res, next) => {
             const readStream = Readable.from(bufferData);
             readStream.pipe(writeBufferFile);
           } catch (error) {
-            console.error(error);
             res.render("public/image-defusion", {
               modeon: false,
               mode: mode,
@@ -483,14 +485,13 @@ exports.postStableDiffusion = (req, res, next) => {
               preInput: value,
               imgaeLink: "/images/invalid2.jpg",
             });
-            return next(new Error("Server Error"));
+            next(error);
           }
         };
         uploadImage(buffer);
       });
     })
     .catch((err) => {
-      console.log(err);
       res.render("public/image-defusion", {
         modeon: false,
         mode: mode,
@@ -500,6 +501,6 @@ exports.postStableDiffusion = (req, res, next) => {
         imgaeLink: "/images/invalid2.jpg",
       });
 
-      return next(new Error("Server Error"));
+      next(err);
     });
 };

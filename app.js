@@ -72,7 +72,6 @@ app.use((req, res, next) => {
           });
         });
       } else {
-        console.log("old user");
         req.user = user;
         next();
       }
@@ -82,8 +81,22 @@ app.use((req, res, next) => {
     });
 });
 
+app.use((error, req, res, next) => {
+  console.log(error);
+  let statusCode = error.statusCode;
+  let data = error.data;
+  let message = error.message;
+
+  res.status(statusCode || 500).json({
+    error: "yes",
+    data: data,
+    message: message,
+  });
+});
+
 const publicRoutes = require("./routes/public");
 const authRoutes = require("./routes/auth");
+const { error } = require("console");
 
 app.use(authRoutes);
 app.use(publicRoutes);
