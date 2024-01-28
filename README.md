@@ -45,8 +45,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 ## :star2: About the Project
 
-<img src="https://github.com/shuvra-matrix/images/blob/main/Screenshot%202024-01-28%20094915.png?raw=true" att="chatsonic" width="100%" height="600px">
-
+![Image Description](https://github.com/shuvra-matrix/images/blob/main/Screenshot%202024-01-28%20094915.png?raw=true)
 <br>
 
   <p>
