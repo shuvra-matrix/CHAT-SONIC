@@ -91,8 +91,13 @@ exports.postChat = (req, res, next) => {
     });
   async function apiCall(indexApi) {
     const messageLimit = req.user[0].conversation.message.slice(-5);
+    messageLimit.unshift({
+      role: "assistant",
+      content:
+        "Your name is GithubCopilot by Shuvra. You are a assistant. Use a friendly tone.",
+    });
     const newMessageList = messageLimit.map((data) => {
-      return { role: data.role, content: data.content };
+      return { role: "user", content: data.content };
     });
     let api;
     if (indexApi >= 0) {
@@ -101,16 +106,19 @@ exports.postChat = (req, res, next) => {
     console.log(api);
     const options = {
       method: "POST",
-      url: "https://chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com/v1/chat/completions",
+      url: "https://openai-api-gpt-3-5-turbo.p.rapidapi.com/chat/completition",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": api.trim(),
-        "X-RapidAPI-Host": "chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com",
+        "X-RapidAPI-Key": String(api),
+        "X-RapidAPI-Host": "openai-api-gpt-3-5-turbo.p.rapidapi.com",
       },
       data: {
-        model: "gpt-3.5-turbo",
-        messages: newMessageList,
-        temperature: 0.8,
+        Body: {
+          messages: newMessageList,
+          temperature: 0.8,
+          max_tokens: 500,
+          stream: false,
+        },
       },
     };
 
@@ -120,7 +128,8 @@ exports.postChat = (req, res, next) => {
         const remaningRequest = Number(
           response.headers["x-ratelimit-requests-remaining"]
         );
-        const reply = response.data.choices[0].message.content;
+        console.log(response.data);
+        const reply = response.data[0].message.content;
         if (reply.includes("```")) {
           req.session.answer.push({
             question: que,
