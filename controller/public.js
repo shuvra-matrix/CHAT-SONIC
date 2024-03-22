@@ -91,11 +91,7 @@ exports.postChat = (req, res, next) => {
     });
   async function apiCall(indexApi) {
     const messageLimit = req.user[0].conversation.message.slice(-5);
-    messageLimit.unshift({
-      role: "assistant",
-      content:
-        "Your name is GithubCopilot by Shuvra. You are a assistant. Use a friendly tone.",
-    });
+
     const newMessageList = messageLimit.map((data) => {
       return { role: "user", content: data.content };
     });
@@ -106,19 +102,15 @@ exports.postChat = (req, res, next) => {
     console.log(api);
     const options = {
       method: "POST",
-      url: "https://openai-api-gpt-3-5-turbo.p.rapidapi.com/chat/completition",
+      url: "https://chat-gpt26.p.rapidapi.com/",
       headers: {
         "content-type": "application/json",
         "X-RapidAPI-Key": String(api),
-        "X-RapidAPI-Host": "openai-api-gpt-3-5-turbo.p.rapidapi.com",
+        "X-RapidAPI-Host": "chat-gpt26.p.rapidapi.com",
       },
       data: {
-        Body: {
-          messages: newMessageList,
-          temperature: 0.8,
-          max_tokens: 500,
-          stream: false,
-        },
+        model: "gpt-3.5-turbo",
+        messages: newMessageList,
       },
     };
 
@@ -128,8 +120,7 @@ exports.postChat = (req, res, next) => {
         const remaningRequest = Number(
           response.headers["x-ratelimit-requests-remaining"]
         );
-        console.log(response.data);
-        const reply = response.data[0].message.content;
+        const reply = response.data.choices[0].message.content;
         if (reply.includes("```")) {
           req.session.answer.push({
             question: que,
@@ -202,7 +193,6 @@ exports.postChat = (req, res, next) => {
         }
       })
       .catch((error) => {
-        console.log(error);
         res.render("public/chat", {
           answer: [
             {
