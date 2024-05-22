@@ -80,7 +80,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 ### :house: LiveDemo
 
-[Live Demo](https://chatsonic.cyclic.cloud/)
+[Live Demo](https://chat-sonic.onrender.com/)
 
 <!-- TechStack -->
 
